@@ -48,6 +48,27 @@ function btnNewNote () {
     generell();
     notesHeader = document.querySelector('main h2');
     notesHeader.textContent = 'New note';
+    let mainNotes =document.getElementById('mainNotes');
+    let form = document.createElement('form');
+    mainNotes.appendChild(form);
+    let inputHeader= document.createElement('input');
+    inputHeader.setAttribute('type', 'text');
+    inputHeader.id='notHeader';
+    form.appendChild(inputHeader);
+
+    let inputBreak=document.createElement('br');
+    form.appendChild(inputBreak);
+    let inputText=document.createElement('textarea');
+    form.appendChild(inputText);
+    inputText.id='noteContent'; 
+    let submitButton = document.createElement('button');
+    submitButton.setAttribute('type','submit');
+    submitButton.textContent='Creat New Note';
+    form.appendChild(submitButton);
+    form.addEventListener('submit',function(e){
+        e.preventDefault();
+        e.target.reset();
+    });
 }
 
 function btnNotes (){
@@ -81,11 +102,4 @@ function generell(){
     mainTwo.appendChild(notesHeader);
     
 }
-
-
 document.addEventListener('DOMContentLoaded', init);
-
-
-
-let mainNotes = document.createElement('main');
-mainNotes.id = 'mainNotes';
