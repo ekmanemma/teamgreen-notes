@@ -39,9 +39,53 @@ function init() {
     let notesHeader = document.createElement('h2');
     notesHeader.textContent = 'Notes';
     mainNotes.appendChild(notesHeader);
+    addNavEventListeners();
 }
+
+
+
+function btnNewNote () {
+    generell();
+    notesHeader = document.querySelector('main h2');
+    notesHeader.textContent = 'New note';
+}
+
+function btnNotes (){
+    generell();
+    notesHeader = document.querySelector('main h2');
+    notesHeader.textContent = 'Notes';
+}
+
+
+
+
+
+function addNavEventListeners() {
+    const allListItems = document.querySelectorAll('li');
+    allListItems[0].addEventListener('click', btnNewNote);
+    allListItems[1].addEventListener('click', btnNotes);
+}
+
+function generell(){
+    // removes the previous main
+    let main = document.getElementById('mainNotes');
+    main.parentElement.removeChild(main);
+    
+    // adds a new main
+    let mainTwo = document.createElement('main');
+    mainTwo.id = 'mainNotes';
+
+
+    mainWrapper.appendChild(mainTwo);
+    let notesHeader = document.createElement('h2');
+    mainTwo.appendChild(notesHeader);
+    
+}
+
 
 document.addEventListener('DOMContentLoaded', init);
 
 
 
+let mainNotes = document.createElement('main');
+mainNotes.id = 'mainNotes';
