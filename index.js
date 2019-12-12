@@ -46,35 +46,12 @@ function init() {
 
 function btnNewNote () {
     generell();
-    notesHeader = document.querySelector('main h2');
-    notesHeader.textContent = 'New note';
-    let mainNotes =document.getElementById('mainNotes');
-    let form = document.createElement('form');
-    mainNotes.appendChild(form);
-    let inputHeader= document.createElement('input');
-    inputHeader.setAttribute('type', 'text');
-    inputHeader.id='notHeader';
-    form.appendChild(inputHeader);
-
-    let inputBreak=document.createElement('br');
-    form.appendChild(inputBreak);
-    let inputText=document.createElement('textarea');
-    form.appendChild(inputText);
-    inputText.id='noteContent'; 
-    let submitButton = document.createElement('button');
-    submitButton.setAttribute('type','submit');
-    submitButton.textContent='Creat New Note';
-    form.appendChild(submitButton);
-    form.addEventListener('submit',function(e){
-        e.preventDefault();
-        e.target.reset();
-    });
+    createForm();
+    form.addEventListener('submit', handleForm)
 }
 
 function btnNotes (){
     generell();
-    notesHeader = document.querySelector('main h2');
-    notesHeader.textContent = 'Notes';
 }
 
 
@@ -101,6 +78,53 @@ function generell(){
     let notesHeader = document.createElement('h2');
     mainTwo.appendChild(notesHeader);
     
+}
+
+function createForm(){
+    notesHeader = document.querySelector('main h2');
+    notesHeader.textContent = 'New note';
+    let mainNotes = document.getElementById('mainNotes');
+
+    let form = document.createElement('form');
+    mainNotes.appendChild(form);
+
+    let labelInputHeader = document.createElement('label');
+    labelInputHeader.textContent = 'Header';
+    form.appendChild(labelInputHeader);
+
+    let inputHeader = document.createElement('input');
+    inputHeader.setAttribute('type', 'text');
+    inputHeader.id = 'noteHeader';
+    form.appendChild(inputHeader);
+
+    let inputBreak = document.createElement('br');
+    form.appendChild(inputBreak);
+
+    let labelTextarea = document.createElement('label');
+    labelTextarea.textContent = 'Content';
+    form.appendChild(labelTextarea);
+
+    let inputText = document.createElement('textarea');
+    inputText.id='noteContent'; 
+    inputText.setAttribute('cols', '45');
+    inputText.setAttribute('rows', '45');
+    form.appendChild(inputText);
+
+    let submitBreak = document.createElement('br');
+    form.appendChild(submitBreak);
+
+    let submitButton = document.createElement('button');
+    submitButton.setAttribute('type','submit');
+    submitButton.textContent='Create New Note';
+    form.appendChild(submitButton);
+
+    // form.addEventListener('submit',function(e){
+    //     e.preventDefault();
+    //     e.target.reset();
+    // });
+
+    form.addEventListener('submit',handleForm);
+ 
 }
 
 
