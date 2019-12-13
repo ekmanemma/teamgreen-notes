@@ -52,6 +52,9 @@ function btnNewNote () {
 
 function btnNotes (){
     generell();
+    notesHeader = document.querySelector('main h2');
+    notesHeader.textContent = 'Notes';
+
 }
 
 
@@ -106,7 +109,7 @@ function createForm(){
 
     let inputText = document.createElement('textarea');
     inputText.id='noteContent'; 
-    inputText.setAttribute('type', 'text', 'name', 'noteContent' );
+    inputText.setAttribute('type', 'text', 'name', 'noteContent');
     form.appendChild(inputText);
 
     let submitBreak = document.createElement('br');
@@ -151,7 +154,7 @@ function handleSubmit(e) {
 // }
 
 //creates an empty array
-let fullNote = [];
+let allNoteObjects = [];
 
 //function that saves form input to object
 function saveFormToObject(){
@@ -162,9 +165,9 @@ function saveFormToObject(){
         'noteContent': this.noteContent.value
     }
     //pushes the object to the array
-    fullNote.push(newNoteObject);
-    
-    console.log(fullNote);
+    allNoteObjects.push(newNoteObject);
+
+    console.log(allNoteObjects);
     console.log(newNoteObject);
    
 
@@ -174,8 +177,6 @@ function saveFormToObject(){
     console.log(this.noteHeader, this.noteContent);
 
 }
-
-
 
 
 
