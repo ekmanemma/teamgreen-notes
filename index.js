@@ -54,6 +54,7 @@ function btnNotes (){
     generell();
     notesHeader = document.querySelector('main h2');
     notesHeader.textContent = 'Notes';
+    displayNote();
 
 }
 
@@ -365,6 +366,27 @@ function saveFormToObject(){
 
 // OSCARS RADER
 
+
+function displayNote(){
+    allNoteObjects.forEach(function(notePad) {
+        let mainNotesWrapper = document.getElementById('mainNotes')
+    
+        let noteDivWrapper = document.createElement('div');
+        noteDivWrapper.setAttribute('class', 'noteDivWrapper');
+        
+        let noteHeader = document.createElement('h4');
+        
+        noteHeader.textContent = notePad.noteHeader;
+    
+        let noteContent = document.createElement('span');
+        noteContent.textContent = notePad.noteContent;
+    
+        mainNotesWrapper.appendChild(noteDivWrapper);
+        noteDivWrapper.appendChild(noteHeader);
+        noteDivWrapper.appendChild(noteContent);
+    });
+
+}
 
 
 
