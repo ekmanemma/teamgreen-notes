@@ -47,11 +47,14 @@ function init() {
 function btnNewNote () {
     generell();
     createForm();
-    form.addEventListener('submit', handleForm)
+    // form.addEventListener('submit' Submit')
 }
 
 function btnNotes (){
     generell();
+    notesHeader = document.querySelector('main h2');
+    notesHeader.textContent = 'Notes';
+
 }
 
 
@@ -93,7 +96,7 @@ function createForm(){
     form.appendChild(labelInputHeader);
 
     let inputHeader = document.createElement('input');
-    inputHeader.setAttribute('type', 'text');
+    inputHeader.setAttribute('type', 'text', 'name', 'noteHeader');
     inputHeader.id = 'noteHeader';
     form.appendChild(inputHeader);
 
@@ -106,8 +109,7 @@ function createForm(){
 
     let inputText = document.createElement('textarea');
     inputText.id='noteContent'; 
-    inputText.setAttribute('cols', '45');
-    inputText.setAttribute('rows', '45');
+    inputText.setAttribute('type', 'text', 'name', 'noteContent');
     form.appendChild(inputText);
 
     let submitBreak = document.createElement('br');
@@ -123,7 +125,7 @@ function createForm(){
     //     e.target.reset();
     // });
 
-    form.addEventListener('submit',handleForm);
+    form.addEventListener('submit', handleSubmit);
  
 }
 
@@ -131,19 +133,50 @@ function createForm(){
 
 
 
-//EMMAS RADER
+//EMMAS RADER OBS! var tvungen att sätta name på båda input
 
 function handleSubmit(e) {
+
+    // Stop the form from submitting since we’re handling that with AJAX.
     e.preventDefault();
 
+    //calls function where form value is saved in an object
+    saveFormToObject();
+
+    //reset the form fields
     e.target.reset();
 }
 
-let newNoteObject = {
-    noteHeader: '',
-    contentHeader: ''
-}
+//funkade ej med contentnamnet så fick ändra
+// let newNoteObject = {
+//     noteHeader: '',
+//     contentHeader: ''
+// }
 
+//creates an empty array
+let allNoteObjects = [];
+
+//function that saves form input to object
+function saveFormToObject(){
+
+    //object that saves the value of the input
+    let newNoteObject = {
+        'noteHeader': this.noteHeader.value,
+        'noteContent': this.noteContent.value
+    }
+    //pushes the object to the array
+    allNoteObjects.push(newNoteObject);
+
+    console.log(allNoteObjects);
+    console.log(newNoteObject);
+   
+
+    //funkar att logga this.noteHeader men om man bara skriver ut this så är det window
+    console.log(this.noteHeader.value);
+    console.log(this.noteContent.value);
+    console.log(this.noteHeader, this.noteContent);
+
+}
 
 
 
