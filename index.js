@@ -369,8 +369,8 @@ function saveFormToObject(){
 
 function displayNote(){
     allNoteObjects.forEach(function(notePad) {
-        let mainNotesWrapper = document.getElementById('mainNotes')
-    
+        let mainNotesWrapper = document.getElementById('mainNotes');
+        mainNotesWrapper.setAttribute('style', 'display: flex; flex-direction: row; flex-wrap: wrap');
         let noteDivWrapper = document.createElement('div');
         noteDivWrapper.setAttribute('class', 'noteDivWrapper');
         
@@ -384,6 +384,8 @@ function displayNote(){
         mainNotesWrapper.appendChild(noteDivWrapper);
         noteDivWrapper.appendChild(noteHeader);
         noteDivWrapper.appendChild(noteContent);
+   
+
     });
 
 }
