@@ -375,20 +375,54 @@ function displayNote(){
         noteDivWrapper.setAttribute('class', 'noteDivWrapper');
         
         let noteHeader = document.createElement('h4');
-        
         noteHeader.textContent = notePad.noteHeader;
     
         let noteContent = document.createElement('span');
         noteContent.textContent = notePad.noteContent;
-    
+
+
+
         mainNotesWrapper.appendChild(noteDivWrapper);
         noteDivWrapper.appendChild(noteHeader);
         noteDivWrapper.appendChild(noteContent);
-   
 
+
+        //  Creates the circles for the paper.
+        let circleDivContainerOne = document.createElement('div')
+        circleDivContainerOne.setAttribute('class', 'circleDivContainer');
+        //circleDivContainerOne.setAttribute('style', 'margin-bottom: 15%');
+        let circleDivOne = document.createElement('div')
+        circleDivOne.setAttribute('class', 'circleDiv');
+        let circleDivTwo = document.createElement('div')
+        circleDivTwo.setAttribute('class', 'circleDiv');
+
+
+        let circleDivContainerTwo = document.createElement('div')
+        circleDivContainerTwo.setAttribute('class', 'circleDivContainer');
+        circleDivContainerTwo.setAttribute('style', 'margin-top: 300px');
+        let circleDivThree = document.createElement('div')
+        circleDivThree.setAttribute('class', 'circleDiv');
+        let circleDivFour = document.createElement('div')
+        circleDivFour.setAttribute('class', 'circleDiv');
+
+
+
+        //  Appends the circles to the paper.
+        noteDivWrapper.appendChild(circleDivContainerOne);
+        circleDivContainerOne.appendChild(circleDivOne);
+        circleDivContainerOne.appendChild(circleDivTwo);
+
+
+        noteDivWrapper.appendChild(circleDivContainerTwo);
+        circleDivContainerTwo.appendChild(circleDivThree);
+        circleDivContainerTwo.appendChild(circleDivFour);   
     });
 
 }
+
+
+
+
 
 
 
