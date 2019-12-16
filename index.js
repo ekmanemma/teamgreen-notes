@@ -283,6 +283,7 @@ function displayNote(){
         mainNotesWrapper.setAttribute('style', 'display: flex; flex-direction: row; flex-wrap: wrap');
 
         let divForWrapperAndButton = document.createElement('div');
+        divForWrapperAndButton.setAttribute('class', 'divForWrapperAndButton');
         mainNotesWrapper.appendChild(divForWrapperAndButton);
 
         let noteDivWrapper = document.createElement('div');
@@ -340,7 +341,7 @@ function displayNote(){
         deleteButton.textContent = 'Delete note';
         // let noteSection = document.getElementsByClassName('noteDivWrapper');
 
-        noteDivWrapper.appendChild(deleteButton);
+        divForWrapperAndButton.appendChild(deleteButton);
         deleteButton.addEventListener('click', deleteNote); //adds event when clicking the delete button
     });
 }
