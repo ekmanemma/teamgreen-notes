@@ -124,19 +124,22 @@ button:hover {
    background-color: rgb(22, 92, 79)
 }
 
+
+
 .noteDivWrapper {
     display: grid;
     grid-template-columns: 10% 90%;
     grid-template-rows: 50px 450px;
-    width: 35%;
+    width: 100%;
     height: 500px;
-    display: grid;
-    grid-template-columns: 10% 90%;
-    grid-template-rows: 50px 450px;
     background-color:beige;
-    margin: 4%;
     box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.301);
     overflow: scroll;
+}
+
+.divForWrapperAndButton{
+    width: 35%;
+    margin: 4%;
 }
 
 .noteDivWrapper h4 {
