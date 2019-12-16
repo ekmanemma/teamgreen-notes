@@ -286,6 +286,9 @@ function displayNote(){
         
         let noteHeader = document.createElement('h4');
         noteHeader.textContent = notePad.noteHeader;
+
+        let toDaysDate = document.createElement('h6');
+        toDaysDate.textContent = notePad.toDaysDate;
     
         let noteContent = document.createElement('span');
         noteContent.textContent = notePad.noteContent;
@@ -295,6 +298,7 @@ function displayNote(){
         mainNotesWrapper.appendChild(noteDivWrapper);
         noteDivWrapper.appendChild(noteHeader);
         noteDivWrapper.appendChild(noteContent);
+        noteDivWrapper.prepend(toDaysDate);
 
 
         //  Creates the circles for the paper.

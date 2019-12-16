@@ -35,6 +35,12 @@ h2 {
     margin: 30px 100% 0 30px;
     
 }
+h6 {
+    color: black;
+    font-family: sans-serif;
+    font-weight: lighter;
+    margin: 30px 100% 0 30px;
+  }
 
 #nav {
     display: flex;
@@ -141,6 +147,12 @@ button:hover {
     text-decoration: underline;
     text-align: center;
 }
+.noteDivWrapper h6 {
+    grid-column:3 / 2;
+    grid-row: auto;
+    text-align: center;
+    margin-bottom:6px ;
+  }
 
 .noteDivWrapper span {
     grid-column: 2 / 3;
