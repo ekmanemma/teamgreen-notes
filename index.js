@@ -127,17 +127,9 @@ function createForm(){
     submitButton.textContent='Create New Note';
     form.appendChild(submitButton);
 
-    // form.addEventListener('submit',function(e){
-    //     e.preventDefault();
-    //     e.target.reset();
-    // });
-
     form.addEventListener('submit', handleSubmit);
  
 }
-
-
-
 
 
 //EMMAS RADER OBS! var tvungen att sätta name på båda input
@@ -154,21 +146,6 @@ function handleSubmit(e) {
     e.target.reset();
 }
 
-//funkade ej med contentnamnet så fick ändra
-// let newNoteObject = {
-//     noteHeader: '',
-//     contentHeader: ''
-// }
-
-    //reset the form fields
-    e.target.reset();
-}
-
-//funkade ej med contentnamnet så fick ändra
-// let newNoteObject = {
-//     noteHeader: '',
-//     contentHeader: ''
-// }
 
 //creates an empty array
 let allNoteObjects = [];
