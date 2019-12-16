@@ -55,7 +55,6 @@ function btnNotes (){
     notesHeader = document.querySelector('main h2');
     notesHeader.textContent = 'Notes';
     displayNote();
-
 }
 
 
@@ -113,6 +112,14 @@ function createForm(){
     inputText.setAttribute('type', 'text', 'name', 'noteContent');
     form.appendChild(inputText);
 
+    // let inputSeconBreak = document.createElement('br');
+    // form.appendChild(inputSeconBreak); Ifall vi behöver sortera på något sätt i framtida behov.
+
+    let toDay = document.createElement('Date');
+    toDay.id = 'toDaysDate';
+    toDay.setAttribute('type', 'text', 'name', 'toDaysDate');
+    form.prepend(toDay);
+
     let submitBreak = document.createElement('br');
     form.appendChild(submitBreak);
 
@@ -121,17 +128,9 @@ function createForm(){
     submitButton.textContent='Create New Note';
     form.appendChild(submitButton);
 
-    // form.addEventListener('submit',function(e){
-    //     e.preventDefault();
-    //     e.target.reset();
-    // });
-
     form.addEventListener('submit', handleSubmit);
  
 }
-
-
-
 
 
 //EMMAS RADER OBS! var tvungen att sätta name på båda input
@@ -148,11 +147,6 @@ function handleSubmit(e) {
     e.target.reset();
 }
 
-//funkade ej med contentnamnet så fick ändra
-// let newNoteObject = {
-//     noteHeader: '',
-//     contentHeader: ''
-// }
 
 //creates an empty array
 let allNoteObjects = [];
@@ -163,7 +157,8 @@ function saveFormToObject(){
     //object that saves the value of the input
     let newNoteObject = {
         'noteHeader': this.noteHeader.value,
-        'noteContent': this.noteContent.value
+        'noteContent': this.noteContent.value,
+        'toDaysDate': new Date()
     }
     //pushes the object to the array
     allNoteObjects.push(newNoteObject);
@@ -178,91 +173,6 @@ function saveFormToObject(){
     console.log(this.noteHeader, this.noteContent);
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // ÅSAS RADER
 
