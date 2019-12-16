@@ -281,8 +281,15 @@ function displayNote(){
     allNoteObjects.forEach(function(notePad) {
         let mainNotesWrapper = document.getElementById('mainNotes');
         mainNotesWrapper.setAttribute('style', 'display: flex; flex-direction: row; flex-wrap: wrap');
+
+        let divForWrapperAndButton = document.createElement('div');
+        mainNotesWrapper.appendChild(divForWrapperAndButton);
+
         let noteDivWrapper = document.createElement('div');
         noteDivWrapper.setAttribute('class', 'noteDivWrapper');
+        divForWrapperAndButton.appendChild(noteDivWrapper);
+
+
         
         let noteHeader = document.createElement('h4');
         noteHeader.textContent = notePad.noteHeader;
@@ -292,7 +299,7 @@ function displayNote(){
 
 
 
-        mainNotesWrapper.appendChild(noteDivWrapper);
+        // mainNotesWrapper.appendChild(noteDivWrapper);
         noteDivWrapper.appendChild(noteHeader);
         noteDivWrapper.appendChild(noteContent);
 
@@ -325,10 +332,30 @@ function displayNote(){
 
         noteDivWrapper.appendChild(circleDivContainerTwo);
         circleDivContainerTwo.appendChild(circleDivThree);
-        circleDivContainerTwo.appendChild(circleDivFour);   
-    });
+        circleDivContainerTwo.appendChild(circleDivFour);  
+        
 
+        let deleteButton = document.createElement('button');
+        deleteButton.id = 'deleteButton';
+        deleteButton.textContent = 'Delete note';
+        // let noteSection = document.getElementsByClassName('noteDivWrapper');
+
+        noteDivWrapper.appendChild(deleteButton);
+        deleteButton.addEventListener('click', deleteNote); //adds event when clicking the delete button
+    });
 }
+
+//deletes an object in the array
+function deleteNote(e){
+    console.log('deleted');
+    allNoteObjects.splice(e.target.parentElement, 1); //takes away the latest object with button
+    console.log(allNoteObjects); 
+    console.log(e.parentElement);
+    
+    let removePaper = e.target.parentElement;
+    removePaper.parentElement.removeChild(removePaper);
+}
+
 
 
 
