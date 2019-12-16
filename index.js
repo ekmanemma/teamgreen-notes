@@ -51,9 +51,9 @@ function btnNewNote () {
 }
 
 function btnNotes (){
-    generell()
-    notesHeader=document.querySelector('main h2');
-    notesHeader.textContent='nots';
+    generell();
+    notesHeader = document.querySelector('main h2');
+    notesHeader.textContent = 'Notes';
 }
 
 
@@ -149,6 +149,16 @@ function handleSubmit(e) {
 
     //calls function where form value is saved in an object
     saveFormToObject();
+
+    //reset the form fields
+    e.target.reset();
+}
+
+//funkade ej med contentnamnet så fick ändra
+// let newNoteObject = {
+//     noteHeader: '',
+//     contentHeader: ''
+// }
 
     //reset the form fields
     e.target.reset();
