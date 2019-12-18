@@ -17,9 +17,17 @@ function init() {
     nav.id = 'nav';
     mainWrapper.appendChild(nav);
 
+    let loginBTN = document.createElement('button');
+    loginBTN.id = 'loginBTN';
+    loginBTN.textContent = 'Login';
+    nav.appendChild(loginBTN);
+
+
+
     let navList = document.createElement('ul');
     nav.appendChild(navList);
 
+  
     let listItemOne = document.createElement('li');
     listItemOne.textContent = 'New note';
     navList.appendChild(listItemOne);

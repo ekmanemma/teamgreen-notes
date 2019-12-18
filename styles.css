@@ -43,12 +43,17 @@ h6 {
   }
 
 #nav {
-    display: flex;
     background-color: rgb(26, 174, 159);
-    align-content: center;
-    flex-direction: row;
-    align-items: center;
     padding: 40px;
+    display: flex;  
+    flex-direction: column;
+    justify-content: center;
+}
+/* 
+funkar ej med flexbox, por que? */
+#loginBTN{                          
+    position: relative;
+    top: -200px;
 }
 
 ul {
@@ -179,6 +184,7 @@ button:hover {
     width: 10px;
     margin: 20px 0 0 0;
 }
+
 
 
 
