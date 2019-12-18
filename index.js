@@ -60,8 +60,6 @@ function btnNotes (){
 function btnNotebook(){
     generell();
     initNotebook(); 
-    notesHeader = document.querySelector('main h2');
-    notesHeader.textContent = 'Notebooks'; 
 }
 
 
@@ -96,6 +94,7 @@ function createForm(){
     let mainNotes = document.getElementById('mainNotes');
 
     let form = document.createElement('form');
+    form.id = 'formNewNote';
     mainNotes.appendChild(form);
 
     let labelInputHeader = document.createElement('label');
@@ -185,6 +184,10 @@ function saveFormToObject(){
 //this should have 2 sections, one for adding a note and one for displaying notebooks
 
 function initNotebook(){
+
+    let notesHeader = document.querySelector('main h2');
+    notesHeader.textContent = 'Notebooks'; 
+
     let mainNotes = document.getElementById('mainNotes');
 
     let divNotebook = document.createElement('div');
@@ -208,43 +211,80 @@ function initNotebook(){
     buttonCreateNotebook.id = 'buttonCreateNotebook';
     section2.appendChild(buttonCreateNotebook);
 
-
-
     buttonCreateNotebook.addEventListener('click', modalPopup);
 
 }
+
+
 
 function modalPopup(){
 
     let notebookModal = document.createElement('div');
     notebookModal.setAttribute('class', 'modal');
     document.body.appendChild(notebookModal);
+    notebookModal.style.display = 'block';
 
     let notebookModalContent = document.createElement('div');
     notebookModalContent.setAttribute('class', 'modalContent');
     notebookModal.appendChild(notebookModalContent);
-
-    //creates a button for when creating a new notebook
-    // let notebook = document.createElement('button');
-    // notebook.id = 'notebookElement';
-    // notebook.textContent = 'Notebook1'
-    // section1.appendChild(notebook);
 
     let inputNotebook = document.createElement('form');
     inputNotebook.id = 'inputNotebook';
     notebookModalContent.appendChild(inputNotebook);
 
     let inputNotebookName = document.createElement('input');
-    inputNotebookName.id = 'inputNotebookName';
+    inputNotebookName.id = 'notebookName';
+    inputNotebookName.setAttribute('placeholder', 'notebook name...')
+    inputNotebookName.setAttribute('type', 'text', 'name', 'notebookName');
     inputNotebook.appendChild(inputNotebookName);
 
     let submitBtnNotebook = document.createElement('button');
     submitBtnNotebook.id = 'submitBtnNotebook';
+    submitBtnNotebook.setAttribute('type','submit');
     submitBtnNotebook.textContent = 'Create';
     inputNotebook.appendChild(submitBtnNotebook);
 
-    notebookModal.style.display = "block"
+    submitBtnNotebook.addEventListener('click', handleNotebook);
     
+}
+
+
+
+function handleNotebook(e){
+    if(e.target == submitBtnNotebook){
+        // let notebookModalContent = document.querySelector('.modalContent')
+        // notebookModalContent.style.display = 'none';
+        let notebookModal = document.querySelector('.modal');
+        notebookModal.style.display = 'none';
+        e.preventDefault();
+        saveNotebook();
+        let notebook = document.createElement('button');
+        notebook.id = 'notebookElement';
+        notebook.textContent = notebookObject.notebookName;
+        section1.appendChild(notebook);
+    } else {
+        alert('whaaat')
+    }
+      
+}
+
+
+let allNotebooks = [];
+
+function saveNotebook(){
+    
+    let notebookObject = {
+        'notebookName': this.notebookName.value,
+        'notebookDate': new Date()
+    }
+    //pushes the object to the array
+    allNotebooks.push(notebookObject);
+
+    console.log(allNotebooks);
+    console.log(notebookObject);
+
+
+
 }
 
 
