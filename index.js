@@ -377,6 +377,12 @@ function deleteNote(e){
 
 
 
+function loginBTNEventListener(){
+    const loginBTN = document.getElementById('loginBTN');
+    loginBTN.addEventListener('click', function(){
+        
+    })
+}
 
 
 
