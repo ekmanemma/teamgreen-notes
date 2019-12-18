@@ -57,7 +57,12 @@ function btnNotes (){
     displayNote();
 }
 
-
+function btnNotebook(){
+    generell();
+    initNotebook(); 
+    notesHeader = document.querySelector('main h2');
+    notesHeader.textContent = 'Notebooks'; 
+}
 
 
 
@@ -65,6 +70,8 @@ function addNavEventListeners() {
     const allListItems = document.querySelectorAll('li');
     allListItems[0].addEventListener('click', btnNewNote);
     allListItems[1].addEventListener('click', btnNotes);
+    allListItems[2].addEventListener('click', btnNotebook); //added event for third button
+
 }
 
 function generell(){
@@ -174,9 +181,71 @@ function saveFormToObject(){
 
 }
 
-// ÅSAS RADER
+// EMMAS RADER
+//this should have 2 sections, one for adding a note and one for displaying notebooks
+
+function initNotebook(){
+    let mainNotes = document.getElementById('mainNotes');
+
+    let divNotebook = document.createElement('div');
+    divNotebook.id = 'divNotebook';
+    mainNotes.appendChild(divNotebook);
+
+    let section1 = document.createElement('section');
+    section1.id = 'section1';
+    divNotebook.appendChild(section1);
+
+    let divSeparator = document.createElement('div');
+    divSeparator.id= 'separator';
+    divNotebook.appendChild(divSeparator);
+
+    let section2 = document.createElement('section');
+    section2.id = 'section2';
+    divNotebook.appendChild(section2);
+
+    let buttonCreateNotebook = document.createElement('button');
+    buttonCreateNotebook.textContent = 'Create Notebook';
+    buttonCreateNotebook.id = 'buttonCreateNotebook';
+    section2.appendChild(buttonCreateNotebook);
 
 
+
+    buttonCreateNotebook.addEventListener('click', modalPopup);
+
+}
+
+function modalPopup(){
+
+    let notebookModal = document.createElement('div');
+    notebookModal.setAttribute('class', 'modal');
+    document.body.appendChild(notebookModal);
+
+    let notebookModalContent = document.createElement('div');
+    notebookModalContent.setAttribute('class', 'modalContent');
+    notebookModal.appendChild(notebookModalContent);
+
+    //creates a button for when creating a new notebook
+    // let notebook = document.createElement('button');
+    // notebook.id = 'notebookElement';
+    // notebook.textContent = 'Notebook1'
+    // section1.appendChild(notebook);
+
+    let inputNotebook = document.createElement('form');
+    inputNotebook.id = 'inputNotebook';
+    notebookModalContent.appendChild(inputNotebook);
+
+    let inputNotebookName = document.createElement('input');
+    inputNotebookName.id = 'inputNotebookName';
+    inputNotebook.appendChild(inputNotebookName);
+
+    let submitBtnNotebook = document.createElement('button');
+    submitBtnNotebook.id = 'submitBtnNotebook';
+    submitBtnNotebook.textContent = 'Create';
+    inputNotebook.appendChild(submitBtnNotebook);
+
+    notebookModal.style.display = "block"
+    
+}
 
 
 

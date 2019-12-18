@@ -180,14 +180,91 @@ button:hover {
     margin: 20px 0 0 0;
 }
 
+#buttonCreateNotebook {
+    width: 100%;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 2rem;
+    background-color: rgb(26, 174, 159);
+    margin: auto;
+}
 
 
+#divNotebook {
+    display: grid;
+    grid-template-columns: 49% 0.5% 49%;
+    grid-template-rows: repeat(4, 25%);
+    grid-gap: 5px;
 
+}
 
+#section1 {
+    grid-column: 1 / 2;
+    grid-row: 1 / 5;
+}
 
+#separator {
+    grid-column: 2;
+    grid-row: 1 / 5;
+    background-color: rgba(187, 187, 187, 0.445);
+    border-radius: 5px;
+    height: 600px;
 
+}
 
+#section2 {
+    grid-column: 3 / 4;
+    grid-row: 1 / 5;
+    justify-self: center;
 
+}
+/*styling for notebook element that are created*/
+#notebookElement{
+    width: 60%;
+    border-radius: 5px;
+    padding: 30px;
+    margin: 20px;
+    font-size: 1.5rem;
+    background-color: white;
+    color: rgb(65, 63, 63);
+}
+
+.modalContent {
+    background-color: rgb(194, 226, 224);
+    margin: auto;
+    padding: 10px;
+    width: 30%;
+    border: 3px solid rgb(26, 174, 159);
+    border-radius: 5px;
+
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 20; /* Sit on top */
+    padding-top: 100px; /*Location of the box*/
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%;/* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+#inputNotebookName {
+    border: none;
+    padding: 20px;
+    width: 100%;
+}
+
+#submitBtnNotebook {
+    border: none;
+    padding: 20px;
+    width: 50%;
+    margin: auto;
+}
 
 
 
