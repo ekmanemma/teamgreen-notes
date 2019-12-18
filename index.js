@@ -300,7 +300,7 @@ function displayNote(){
     
         let noteContent = document.createElement('span');
         noteContent.textContent = notePad.noteContent;
-
+                
 
 
         // mainNotesWrapper.appendChild(noteDivWrapper);
