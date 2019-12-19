@@ -21,6 +21,7 @@ function init() {
     loginBTN.id = 'loginBTN';
     loginBTN.textContent = 'Login';
     nav.appendChild(loginBTN);
+    loginBTNEventListener();
 
 
 
@@ -342,11 +343,9 @@ function displayNote(){
         circleDivContainerOne.appendChild(circleDivOne);
         circleDivContainerOne.appendChild(circleDivTwo);
 
-
         noteDivWrapper.appendChild(circleDivContainerTwo);
         circleDivContainerTwo.appendChild(circleDivThree);
         circleDivContainerTwo.appendChild(circleDivFour);  
-        
 
         let deleteButton = document.createElement('button');
         deleteButton.id = 'deleteButton';
@@ -377,12 +376,84 @@ function deleteNote(e){
 
 
 
-function loginBTNEventListener(){
-    const loginBTN = document.getElementById('loginBTN');
-    loginBTN.addEventListener('click', function(){
-        
-    })
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -405,3 +476,5 @@ function loginBTNEventListener(){
 
 
 document.addEventListener('DOMContentLoaded', init);
+
+
