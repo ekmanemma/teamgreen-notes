@@ -240,7 +240,7 @@ function modalPopup(){
 
     let submitBtnNotebook = document.createElement('button');
     submitBtnNotebook.id = 'submitBtnNotebook';
-    submitBtnNotebook.setAttribute('type','submit');
+    submitBtnNotebook.setAttribute('type','submit'); // not needed
     submitBtnNotebook.textContent = 'Create';
     inputNotebook.appendChild(submitBtnNotebook);
 
@@ -248,26 +248,22 @@ function modalPopup(){
     
 }
 
+// function modalClose(){
+//     let notebookModal = document.querySelector('.modal');
+//     notebookModal.style.display = 'none';
 
+// }
 
 function handleNotebook(e){
-    if(e.target == submitBtnNotebook){
+
         // let notebookModalContent = document.querySelector('.modalContent')
         // notebookModalContent.style.display = 'none';
-        let notebookModal = document.querySelector('.modal');
-        notebookModal.style.display = 'none';
-        e.preventDefault();
+        
         saveNotebook();
-        let notebook = document.createElement('button');
-        notebook.id = 'notebookElement';
-        notebook.textContent = notebookObject.notebookName;
-        section1.appendChild(notebook);
-    } else {
-        alert('whaaat')
-    }
-      
+        document.querySelector('.modal').style.display = 'none';
+       
+       e.preventDefault();
 }
-
 
 let allNotebooks = [];
 
@@ -276,7 +272,9 @@ function saveNotebook(){
     let notebookObject = {
         'notebookName': this.notebookName.value,
         'notebookDate': new Date()
+        
     }
+    
     //pushes the object to the array
     allNotebooks.push(notebookObject);
 
@@ -284,7 +282,10 @@ function saveNotebook(){
     console.log(notebookObject);
 
 
-
+    let notebook = document.createElement('button');
+    notebook.id = 'notebookElement';
+    notebook.textContent = notebookObject.notebookName;
+    section1.appendChild(notebook);
 }
 
 
