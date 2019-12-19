@@ -349,13 +349,15 @@ function login(){
     let password = document.createElement('input');
     password.id = 'passwordInputForm';
     password.setAttribute('placeholder', 'password...')
-    password.setAttribute('type', 'text', 'name', 'password');
+    password.setAttribute('type', 'password', 'name', 'password');
     loginInputForm.appendChild(password);
 
     let submitLoginFormBTN = document.createElement('button');
     submitLoginFormBTN.id = 'submitLoginFormBTN';
     submitLoginFormBTN.textContent = 'Login';
     loginInputForm.appendChild(submitLoginFormBTN);
+    submitLoginFormBTN.addEventListener('click', )
+
     
 }
 
