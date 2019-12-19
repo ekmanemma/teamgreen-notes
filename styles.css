@@ -240,7 +240,7 @@ button:hover {
 }
 
 .modal {
-    display: none; 
+    display: block; 
     position: fixed; 
     padding-top: 100px; 
     left: 0;
@@ -250,6 +250,10 @@ button:hover {
     background-color: rgba(0, 0, 0, 0.267);
 }
 
+.modalClose {
+    display: none;
+
+}
 #inputNotebook {
     padding: 50px;
     text-align: center;

@@ -52,7 +52,7 @@ function btnNewNote () {
 
 function btnNotes (){
     generell();
-    notesHeader = document.querySelector('main h2');
+    let notesHeader = document.querySelector('main h2');
     notesHeader.textContent = 'Notes';
     displayNote();
 }
@@ -222,7 +222,6 @@ function modalPopup(){
     let notebookModal = document.createElement('div');
     notebookModal.setAttribute('class', 'modal');
     document.body.appendChild(notebookModal);
-    notebookModal.style.display = 'block';
 
     let notebookModalContent = document.createElement('div');
     notebookModalContent.setAttribute('class', 'modalContent');
@@ -244,35 +243,34 @@ function modalPopup(){
     submitBtnNotebook.textContent = 'Create';
     inputNotebook.appendChild(submitBtnNotebook);
 
-    submitBtnNotebook.addEventListener('click', handleNotebook);
+    inputNotebook.addEventListener('submit', handleNotebook);
     
 }
 
-// function modalClose(){
-//     let notebookModal = document.querySelector('.modal');
-//     notebookModal.style.display = 'none';
-
-// }
-
 function handleNotebook(e){
+    
+    let notebookModal = document.querySelector('.modal');
+    notebookModal.setAttribute('class', 'modalClose');
 
-        // let notebookModalContent = document.querySelector('.modalContent')
-        // notebookModalContent.style.display = 'none';
-        
-        saveNotebook();
-        document.querySelector('.modal').style.display = 'none';
+    // document.querySelector('.modal').reset(); 
+
+    e.preventDefault();
+    saveNotebook();
+    let inputNotebookName = document.getElementById('notebookName');
+    console.log(inputNotebookName.value);
+    document.querySelectorAll('notbookName').reset();
        
-       e.preventDefault();
 }
+
+
 
 let allNotebooks = [];
 
-function saveNotebook(){
+function saveNotebook(e){
     
     let notebookObject = {
         'notebookName': this.notebookName.value,
         'notebookDate': new Date()
-        
     }
     
     //pushes the object to the array
@@ -286,6 +284,8 @@ function saveNotebook(){
     notebook.id = 'notebookElement';
     notebook.textContent = notebookObject.notebookName;
     section1.appendChild(notebook);
+
+    
 }
 
 
