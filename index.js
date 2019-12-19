@@ -12,10 +12,17 @@ function init() {
     let mainApplicationHeader = document.createElement('h1');
     mainApplicationHeader.textContent = 'Note Application 2000';
     header.appendChild(mainApplicationHeader);
+
     
     let nav = document.createElement('nav');
     nav.id = 'nav';
     mainWrapper.appendChild(nav);
+
+    let loginBTN = document.createElement('button');
+    loginBTN.id = 'loginBTN';
+    loginBTN.textContent = 'Login';
+    nav.appendChild(loginBTN);
+    loginBTN.addEventListener('click', login);
 
     let navList = document.createElement('ul');
     nav.appendChild(navList);
@@ -316,7 +323,41 @@ function saveNotebook(){
 
 
 
+function login(){
+    //  creates the modals.
+    let loginModal = document.createElement('div');
+    loginModal.setAttribute('class', 'modal');
+    document.body.appendChild(loginModal);
+    loginModal.style.display = 'block';
 
+    let loginModalContent = document.createElement('div');
+    loginModalContent.setAttribute('class', 'modalContent');
+    loginModal.appendChild(loginModalContent);
+    
+
+    // creates the contents for the login modal.
+    let loginInputForm = document.createElement('form');
+    loginInputForm.id = 'usernameInputForm';
+    loginModalContent.appendChild(loginInputForm);
+
+    let userNameInputField = document.createElement('input');
+    userNameInputField.id = 'userNameInputField';
+    userNameInputField.setAttribute('placeholder', 'username...')
+    userNameInputField.setAttribute('type', 'text', 'name', 'username');
+    loginInputForm.appendChild(userNameInputField);
+
+    let password = document.createElement('input');
+    password.id = 'passwordInputForm';
+    password.setAttribute('placeholder', 'password...')
+    password.setAttribute('type', 'text', 'name', 'password');
+    loginInputForm.appendChild(password);
+
+    let submitLoginFormBTN = document.createElement('button');
+    submitLoginFormBTN.id = 'submitLoginFormBTN';
+    submitLoginFormBTN.textContent = 'Login';
+    loginInputForm.appendChild(submitLoginFormBTN);
+    
+}
 
 
 
