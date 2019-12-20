@@ -239,7 +239,7 @@ function modalPopup(){
 
     let submitBtnNotebook = document.createElement('button');
     submitBtnNotebook.id = 'submitBtnNotebook';
-    submitBtnNotebook.setAttribute('type','submit'); // not needed
+    submitBtnNotebook.setAttribute('type','submit'); 
     submitBtnNotebook.textContent = 'Create';
     inputNotebook.appendChild(submitBtnNotebook);
 
@@ -248,24 +248,13 @@ function modalPopup(){
 }
 
 function handleNotebook(e){
-    
-    let notebookModal = document.querySelector('.modal');
-    notebookModal.setAttribute('class', 'modalClose');
-
-    // inputNotebook.removeEventListener('submit', handleNotebook);
-
-
-    // document.querySelector('.modal').reset(); 
 
     e.preventDefault();
     saveNotebook();
-    e.target.reset();
+    
+    let notebookModal = document.getElementsByClassName('modal')[0];
+    document.body.removeChild(notebookModal);
 
-    // document.getElementById('inputNotebook').reset();
-    // let inputNotebookName = document.getElementById('notebookName');
-    // console.log(inputNotebookName.value);
-    // document.querySelectorAll('notbookName').reset();
-       
 }
 
 
