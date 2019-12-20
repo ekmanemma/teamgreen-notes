@@ -33,6 +33,7 @@ function init() {
     navList.appendChild(listItemOne);
     let listItemTwo = document.createElement('li');
     listItemTwo.textContent = 'Notes';
+    listItemTwo.setAttribute('class', 'active');
     navList.appendChild(listItemTwo);
     let listItemThree = document.createElement('li');
     listItemThree.textContent = 'Notebooks';
@@ -49,17 +50,28 @@ function init() {
     
 }
 
-function btnNewNote () {
+function activeListItem(e){
+    const allListItems = document.querySelectorAll('li');
+    allListItems.forEach(function(listItem){
+        listItem.removeAttribute('class');
+    });
+    e.target.setAttribute('class', 'active');
+}
+
+function btnNewNote(e) {
+    activeListItem(e);
     createMainContent();
     createNoteForm();
 }
 
-function btnNotes (){
+function btnNotes (e){
+    activeListItem(e);  
     createMainContent();
     displayNote();
 }
 
-function btnNotebook(){
+function btnNotebook(e){
+    activeListItem(e);
     createMainContent();
     initNotebook(); 
 }
