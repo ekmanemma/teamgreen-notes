@@ -1,5 +1,4 @@
-
-
+// Initializes the UI.
 function init() {
     let header = document.createElement('header');
     header.id = 'header';
@@ -13,32 +12,31 @@ function init() {
     mainApplicationHeader.textContent = 'Note Application 2000';
     header.appendChild(mainApplicationHeader);
 
-    
     let nav = document.createElement('nav');
     nav.id = 'nav';
     mainWrapper.appendChild(nav);
 
+    //  Creates the loginbutton.
     let loginBTN = document.createElement('button');
     loginBTN.id = 'loginBTN';
     loginBTN.textContent = 'Login';
     nav.appendChild(loginBTN);
     loginBTN.addEventListener('click', login);
 
+    //  Creates the list with navigation.
     let navList = document.createElement('ul');
     nav.appendChild(navList);
-
     let listItemOne = document.createElement('li');
     listItemOne.textContent = 'New note';
     navList.appendChild(listItemOne);
-
     let listItemTwo = document.createElement('li');
     listItemTwo.textContent = 'Notes';
     navList.appendChild(listItemTwo);
-
     let listItemThree = document.createElement('li');
     listItemThree.textContent = 'Notebooks';
     navList.appendChild(listItemThree);
 
+    //  Creates the main.
     let mainNotes = document.createElement('main');
     mainNotes.id = 'mainNotes';
     mainWrapper.appendChild(mainNotes);
@@ -54,7 +52,6 @@ function init() {
 function btnNewNote () {
     generell();
     createForm();
-    // form.addEventListener('submit' Submit')
 }
 
 function btnNotes (){
@@ -69,14 +66,11 @@ function btnNotebook(){
     initNotebook(); 
 }
 
-
-
 function addNavEventListeners() {
     const allListItems = document.querySelectorAll('li');
     allListItems[0].addEventListener('click', btnNewNote);
     allListItems[1].addEventListener('click', btnNotes);
     allListItems[2].addEventListener('click', btnNotebook); //added event for third button
-
 }
 
 function generell(){
@@ -92,7 +86,6 @@ function generell(){
     mainWrapper.appendChild(mainTwo);
     let notesHeader = document.createElement('h2');
     mainTwo.appendChild(notesHeader);
-    
 }
 
 function createForm(){

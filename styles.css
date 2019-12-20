@@ -139,7 +139,7 @@ button:hover {
     height: 500px;
     background-color:beige;
     box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.301);
-    overflow: scroll;
+    overflow: auto;
 }
 
 .divForWrapperAndButton{
@@ -200,7 +200,6 @@ button:hover {
     grid-template-columns: 49% 0.5% 49%;
     grid-template-rows: repeat(4, 25%);
     grid-gap: 5px;
-
 }
 
 #section1 {
@@ -214,15 +213,14 @@ button:hover {
     background-color: rgba(187, 187, 187, 0.445);
     border-radius: 5px;
     height: 600px;
-
 }
 
 #section2 {
     grid-column: 3 / 4;
     grid-row: 1 / 5;
     justify-self: center;
-
 }
+
 /*styling for notebook elements that are created*/
 #notebookElement{
     width: 60%;
@@ -281,7 +279,6 @@ button:hover {
 ::placeholder{
     color: rgb(0, 0, 0);
     font-size: 1.5rem;
-    
 } 
 
 
