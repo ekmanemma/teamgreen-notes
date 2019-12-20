@@ -295,7 +295,6 @@ function displayNote(){
         let noteContent = document.createElement('span');
         noteContent.textContent = notePad.noteContent;
 
-        // mainNotesWrapper.appendChild(notePaper);
         notePaper.appendChild(noteHeader);
         notePaper.appendChild(noteContent);
         notePaper.prepend(toDaysDate);
@@ -303,16 +302,14 @@ function displayNote(){
         //  Creates the circles for the paper.
         let circleDivContainerOne = document.createElement('div')
         circleDivContainerOne.setAttribute('class', 'circleDivContainer');
-        //circleDivContainerOne.setAttribute('style', 'margin-bottom: 15%');
         let circleDivOne = document.createElement('div')
         circleDivOne.setAttribute('class', 'circleDiv');
         let circleDivTwo = document.createElement('div')
         circleDivTwo.setAttribute('class', 'circleDiv');
 
-
         let circleDivContainerTwo = document.createElement('div')
         circleDivContainerTwo.setAttribute('class', 'circleDivContainer');
-        circleDivContainerTwo.setAttribute('style', 'margin-top: 300px');
+        circleDivContainerTwo.setAttribute('style', 'margin-top: 300px');           // Pushes the containers apart.
         let circleDivThree = document.createElement('div')
         circleDivThree.setAttribute('class', 'circleDiv');
         let circleDivFour = document.createElement('div')
@@ -322,7 +319,6 @@ function displayNote(){
         notePaper.appendChild(circleDivContainerOne);
         circleDivContainerOne.appendChild(circleDivOne);
         circleDivContainerOne.appendChild(circleDivTwo);
-
         notePaper.appendChild(circleDivContainerTwo);
         circleDivContainerTwo.appendChild(circleDivThree);
         circleDivContainerTwo.appendChild(circleDivFour);  
@@ -330,51 +326,17 @@ function displayNote(){
         let deleteButton = document.createElement('button');
         deleteButton.id = 'deleteButton';
         deleteButton.textContent = 'Delete note';
-        // let noteSection = document.getElementsByClassName('notePaper');
 
         divForWrapperAndButton.appendChild(deleteButton);
-        deleteButton.addEventListener('click', deleteNote); //adds event when clicking the delete button
+        deleteButton.addEventListener('click', deleteNote); 
     });
 }
 
-//deletes an object in the array
 function deleteNote(e){
-    console.log('deleted');
-    allNoteObjects.splice(e.target.parentElement, 1); //takes away the latest object with button
-    console.log(allNoteObjects); 
-    console.log(e.parentElement);
-    
+    allNoteObjects.splice(e.target.parentElement, 1);               // Takes away the object from the array.
+
     let removePaper = e.target.parentElement;
-    removePaper.parentElement.removeChild(removePaper);
+    removePaper.parentElement.removeChild(removePaper);             // Takes away the paper connected to the BTN.
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 document.addEventListener('DOMContentLoaded', init);
