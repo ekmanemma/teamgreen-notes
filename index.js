@@ -244,7 +244,6 @@ function login(){
     loginModalContent.setAttribute('class', 'modalContent');
     loginModal.appendChild(loginModalContent);
     
-
     // creates the contents for the login modal.
     let loginInputForm = document.createElement('form');
     loginInputForm.id = 'usernameInputForm';
@@ -266,7 +265,7 @@ function login(){
     submitLoginFormBTN.id = 'submitLoginFormBTN';
     submitLoginFormBTN.textContent = 'Login';
     loginInputForm.appendChild(submitLoginFormBTN);
-    submitLoginFormBTN.addEventListener('click', )
+    submitLoginFormBTN.addEventListener('click', validateUsers); 
 }
 
 function displayNote(){
@@ -338,5 +337,91 @@ function deleteNote(e){
     let removePaper = e.target.parentElement;
     removePaper.parentElement.removeChild(removePaper);             // Takes away the paper connected to the BTN.
 }
+
+function validateUsers(e){     
+    e.preventDefault();  
+    allUsersArray();
+}
+
+function allUsersArray(){
+    const xhr = new XMLHttpRequest();
+    xhr.open('get','https://jsonplaceholder.typicode.com/users', true);
+    xhr.send();
+    xhr.addEventListener("load", function(){                        
+        const usersObject = JSON.parse(this.response);
+        validate(usersObject);
+    });
+}
+
+let test = false;
+function validate(_usersObject){
+    console.log(_usersObject);
+    
+    _usersObject.forEach(function(user){
+        const usernameInput = document.getElementById('userNameInputField').value;
+        const passwordInput = document.getElementById('passwordInputForm').value;
+        const usernameFromBackend = user.username;
+        const passwordFromBackend = user.address.suite;
+        if(usernameFromBackend===usernameInput && passwordInput === passwordFromBackend){
+            console.log('du är inloggad');
+            test = true;
+        } else {
+            console.log('försök igen');
+        }
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 document.addEventListener('DOMContentLoaded', init);
