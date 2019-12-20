@@ -233,7 +233,7 @@ function modalPopup(){
 
     let inputNotebookName = document.createElement('input');
     inputNotebookName.id = 'notebookName';
-    inputNotebookName.setAttribute('placeholder', 'notebook name...')
+    inputNotebookName.setAttribute('placeholder', 'notebook name...');
     inputNotebookName.setAttribute('type', 'text', 'name', 'notebookName');
     inputNotebook.appendChild(inputNotebookName);
 
@@ -252,13 +252,19 @@ function handleNotebook(e){
     let notebookModal = document.querySelector('.modal');
     notebookModal.setAttribute('class', 'modalClose');
 
+    // inputNotebook.removeEventListener('submit', handleNotebook);
+
+
     // document.querySelector('.modal').reset(); 
 
     e.preventDefault();
     saveNotebook();
-    let inputNotebookName = document.getElementById('notebookName');
-    console.log(inputNotebookName.value);
-    document.querySelectorAll('notbookName').reset();
+    e.target.reset();
+
+    // document.getElementById('inputNotebook').reset();
+    // let inputNotebookName = document.getElementById('notebookName');
+    // console.log(inputNotebookName.value);
+    // document.querySelectorAll('notbookName').reset();
        
 }
 
@@ -284,6 +290,13 @@ function saveNotebook(e){
     notebook.id = 'notebookElement';
     notebook.textContent = notebookObject.notebookName;
     section1.appendChild(notebook);
+
+    //   allNotebooks.forEach(function(book) {
+    // let notebook = document.createElement('button');
+    // notebook.id = 'notebookElement';
+    // notebook.textContent = book.notebookName;
+    // section1.appendChild(notebook);
+    // });
 
     
 }
