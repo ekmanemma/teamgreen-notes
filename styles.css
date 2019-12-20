@@ -131,7 +131,7 @@ button:hover {
 
 
 
-.noteDivWrapper {
+.notePaper {
     display: grid;
     grid-template-columns: 10% 90%;
     grid-template-rows: 50px 450px;
@@ -147,7 +147,7 @@ button:hover {
     margin: 4%;
 }
 
-.noteDivWrapper h4 {
+.notePaper h4 {
     grid-column: 1 / 3;
     grid-row: 1 / 2;
     font-size: 1.8em;
@@ -155,14 +155,14 @@ button:hover {
     text-decoration: underline;
     text-align: center;
 }
-.noteDivWrapper h6 {
+.notePaper h6 {
     grid-column:3 / 2;
     grid-row: auto;
     text-align: center;
     margin-bottom:6px ;
   }
 
-.noteDivWrapper span {
+.notePaper span {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
     font-size: 1.2em;
@@ -257,7 +257,7 @@ button:hover {
     display: none;
 
 }
-#inputNotebook {
+#notebookForm {
     padding: 50px;
     text-align: center;
 }

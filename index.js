@@ -1,17 +1,19 @@
 // Initializes the UI.
 function init() {
+    //  Creates header.
     let header = document.createElement('header');
     header.id = 'header';
     document.body.appendChild(header);
-
-    let mainWrapper = document.createElement('div');
-    mainWrapper.id = 'mainWrapper';
-    document.body.appendChild(mainWrapper);
-
     let mainApplicationHeader = document.createElement('h1');
     mainApplicationHeader.textContent = 'Note Application 2000';
     header.appendChild(mainApplicationHeader);
 
+    //  Creates the main section.
+    let mainWrapper = document.createElement('div');
+    mainWrapper.id = 'mainWrapper';
+    document.body.appendChild(mainWrapper);
+    
+    //  Creates the nav.
     let nav = document.createElement('nav');
     nav.id = 'nav';
     mainWrapper.appendChild(nav);
@@ -23,7 +25,7 @@ function init() {
     nav.appendChild(loginBTN);
     loginBTN.addEventListener('click', login);
 
-    //  Creates the list with navigation.
+    //  Creates the list with navigation.     -----------------------------------------Optimize below with for loop. TO DO
     let navList = document.createElement('ul');
     nav.appendChild(navList);
     let listItemOne = document.createElement('li');
@@ -35,34 +37,30 @@ function init() {
     let listItemThree = document.createElement('li');
     listItemThree.textContent = 'Notebooks';
     navList.appendChild(listItemThree);
+    addNavEventListeners();
 
-    //  Creates the main.
+    //  Creates the main.                   ---------------------------------------------Add below to main-class. TO DO
     let mainNotes = document.createElement('main');
     mainNotes.id = 'mainNotes';
     mainWrapper.appendChild(mainNotes);
-
     let notesHeader = document.createElement('h2');
     notesHeader.textContent = 'Notes';
     mainNotes.appendChild(notesHeader);
-    addNavEventListeners();
+    
 }
 
-
-
 function btnNewNote () {
-    generell();
-    createForm();
+    createMainContent();
+    createNoteForm();
 }
 
 function btnNotes (){
-    generell();
-    let notesHeader = document.querySelector('main h2');
-    notesHeader.textContent = 'Notes';
+    createMainContent();
     displayNote();
 }
 
 function btnNotebook(){
-    generell();
+    createMainContent();
     initNotebook(); 
 }
 
@@ -70,25 +68,24 @@ function addNavEventListeners() {
     const allListItems = document.querySelectorAll('li');
     allListItems[0].addEventListener('click', btnNewNote);
     allListItems[1].addEventListener('click', btnNotes);
-    allListItems[2].addEventListener('click', btnNotebook); //added event for third button
+    allListItems[2].addEventListener('click', btnNotebook);
 }
 
-function generell(){
+//  Replaces the current main.
+function createMainContent(){
     // removes the previous main
     let main = document.getElementById('mainNotes');
     main.parentElement.removeChild(main);
     
-    // adds a new main
+    // adds a new main and h2
     let mainTwo = document.createElement('main');
     mainTwo.id = 'mainNotes';
-
-
     mainWrapper.appendChild(mainTwo);
     let notesHeader = document.createElement('h2');
     mainTwo.appendChild(notesHeader);
 }
 
-function createForm(){
+function createNoteForm(){
     notesHeader = document.querySelector('main h2');
     notesHeader.textContent = 'New note';
     let mainNotes = document.getElementById('mainNotes');
@@ -106,9 +103,6 @@ function createForm(){
     inputHeader.id = 'noteHeader';
     form.appendChild(inputHeader);
 
-    let inputBreak = document.createElement('br');
-    form.appendChild(inputBreak);
-
     let labelTextarea = document.createElement('label');
     labelTextarea.textContent = 'Content';
     form.appendChild(labelTextarea);
@@ -118,73 +112,41 @@ function createForm(){
     inputText.setAttribute('type', 'text', 'name', 'noteContent');
     form.appendChild(inputText);
 
-    // let inputSeconBreak = document.createElement('br');
-    // form.appendChild(inputSeconBreak); Ifall vi behöver sortera på något sätt i framtida behov.
-
     let toDay = document.createElement('Date');
     toDay.id = 'toDaysDate';
     toDay.setAttribute('type', 'text', 'name', 'toDaysDate');
-    form.prepend(toDay);
-
-    let submitBreak = document.createElement('br');
-    form.appendChild(submitBreak);
+    form.prepend(toDay);                                                // Preoritizes this element before other when placing.
 
     let submitButton = document.createElement('button');
     submitButton.setAttribute('type','submit');
-    submitButton.textContent='Create New Note';
+    submitButton.textContent = 'Create New Note';
     form.appendChild(submitButton);
-
-    form.addEventListener('submit', handleSubmit);
+    form.addEventListener('submit', handleSubmitNote);                      // Adds a submit event to the form.
  
 }
 
-
-//EMMAS RADER OBS! var tvungen att sätta name på båda input
-
-function handleSubmit(e) {
-
-    // Stop the form from submitting since we’re handling that with AJAX.
+function handleSubmitNote(e) {
     e.preventDefault();
-
-    //calls function where form value is saved in an object
     saveFormToObject();
-
-    //reset the form fields
     e.target.reset();
 }
 
-
-//creates an empty array
+// Creates an empty array for noteobjects.
 let allNoteObjects = [];
 
-//function that saves form input to object
+// Function that saves noteform input to object.
 function saveFormToObject(){
-
-    //object that saves the value of the input
+    // Creates object that saves value from the input.
     let newNoteObject = {
-        'noteHeader': this.noteHeader.value,
-        'noteContent': this.noteContent.value,
-        'toDaysDate': new Date()
+    'noteHeader': this.noteHeader.value,
+    'noteContent': this.noteContent.value,
+    'toDaysDate': new Date()
     }
-    //pushes the object to the array
-    allNoteObjects.push(newNoteObject);
 
-    console.log(allNoteObjects);
-    console.log(newNoteObject);
-   
-
-    //funkar att logga this.noteHeader men om man bara skriver ut this så är det window
-    console.log(this.noteHeader.value);
-    console.log(this.noteContent.value);
-    console.log(this.noteHeader, this.noteContent);
-
+    allNoteObjects.push(newNoteObject);                                   // Pushes the object to the array
 }
 
-// EMMAS RADER
-//this should have 2 sections, one for adding a note and one for displaying notebooks
-
 function initNotebook(){
-
     let notesHeader = document.querySelector('main h2');
     notesHeader.textContent = 'Notebooks'; 
 
@@ -211,14 +173,10 @@ function initNotebook(){
     buttonCreateNotebook.id = 'buttonCreateNotebook';
     section2.appendChild(buttonCreateNotebook);
 
-    buttonCreateNotebook.addEventListener('click', modalPopup);
-
+    buttonCreateNotebook.addEventListener('click', modalPopupNotebook);
 }
-
-
-
-function modalPopup(){
-
+// Creates popup modal with a form for adding a new notebook.
+function modalPopupNotebook(){
     let notebookModal = document.createElement('div');
     notebookModal.setAttribute('class', 'modal');
     document.body.appendChild(notebookModal);
@@ -227,96 +185,53 @@ function modalPopup(){
     notebookModalContent.setAttribute('class', 'modalContent');
     notebookModal.appendChild(notebookModalContent);
 
-    let inputNotebook = document.createElement('form');
-    inputNotebook.id = 'inputNotebook';
-    notebookModalContent.appendChild(inputNotebook);
+    let notebookForm = document.createElement('form');
+    notebookForm.id = 'notebookForm';
+    notebookModalContent.appendChild(notebookForm);
 
     let inputNotebookName = document.createElement('input');
     inputNotebookName.id = 'notebookName';
     inputNotebookName.setAttribute('placeholder', 'notebook name...');
     inputNotebookName.setAttribute('type', 'text', 'name', 'notebookName');
-    inputNotebook.appendChild(inputNotebookName);
+    notebookForm.appendChild(inputNotebookName);
 
     let submitBtnNotebook = document.createElement('button');
     submitBtnNotebook.id = 'submitBtnNotebook';
     submitBtnNotebook.setAttribute('type','submit'); 
     submitBtnNotebook.textContent = 'Create';
-    inputNotebook.appendChild(submitBtnNotebook);
+    notebookForm.appendChild(submitBtnNotebook);
 
-    inputNotebook.addEventListener('submit', handleNotebook);
-    
+    notebookForm.addEventListener('submit', handleNotebook);
 }
 
 function handleNotebook(e){
-
     e.preventDefault();
     saveNotebook();
     
     let notebookModal = document.getElementsByClassName('modal')[0];
     document.body.removeChild(notebookModal);
-
 }
 
-
-
+// Creates an empty array for notebookobjects.
 let allNotebooks = [];
 
-function saveNotebook(e){
-    
+function saveNotebook(){
     let notebookObject = {
         'notebookName': this.notebookName.value,
-        'notebookDate': new Date()
+        'notebookDate': new Date()                                      //  If, in the future, would like to add date to notebooks.
     }
     
-    //pushes the object to the array
+    // Pushes the object to the allNotebooksarray.
     allNotebooks.push(notebookObject);
-
-    console.log(allNotebooks);
-    console.log(notebookObject);
-
 
     let notebook = document.createElement('button');
     notebook.id = 'notebookElement';
     notebook.textContent = notebookObject.notebookName;
     section1.appendChild(notebook);
 
-    //   allNotebooks.forEach(function(book) {
-    // let notebook = document.createElement('button');
-    // notebook.id = 'notebookElement';
-    // notebook.textContent = book.notebookName;
-    // section1.appendChild(notebook);
-    // });
-
-    
+    // let inputSeconBreak = document.createElement('br');
+    // form.appendChild(inputSeconBreak); Ifall vi behöver sortera på något sätt i framtida behov.    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function login(){
     //  creates the modals.
@@ -352,94 +267,25 @@ function login(){
     submitLoginFormBTN.textContent = 'Login';
     loginInputForm.appendChild(submitLoginFormBTN);
     submitLoginFormBTN.addEventListener('click', )
-
-    
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// OSCARS RADER
-
-
 function displayNote(){
+    let notesHeader = document.querySelector('main h2');
+    notesHeader.textContent = 'Notes';
+
+    // Applies to each object in the array.
     allNoteObjects.forEach(function(notePad) {
         let mainNotesWrapper = document.getElementById('mainNotes');
-        mainNotesWrapper.setAttribute('style', 'display: flex; flex-direction: row; flex-wrap: wrap');
+        mainNotesWrapper.setAttribute('style', 'display: flex; flex-direction: row; flex-wrap: wrap');  //  inline styling is used to not colide with other mains.
 
         let divForWrapperAndButton = document.createElement('div');
         divForWrapperAndButton.setAttribute('class', 'divForWrapperAndButton');
         mainNotesWrapper.appendChild(divForWrapperAndButton);
 
-        let noteDivWrapper = document.createElement('div');
-        noteDivWrapper.setAttribute('class', 'noteDivWrapper');
-        divForWrapperAndButton.appendChild(noteDivWrapper);
+        let notePaper = document.createElement('div');
+        notePaper.setAttribute('class', 'notePaper');
+        divForWrapperAndButton.appendChild(notePaper);
 
-
-        
         let noteHeader = document.createElement('h4');
         noteHeader.textContent = notePad.noteHeader;
 
@@ -449,13 +295,10 @@ function displayNote(){
         let noteContent = document.createElement('span');
         noteContent.textContent = notePad.noteContent;
 
-
-
-        // mainNotesWrapper.appendChild(noteDivWrapper);
-        noteDivWrapper.appendChild(noteHeader);
-        noteDivWrapper.appendChild(noteContent);
-        noteDivWrapper.prepend(toDaysDate);
-
+        // mainNotesWrapper.appendChild(notePaper);
+        notePaper.appendChild(noteHeader);
+        notePaper.appendChild(noteContent);
+        notePaper.prepend(toDaysDate);
 
         //  Creates the circles for the paper.
         let circleDivContainerOne = document.createElement('div')
@@ -475,23 +318,19 @@ function displayNote(){
         let circleDivFour = document.createElement('div')
         circleDivFour.setAttribute('class', 'circleDiv');
 
-
-
         //  Appends the circles to the paper.
-        noteDivWrapper.appendChild(circleDivContainerOne);
+        notePaper.appendChild(circleDivContainerOne);
         circleDivContainerOne.appendChild(circleDivOne);
         circleDivContainerOne.appendChild(circleDivTwo);
 
-
-        noteDivWrapper.appendChild(circleDivContainerTwo);
+        notePaper.appendChild(circleDivContainerTwo);
         circleDivContainerTwo.appendChild(circleDivThree);
         circleDivContainerTwo.appendChild(circleDivFour);  
         
-
         let deleteButton = document.createElement('button');
         deleteButton.id = 'deleteButton';
         deleteButton.textContent = 'Delete note';
-        // let noteSection = document.getElementsByClassName('noteDivWrapper');
+        // let noteSection = document.getElementsByClassName('notePaper');
 
         divForWrapperAndButton.appendChild(deleteButton);
         deleteButton.addEventListener('click', deleteNote); //adds event when clicking the delete button
