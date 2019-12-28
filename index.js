@@ -238,34 +238,48 @@ function login(){
     let loginModal = document.createElement('div');
     loginModal.setAttribute('class', 'modal');
     document.body.appendChild(loginModal);
-    loginModal.style.display = 'block';
+    loginModal.style.display = 'block';                     // Behöver vi denna?(emma?)
 
     let loginModalContent = document.createElement('div');
     loginModalContent.setAttribute('class', 'modalContent');
+    loginModalContent.setAttribute('style', 'min-height: 300px');
     loginModal.appendChild(loginModalContent);
     
     // creates the contents for the login modal.
+
+    
     let loginInputForm = document.createElement('form');
     loginInputForm.id = 'usernameInputForm';
     loginModalContent.appendChild(loginInputForm);
+    loginInputForm.addEventListener('submit', validateUsers);
+
+    const errorMessageSpanUsername = document.createElement('span');
+    errorMessageSpanUsername.id = 'errorMessageSpanUsername';
+    loginInputForm.appendChild(errorMessageSpanUsername);
 
     let userNameInputField = document.createElement('input');
     userNameInputField.id = 'userNameInputField';
     userNameInputField.setAttribute('placeholder', 'username...')
     userNameInputField.setAttribute('type', 'text', 'name', 'username');
     loginInputForm.appendChild(userNameInputField);
+    userNameInputField.addEventListener('input', liveEmailCheck);       // byt namn sen när jag vet vad den gör...
+    
+
+    const errorMessageSpanPassword = document.createElement('span');
+    errorMessageSpanPassword.id = 'errorMessageSpanPassword';
+    loginInputForm.appendChild(errorMessageSpanPassword);
 
     let password = document.createElement('input');
     password.id = 'passwordInputForm';
     password.setAttribute('placeholder', 'password...')
     password.setAttribute('type', 'password', 'name', 'password');
     loginInputForm.appendChild(password);
+    password.addEventListener('input', livePasswordCheck);           // byt namn sen när jag vet vad den gör...
 
     let submitLoginFormBTN = document.createElement('button');
     submitLoginFormBTN.id = 'submitLoginFormBTN';
     submitLoginFormBTN.textContent = 'Login';
     loginInputForm.appendChild(submitLoginFormBTN);
-    submitLoginFormBTN.addEventListener('click', validateUsers); 
 }
 
 function displayNote(){
@@ -341,37 +355,81 @@ function deleteNote(e){
 function validateUsers(e){     
     e.preventDefault();  
     allUsersArray();
+                            // HÄR VILL JAG KALLA PÅ VALIDATE IGENTLIGEN MEN MÅSTE DÅ RETURNA usersObject.???
 }
 
+//  Fetches the users from backend. WHen loaded, calls the validate function.
 function allUsersArray(){
     const xhr = new XMLHttpRequest();
     xhr.open('get','https://jsonplaceholder.typicode.com/users', true);
     xhr.send();
     xhr.addEventListener("load", function(){                        
         const usersObject = JSON.parse(this.response);
-        validate(usersObject);
+        validate(usersObject);      // HÄR VILL JAG inte ha VALIDATE IGENTLIGEN MEN MÅSTE DÅ RETURNA usersObject.???^^
     });
 }
 
-let test = false;
+//  Validates the users input credentials.
 function validate(_usersObject){
     console.log(_usersObject);
-    
     _usersObject.forEach(function(user){
+        const errMSG = document.getElementById('errorMessageSpan');
         const usernameInput = document.getElementById('userNameInputField').value;
         const passwordInput = document.getElementById('passwordInputForm').value;
-        const usernameFromBackend = user.username;
+        const usernameFromBackend = user.email;
         const passwordFromBackend = user.address.suite;
-        if(usernameFromBackend===usernameInput && passwordInput === passwordFromBackend){
-            console.log('du är inloggad');
-            test = true;
-        } else {
-            console.log('försök igen');
+        if(usernameFromBackend === usernameInput && passwordInput === passwordFromBackend){
+            validLoginCredentials();
+            return true;
         }
-    })
+        
+    });
+
+
+    // const passwordInput = document.getElementById('passwordInputForm');
+    // if (passwordInput.value =='' || passwordInput.value == null){
+     
+    //     errMSG.innerText = 'Password required';
+    // }
+    alert('fail');
 }
 
 
+function validLoginCredentials(){
+    const modal = document.getElementsByClassName('modal')[0];
+    modal.parentElement.removeChild(modal);
+    alert('du är inloggad');
+}
+
+function liveEmailCheck(){
+    const errMSG = document.getElementById('errorMessageSpanUsername');
+    const usernameInput = document.getElementById('userNameInputField');
+    errMSG.innerText = '';
+    usernameInput.setAttribute('style', 'border: 2px solid grey');
+    if (usernameInput.value =='' || usernameInput.value == null){
+        errMSG.innerText = 'Username required';
+        usernameInput.setAttribute('style', 'border: 2px solid red')
+    }
+    if (usernameInput.value.length >= 40){
+        errMSG.innerText = 'Email must be less than 40 characters';
+        usernameInput.setAttribute('style', 'border: 2px solid red');
+    }
+    if (!usernameInput.value.includes('@')){
+        errMSG.innerText = 'Email must have a: @';
+        usernameInput.setAttribute('style', 'border: 2px solid red');
+    }
+}
+
+function livePasswordCheck(){
+    const errMSG = document.getElementById('errorMessageSpanPassword');
+    const passwordInput = document.getElementById('passwordInputForm');
+    errMSG.innerText = '';
+    passwordInput.setAttribute('style', 'border: 2px solid grey');
+    if (passwordInput.value.length <=2 ){
+        errMSG.innerText = 'Password needs to be longar than two charachters';
+        passwordInput.setAttribute('style', 'border: 2px solid red');
+    }
+}    
 
 
 
@@ -417,11 +475,4 @@ function validate(_usersObject){
 
 
 
-
-
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', init, false);
