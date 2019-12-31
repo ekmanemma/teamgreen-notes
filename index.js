@@ -1,3 +1,5 @@
+const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
 // Initializes the UI.
 function init() {
     //  Creates header.
@@ -23,7 +25,7 @@ function init() {
     loginBTN.id = 'loginBTN';
     loginBTN.textContent = 'Login';
     nav.appendChild(loginBTN);
-    loginBTN.addEventListener('click', login);
+    loginBTN.addEventListener('click', createLoginModal);
 
     //  Creates the list with navigation.     -----------------------------------------Optimize below with for loop. TO DO
     let navList = document.createElement('ul');
@@ -233,7 +235,7 @@ function saveNotebook(){
     // form.appendChild(inputSeconBreak); Ifall vi behöver sortera på något sätt i framtida behov.    
 }
 
-function login(){
+function createLoginModal(){
     //  creates the modals.
     let loginModal = document.createElement('div');
     loginModal.setAttribute('class', 'modal');
@@ -246,12 +248,10 @@ function login(){
     loginModal.appendChild(loginModalContent);
     
     // creates the contents for the login modal.
-
-    
     let loginInputForm = document.createElement('form');
     loginInputForm.id = 'usernameInputForm';
     loginModalContent.appendChild(loginInputForm);
-    loginInputForm.addEventListener('submit', validateUsers);
+    loginInputForm.addEventListener('submit', handleLogin);
 
     const errorMessageSpanUsername = document.createElement('span');
     errorMessageSpanUsername.id = 'errorMessageSpanUsername';
@@ -262,7 +262,8 @@ function login(){
     userNameInputField.setAttribute('placeholder', 'username...')
     userNameInputField.setAttribute('type', 'text', 'name', 'username');
     loginInputForm.appendChild(userNameInputField);
-    userNameInputField.addEventListener('input', liveEmailCheck);       // byt namn sen när jag vet vad den gör...
+    userNameInputField.addEventListener('blur', liveEmailCheck);      
+    userNameInputField.addEventListener('keyup', liveEmailCheck);      
     
 
     const errorMessageSpanPassword = document.createElement('span');
@@ -274,12 +275,16 @@ function login(){
     password.setAttribute('placeholder', 'password...')
     password.setAttribute('type', 'password', 'name', 'password');
     loginInputForm.appendChild(password);
-    password.addEventListener('input', livePasswordCheck);           // byt namn sen när jag vet vad den gör...
-
+    password.addEventListener('input', livePasswordCheck);          
+    password.addEventListener('blur', livePasswordCheck);          
     let submitLoginFormBTN = document.createElement('button');
     submitLoginFormBTN.id = 'submitLoginFormBTN';
     submitLoginFormBTN.textContent = 'Login';
     loginInputForm.appendChild(submitLoginFormBTN);
+
+    const errMSG = document.createElement('p');
+    errMSG.id ='invalidUser';
+    loginModalContent.appendChild(errMSG);
 }
 
 function displayNote(){
@@ -352,49 +357,62 @@ function deleteNote(e){
     removePaper.parentElement.removeChild(removePaper);             // Takes away the paper connected to the BTN.
 }
 
-function validateUsers(e){     
-    e.preventDefault();  
-    allUsersArray();
-                            // HÄR VILL JAG KALLA PÅ VALIDATE IGENTLIGEN MEN MÅSTE DÅ RETURNA usersObject.???
-}
+function handleLogin(e){     
+    e.preventDefault();
 
-//  Fetches the users from backend. WHen loaded, calls the validate function.
-function allUsersArray(){
     const xhr = new XMLHttpRequest();
     xhr.open('get','https://jsonplaceholder.typicode.com/users', true);
-    xhr.send();
-    xhr.addEventListener("load", function(){                        
-        const usersObject = JSON.parse(this.response);
-        validate(usersObject);      // HÄR VILL JAG inte ha VALIDATE IGENTLIGEN MEN MÅSTE DÅ RETURNA usersObject.???^^
-    });
+    xhr.addEventListener("load", handleUsersResponse);
+    xhr.send();            
 }
 
-//  Validates the users input credentials.
-function validate(_usersObject){
-    console.log(_usersObject);
-    _usersObject.forEach(function(user){
-        const errMSG = document.getElementById('errorMessageSpan');
-        const usernameInput = document.getElementById('userNameInputField').value;
-        const passwordInput = document.getElementById('passwordInputForm').value;
-        const usernameFromBackend = user.email;
-        const passwordFromBackend = user.address.suite;
-        if(usernameFromBackend === usernameInput && passwordInput === passwordFromBackend){
-            validLoginCredentials();
+function handleUsersResponse() {
+    const usernameInput = document.getElementById('userNameInputField').value;
+    const passwordInput = document.getElementById('passwordInputForm').value;
+    const users = JSON.parse(this.response);
+    console.log(users);
+
+    // Checks if the user exists and has a password to match. If so, returns that user.
+    const possibleUser = users.find(function (user){
+    return user.email === usernameInput && passwordInput === user.address.suite; 
+        // Ovan är exakt samma sak som nedan
+        /* 
+        if(user.email === usernameInput && passwordInput === user.address.suite){
             return true;
-        }
-        
+        } else {
+            return false;
+        } 
+        */
     });
+    if(possibleUser){
+        // Användaren hittades och variabeln possibleUser innehåller användar-objektet i fråga.
+        validLoginCredentials();
+        console.log({ possibleUser });
+    }
 
-
-    // const passwordInput = document.getElementById('passwordInputForm');
-    // if (passwordInput.value =='' || passwordInput.value == null){
-     
-    //     errMSG.innerText = 'Password required';
-    // }
-    alert('fail');
+    if(!possibleUser){
+        users.forEach(function(user){
+            console.log(user.email);
+            console.log(user.address.suite);
+            if(user.email === usernameInput && user.address.suite !== passwordInput){
+            const errMSG = document.getElementById('errorMessageSpanPassword');
+            const passwordInput = document.getElementById('passwordInputForm');
+            errMSG.innerText = 'Password is incorrect';
+            passwordInput.setAttribute('style', 'border: 2px solid red');
+            }
+        });
+    } else {
+        // Användaren hittades inte och variabeln possibleUser är tomt, dvs.
+        // Berätta att inloggningen misslyckades.
+        inValidLoginCredentials();
+    }
 }
 
 
+function inValidLoginCredentials(){
+    const errInvalidUser = document.getElementById('invalidUser');
+    errInvalidUser.textContent = 'Invalid User, you do not exist :,(';
+}
 function validLoginCredentials(){
     const modal = document.getElementsByClassName('modal')[0];
     modal.parentElement.removeChild(modal);
@@ -406,7 +424,7 @@ function liveEmailCheck(){
     const usernameInput = document.getElementById('userNameInputField');
     errMSG.innerText = '';
     usernameInput.setAttribute('style', 'border: 2px solid grey');
-    if (usernameInput.value =='' || usernameInput.value == null){
+    if (!usernameInput.value){
         errMSG.innerText = 'Username required';
         usernameInput.setAttribute('style', 'border: 2px solid red')
     }
@@ -433,17 +451,47 @@ function livePasswordCheck(){
 
 
 
+// gjorde så här först.
+// //  Fetches the users from backend. WHen loaded, calls the validate function.
+// function allUsersArray(){
+//     const xhr = new XMLHttpRequest();
+//     xhr.open('get','https://jsonplaceholder.typicode.com/users', true);
+//     xhr.send();
+//     xhr.addEventListener("load", function(){                        
+//         const usersObject = JSON.parse(this.response);
+//         const userExists = validate(usersObject);      // HÄR VILL JAG inte ha VALIDATE IGENTLIGEN MEN MÅSTE DÅ RETURNA usersObject.???^^
+//     });
+// }
+
+// //  Validates the users input credentials.
+// function validate(userListFromServer){
+//     userListFromServer.forEach(function(user){
+//         const errMSG = document.getElementById('errorMessageSpan');
+
+//         const usernameInput = document.getElementById('userNameInputField').value;
+//         const passwordInput = document.getElementById('passwordInputForm').value;
+//         const usernameFromBackend = user.email;
+//         const passwordFromBackend = user.address.suite;
+//         if(usernameFromBackend === usernameInput && passwordInput === passwordFromBackend){
+//             validLoginCredentials();
+//             return true;
+//         }
+        
+//     });
+//     alert ('fail');
+// }
 
 
 
-
-
-
-
-
-
-
-
+        // // Checks if the user exists but does not have a password to match. If so, that user is informed.
+        // users.forEach(function(user){
+        //     if(user.email === usernameInput && !passwordInput === user.address.suite){
+        //         const errMSG = document.getElementById('errorMessageSpanPassword');
+        //         const passwordInput = document.getElementById('passwordInputForm');
+        //         errMSG.innerText = 'Wrong password';
+        //         passwordInput.setAttribute('style', 'border: 2px solid red');   
+        //     };
+        // });   
 
 
 
