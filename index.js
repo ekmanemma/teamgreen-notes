@@ -1,4 +1,3 @@
-const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 // Initializes the UI.
 function init() {
@@ -254,12 +253,13 @@ function createLoginModal(){
     loginInputForm.addEventListener('submit', handleLogin);
 
     const errorMessageSpanUsername = document.createElement('span');
+    errorMessageSpanUsername.setAttribute('class', 'errorMSGAboveInput')
     errorMessageSpanUsername.id = 'errorMessageSpanUsername';
     loginInputForm.appendChild(errorMessageSpanUsername);
 
     let userNameInputField = document.createElement('input');
     userNameInputField.id = 'userNameInputField';
-    userNameInputField.setAttribute('placeholder', 'username...')
+    userNameInputField.setAttribute('placeholder', 'Email...')
     userNameInputField.setAttribute('type', 'text', 'name', 'username');
     loginInputForm.appendChild(userNameInputField);
     userNameInputField.addEventListener('blur', liveEmailCheck);      
@@ -267,12 +267,13 @@ function createLoginModal(){
     
 
     const errorMessageSpanPassword = document.createElement('span');
+    errorMessageSpanPassword.setAttribute('class', 'errorMSGAboveInput')
     errorMessageSpanPassword.id = 'errorMessageSpanPassword';
     loginInputForm.appendChild(errorMessageSpanPassword);
 
     let password = document.createElement('input');
     password.id = 'passwordInputForm';
-    password.setAttribute('placeholder', 'password...')
+    password.setAttribute('placeholder', 'Password...')
     password.setAttribute('type', 'password', 'name', 'password');
     loginInputForm.appendChild(password);
     password.addEventListener('input', livePasswordCheck);          
@@ -374,42 +375,48 @@ function handleUsersResponse() {
 
     // Checks if the user exists and has a password to match. If so, returns that user.
     const possibleUser = users.find(function (user){
-    return user.email === usernameInput && passwordInput === user.address.suite; 
-        // Ovan är exakt samma sak som nedan
-        /* 
-        if(user.email === usernameInput && passwordInput === user.address.suite){
-            return true;
-        } else {
-            return false;
-        } 
-        */
+        return user.email === usernameInput && passwordInput === user.address.suite; 
     });
+
+    //  If the the login was successfull then possibleUser now contins the "validuserobject". 
     if(possibleUser){
-        // Användaren hittades och variabeln possibleUser innehåller användar-objektet i fråga.
         validLoginCredentials();
         console.log({ possibleUser });
     }
-
+    //  If the the login was not successfull this code runs. 
     if(!possibleUser){
-        users.forEach(function(user){
-            console.log(user.email);
-            console.log(user.address.suite);
-            if(user.email === usernameInput && user.address.suite !== passwordInput){
+        // Checks if the user exists. If so, the wrong password was enterd. Else returns -1.
+        const wrongPassword = users.findIndex(function(user){
+            const errInvalidUser = document.getElementById('invalidUser');
+            errInvalidUser.textContent = '';
+            return user.email === usernameInput;
+        });
+        console.log(wrongPassword)
+        if(wrongPassword !== -1 ){
             const errMSG = document.getElementById('errorMessageSpanPassword');
             const passwordInput = document.getElementById('passwordInputForm');
             errMSG.innerText = 'Password is incorrect';
             passwordInput.setAttribute('style', 'border: 2px solid red');
-            }
-        });
-    } else {
-        // Användaren hittades inte och variabeln possibleUser är tomt, dvs.
-        // Berätta att inloggningen misslyckades.
-        inValidLoginCredentials();
-    }
+        } else {
+            // Användaren hittades inte och variabeln possibleUser är tomt, dvs.
+            // Berätta att inloggningen misslyckades.
+            inValidLoginCredentials();
+        }
+    } 
+
 }
 
-
 function inValidLoginCredentials(){
+    const errMSGOne = document.getElementById('errorMessageSpanUsername');
+    const usernameInput = document.getElementById('userNameInputField');
+    errMSGOne.innerText = '';
+    usernameInput.setAttribute('style', 'border: 2px solid grey');
+    
+    const errMSGTwo = document.getElementById('errorMessageSpanPassword');
+    const passwordInput = document.getElementById('passwordInputForm');
+    errMSGTwo.innerText = '';
+    passwordInput.setAttribute('style', 'border: 2px solid grey');
+
     const errInvalidUser = document.getElementById('invalidUser');
     errInvalidUser.textContent = 'Invalid User, you do not exist :,(';
 }
@@ -442,11 +449,14 @@ function livePasswordCheck(){
     const errMSG = document.getElementById('errorMessageSpanPassword');
     const passwordInput = document.getElementById('passwordInputForm');
     errMSG.innerText = '';
+    const passWordRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    // -\s (MATCHES    whitespace charachter)
     passwordInput.setAttribute('style', 'border: 2px solid grey');
     if (passwordInput.value.length <=2 ){
         errMSG.innerText = 'Password needs to be longar than two charachters';
         passwordInput.setAttribute('style', 'border: 2px solid red');
     }
+
 }    
 
 

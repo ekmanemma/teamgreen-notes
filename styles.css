@@ -286,13 +286,17 @@ button:hover {
 
 
 
-#InvalidUser {
+#invalidUser{
     color: red;
     font-size: 2em;
     font-weight: bold;
     text-align: center;
+
 }
 
+.errorMSGAboveInput {
+    color: red;
+}
 
 
 
