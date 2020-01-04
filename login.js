@@ -1,32 +1,25 @@
-
 //  Gets the users from backend and handles the form.
 function handleLogin(e){     
    
-    //  Stops the form from submiting(reloding page).
-    e.preventDefault();
-
+    e.preventDefault();                                         //  Stops the form from submiting(reloding page).
     const xhr = new XMLHttpRequest();
     xhr.open('get','https://jsonplaceholder.typicode.com/users', true);
-
-    //  Listens for the response to load, then calls handleUsersResponse function.
-    xhr.addEventListener("load", handleUsersResponse);
+    xhr.addEventListener("load", handleUsersResponse);          //  Listens for the response to load, then calls handleUsersResponse function.
     xhr.send();            
 }
 
+//  Handles the from when submited.
 function handleUsersResponse() {
     
     const emailInput = document.getElementById('emailInputField').value; 
     const passwordInput = document.getElementById('passwordInputForm').value;
-    const users = JSON.parse(this.response);
+    const users = JSON.parse(this.response);                    //  HITTAR DEN SVARET BARA FÖR ATT DEN KALLADES PÅ I LOAD FUNKTIONEN? DEN ÄR JU INTE MEDSKICKAD SOM ARGUMENT?
     console.log(users);
-
-    // Checks if the user exists and has a password to match. If so, returns that user.
-    const validUser = users.find(function (user){
+    const validUser = users.find(function (user){               // Checks if the user exists and has a password to match. If so, returns that user.
         return user.email === emailInput && passwordInput === user.address.suite; 
     });
 
-    //  If the the login was successful then validUser now contins the "validuserobject". 
-    if(validUser){
+    if(validUser){                                              //  If the the login was successful then validUser now contins the "validuserobject". 
         sessionStorage.setItem('testar', JSON.stringify(validUser));
         const modal = document.getElementsByClassName('modal')[0];
         modal.parentElement.removeChild(modal);
@@ -34,21 +27,16 @@ function handleUsersResponse() {
         //validLoginCredentials(validUser);
     }
     
-    //  If the the login was not successfull this code runs. 
-    if(!validUser){
-       
-        // Checks if the user exists. If so "findIndex" returns something else than -1. 
-        const wrongPassword = users.findIndex(function(user){
-            const errInvalidUser = document.getElementById('invalidUser');
-            errInvalidUser.textContent = '';
+    if(!validUser){                                             //  If the the login was not successfull. 
+        const wrongPassword = users.findIndex(function(user){   // Checks if the user exists. If so "findIndex" returns something else than -1. 
             return user.email === emailInput;
         });
-        if(wrongPassword !== -1 ){
+        if(wrongPassword !== -1 ){                              //  If the user was found (not-1).
             const errMSG = document.getElementById('errorMessageSpanPassword');
             const passwordInput = document.getElementById('passwordInputForm');
             errMSG.innerText = 'Password is incorrect';
             passwordInput.setAttribute('style', 'border: 2px solid red');
-        } else {
+        } else {                                               
             inValidLoginCredentials();
         }
     }
@@ -70,13 +58,7 @@ function inValidLoginCredentials(){
     errInvalidUser.textContent = 'Invalid User, you do not exist :,(';
 }
 
-// function validLoginCredentials(validUser){
-//     localStorage.setItem('loggedInUser', JSON.stringify(validUser));
-//     const modal = document.getElementsByClassName('modal')[0];
-//     modal.parentElement.removeChild(modal);
-//     alert('du är inloggad');
-// }
-
+// Provides direct feedback for the email iputfield.
 function liveEmailCheck(){
     const errMSG = document.getElementById('errorMessageSpanUsername');
     const emailInput = document.getElementById('emailInputField');
@@ -96,6 +78,7 @@ function liveEmailCheck(){
     }
 }
 
+// Provides direct feedback for the password iputfield.
 function livePasswordCheck(){
     const errMSG = document.getElementById('errorMessageSpanPassword');
     const passwordInput = document.getElementById('passwordInputForm');
@@ -112,46 +95,4 @@ function livePasswordCheck(){
         errMSG.innerText = 'Password needs to be longar than two charachters';
         passwordInput.setAttribute('style', 'border: 2px solid red');
     }
-}    
-
-// gjorde så här först.
-// //  Fetches the users from backend. WHen loaded, calls the validate function.
-// function allUsersArray(){
-//     const xhr = new XMLHttpRequest();
-//     xhr.open('get','https://jsonplaceholder.typicode.com/users', true);
-//     xhr.send();
-//     xhr.addEventListener("load", function(){                        
-//         const usersObject = JSON.parse(this.response);
-//         const userExists = validate(usersObject);      // HÄR VILL JAG inte ha VALIDATE IGENTLIGEN MEN MÅSTE DÅ RETURNA usersObject.???^^
-//     });
-// }
-
-// //  Validates the users input credentials.
-// function validate(userListFromServer){
-//     userListFromServer.forEach(function(user){
-//         const errMSG = document.getElementById('errorMessageSpan');
-
-//         const emailInput = document.getElementById('emailInputField').value;
-//         const passwordInput = document.getElementById('passwordInputForm').value;
-//         const usernameFromBackend = user.email;
-//         const passwordFromBackend = user.address.suite;
-//         if(usernameFromBackend === emailInput && passwordInput === passwordFromBackend){
-//             validLoginCredentials();
-//             return true;
-//         }
-        
-//     });
-//     alert ('fail');
-// }
-
-
-
-        // // Checks if the user exists but does not have a password to match. If so, that user is informed.
-        // users.forEach(function(user){
-        //     if(user.email === emailInput && !passwordInput === user.address.suite){
-        //         const errMSG = document.getElementById('errorMessageSpanPassword');
-        //         const passwordInput = document.getElementById('passwordInputForm');
-        //         errMSG.innerText = 'Wrong password';
-        //         passwordInput.setAttribute('style', 'border: 2px solid red');   
-        //     };
-        // });   
+}
