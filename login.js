@@ -96,13 +96,18 @@ function livePasswordCheck(){
         passwordInput.setAttribute('style', 'border: 2px solid red');
     }
 }
-
+showLoggedInUser();
 //  Gets the user Email from sessionstorage and displays it when user is logged in.
 function showLoggedInUser (){
-    const header = document.getElementById('header');
-    const emailSpan = document.createElement('h1');
     const logedInUserObject = JSON.parse(sessionStorage.getItem("logedInUser"));
-    emailSpan.setAttribute('style', 'float: left; padding: 12px; font-size: 1.2em');
-    emailSpan.textContent = logedInUserObject.email;
-    header.prepend(emailSpan);
+   
+    if (logedInUserObject!==null) {
+        console.log(logedInUserObject);
+        const header = document.getElementById('header');
+        const emailSpan = document.createElement('h1');
+        emailSpan.setAttribute('style', 'float: left; padding: 12px; font-size: 1.2em');
+        emailSpan.textContent = logedInUserObject.email;
+        header.prepend(emailSpan);
+    }
+
 }
