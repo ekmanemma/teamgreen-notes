@@ -20,11 +20,11 @@ function handleUsersResponse() {
     });
 
     if(validUser){                                              //  If the the login was successful then validUser now contins the "validuserobject". 
-        sessionStorage.setItem('testar', JSON.stringify(validUser));
+        sessionStorage.setItem('logedInUser', JSON.stringify(validUser));
         const modal = document.getElementsByClassName('modal')[0];
         modal.parentElement.removeChild(modal);
-        alert('du är inloggad');
-        //validLoginCredentials(validUser);
+        showLoggedInUser();
+
     }
     
     if(!validUser){                                             //  If the the login was not successfull. 
@@ -95,4 +95,14 @@ function livePasswordCheck(){
         errMSG.innerText = 'Password needs to be longar than two charachters';
         passwordInput.setAttribute('style', 'border: 2px solid red');
     }
+}
+
+//  Gets the user Email from sessionstorage and displays it when user is logged in.
+function showLoggedInUser (){
+    const header = document.getElementById('header');
+    const emailSpan = document.createElement('h1');
+    const logedInUserObject = JSON.parse(sessionStorage.getItem("logedInUser"));
+    emailSpan.setAttribute('style', 'float: left; padding: 12px; font-size: 1.2em');
+    emailSpan.textContent = logedInUserObject.email;
+    header.prepend(emailSpan);
 }
