@@ -257,13 +257,13 @@ function createLoginModal(){
     errorMessageSpanUsername.id = 'errorMessageSpanUsername';
     loginInputForm.appendChild(errorMessageSpanUsername);
 
-    let userNameInputField = document.createElement('input');
-    userNameInputField.id = 'userNameInputField';
-    userNameInputField.setAttribute('placeholder', 'Email...')
-    userNameInputField.setAttribute('type', 'text', 'name', 'username');
-    loginInputForm.appendChild(userNameInputField);
-    userNameInputField.addEventListener('blur', liveEmailCheck);      
-    userNameInputField.addEventListener('keyup', liveEmailCheck);      
+    let emailInputField = document.createElement('input');
+    emailInputField.id = 'emailInputField';
+    emailInputField.setAttribute('placeholder', 'Email...')
+    emailInputField.setAttribute('type', 'text', 'name', 'email');
+    loginInputForm.appendChild(emailInputField);
+    emailInputField.addEventListener('blur', liveEmailCheck);      
+    emailInputField.addEventListener('keyup', liveEmailCheck);      
     
 
     const errorMessageSpanPassword = document.createElement('span');
