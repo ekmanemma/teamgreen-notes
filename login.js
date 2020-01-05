@@ -96,14 +96,15 @@ function livePasswordCheck(){
         passwordInput.setAttribute('style', 'border: 2px solid red');
     }
 }
-showLoggedInUser();
+
 //  Gets the user Email from sessionstorage and displays it when user is logged in.
-function showLoggedInUser (){
+function showLoggedInUser (){           //  OBS DENNNA MÅSTE KALLAS PÅ TIDIGT(TYP I INIT DÅ DOMEN LADDATS!)
     const logedInUserObject = JSON.parse(sessionStorage.getItem("logedInUser"));
    
-    if (logedInUserObject!==null) {
+    if (logedInUserObject !== null) {
         console.log(logedInUserObject);
         const header = document.getElementById('header');
+        console.log(header);
         const emailSpan = document.createElement('h1');
         emailSpan.setAttribute('style', 'float: left; padding: 12px; font-size: 1.2em');
         emailSpan.textContent = logedInUserObject.email;
