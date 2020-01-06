@@ -10,7 +10,10 @@ class NoteScreen extends Screen {
     displayNote(){
         this.notesHeader = document.querySelector('main h2');
         this.notesHeader.textContent = 'Notes';
+
+        
         let localObject = JSON.parse(localStorage.getItem('allNoteObjects'));
+
 
         
         // Applies to each object in the array.
@@ -68,20 +71,14 @@ class NoteScreen extends Screen {
             deleteButton.textContent = 'Delete note';
     
             divForWrapperAndButton.appendChild(deleteButton);
-            deleteButton.addEventListener('click', () => {
-                localObject.splice(e.target.parentElement, 1);               // Takes away the object from the array.
-                // localStorage.removeItem(allNoteObjects[0]);
+            deleteButton.addEventListener('click', (e) => {
+                // localObject.splice(e.target.parentElement, 1);        // Takes away the object from the array.
+                localStorage.removeItem(allNoteObjects); //EJ KLARA
                 let removePaper = e.target.parentElement;
                 removePaper.parentElement.removeChild(removePaper); 
+                console.log(localObject);
             }); 
         });
     }
-    
-    // deleteNote(e){
-    //     allNoteObjects.splice(e.target.parentElement, 1);               // Takes away the object from the array.
-    //     // localStorage.removeItem(allNoteObjects[0]);
-    //     let removePaper = e.target.parentElement;
-    //     removePaper.parentElement.removeChild(removePaper);             // Takes away the paper connected to the BTN.
-    // }
     
 }

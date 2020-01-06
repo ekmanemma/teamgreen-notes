@@ -1,4 +1,5 @@
 let allNoteObjects = [];
+let allNotebooks = [];
 
 class Screen {
 
@@ -28,6 +29,29 @@ class Screen {
 
         allNoteObjects.push(newNoteObject);                                   // Pushes the object to the array
         localStorage.setItem('allNoteObjects', JSON.stringify(allNoteObjects)); // Stores array with all objects in local storage
+    }
+
+    saveNotebook(){
+        let notebookObject = {
+            'notebookName': notebookName.value,
+            'notebookDate': new Date()                                      //  If, in the future, would like to add date to notebooks.
+        }
+        
+        // Pushes the object to the allNotebooksarray.
+        allNotebooks.push(notebookObject);
+        localStorage.setItem('allNotebooks', JSON.stringify(allNotebooks));
+
+    
+        // localNotebook.foreach(function(book){
+        //     let notebook = document.createElement('button');
+        //     notebook.setAttribute('class', 'notebookElement');
+        //     notebook.textContent = book.notebookName;
+        //     section1.appendChild(notebook);
+        // })
+
+    
+        // let inputSeconBreak = document.createElement('br');
+        // form.appendChild(inputSeconBreak); Ifall vi behöver sortera på något sätt i framtida behov.    
     }
     
     removeMe(){
