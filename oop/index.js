@@ -1,12 +1,13 @@
 class Main {
     constructor(){
+
         this.init();
+        // this.login();
         this.addNavEventListeners();
-        // this.saveFormToObject();
-        //this.activeListItem();
-        // this.allNoteObjects = allNoteObjects;
-        // this.allNoteBooks = allNoteBooks;
+        this.showLoggedInUser();
     }    
+
+    
 
 // // Initializes the UI.
  init() {
@@ -25,6 +26,8 @@ class Main {
     this.mainWrapper = document.createElement('div');
     this.mainWrapper.id = 'mainWrapper';
     bodyRef.appendChild(this.mainWrapper);
+
+    
     
     //  Creates the nav.
     this.nav = document.createElement('nav');
@@ -36,7 +39,152 @@ class Main {
     this.loginBTN.id = 'loginBTN';
     this.loginBTN.textContent = 'Login';
     this.nav.appendChild(this.loginBTN);
-    // loginBTN.addEventListener('click', login);
+    loginBTN.addEventListener('click', () =>{
+    
+        //  creates the modals.
+    let loginModal = document.createElement('div');
+    loginModal.setAttribute('class', 'modal');
+    document.body.appendChild(loginModal);
+    loginModal.style.display = 'block';                     // Behöver vi denna?(emma?)
+
+    let loginModalContent = document.createElement('div');
+    loginModalContent.setAttribute('class', 'modalContent');
+    loginModalContent.setAttribute('style', 'min-height: 300px');
+    loginModal.appendChild(loginModalContent);
+    
+    // creates the contents for the login modal.
+    let loginInputForm = document.createElement('form');
+    loginInputForm.id = 'usernameInputForm';
+    loginModalContent.appendChild(loginInputForm);
+    loginInputForm.addEventListener('submit', (e) =>{
+        e.preventDefault();                                         //  Stops the form from submiting(reloding page).
+        const xhr = new XMLHttpRequest();
+        xhr.open('get','https://jsonplaceholder.typicode.com/users', true);
+        xhr.addEventListener("load", () => {
+            const emailInput = document.getElementById('emailInputField').value; 
+            const passwordInput = document.getElementById('passwordInputForm').value;
+            const users = JSON.parse(xhr.response);                    //  HITTAR DEN SVARET BARA FÖR ATT DEN KALLADES PÅ I LOAD FUNKTIONEN? DEN ÄR JU INTE MEDSKICKAD SOM ARGUMENT?
+            console.log(users);
+            const validUser = users.find(function (user){               // Checks if the user exists and has a password to match. If so, returns that user.
+                return user.email === emailInput && passwordInput === user.address.suite; 
+            });
+        
+            if(validUser){                                              //  If the the login was successful then validUser now contins the "validuserobject". 
+                sessionStorage.setItem('logedInUser', JSON.stringify(validUser));
+                const modal = document.getElementsByClassName('modal')[0];
+                modal.parentElement.removeChild(modal);
+                this.showLoggedInUser();
+
+        
+            }
+        });          //  Listens for the response to load, then calls handleUsersResponse function.
+        xhr.send();  
+    });
+
+    const errorMessageSpanUsername = document.createElement('span');
+    errorMessageSpanUsername.setAttribute('class', 'errorMSGAboveInput')
+    errorMessageSpanUsername.id = 'errorMessageSpanUsername';
+    loginInputForm.appendChild(errorMessageSpanUsername);
+
+    let emailInputField = document.createElement('input');
+    emailInputField.id = 'emailInputField';
+    emailInputField.setAttribute('placeholder', 'Email...')
+    emailInputField.setAttribute('type', 'text', 'name', 'email');
+    loginInputForm.appendChild(emailInputField);
+    emailInputField.addEventListener('blur', () =>{
+        const errMSG = document.getElementById('errorMessageSpanUsername');
+        const emailInput = document.getElementById('emailInputField');
+        errMSG.innerText = '';
+        emailInput.setAttribute('style', 'border: 2px solid grey');
+        if (!emailInput.value){
+            errMSG.innerText = 'Username required';
+            emailInput.setAttribute('style', 'border: 2px solid red')
+        }
+        if (emailInput.value.length >= 40){
+            errMSG.innerText = 'Email must be less than 40 characters';
+            emailInput.setAttribute('style', 'border: 2px solid red');
+        }
+        if (!emailInput.value.includes('@')){
+            errMSG.innerText = 'Email must have a: @';
+            emailInput.setAttribute('style', 'border: 2px solid red');
+        }
+    });      
+    emailInputField.addEventListener('keyup', () =>{
+        const errMSG = document.getElementById('errorMessageSpanUsername');
+        const emailInput = document.getElementById('emailInputField');
+        errMSG.innerText = '';
+        emailInput.setAttribute('style', 'border: 2px solid grey');
+        if (!emailInput.value){
+            errMSG.innerText = 'Username required';
+            emailInput.setAttribute('style', 'border: 2px solid red')
+        }
+        if (emailInput.value.length >= 40){
+            errMSG.innerText = 'Email must be less than 40 characters';
+            emailInput.setAttribute('style', 'border: 2px solid red');
+        }
+        if (!emailInput.value.includes('@')){
+            errMSG.innerText = 'Email must have a: @';
+            emailInput.setAttribute('style', 'border: 2px solid red');
+        }
+    });      
+    
+
+    const errorMessageSpanPassword = document.createElement('span');
+    errorMessageSpanPassword.setAttribute('class', 'errorMSGAboveInput')
+    errorMessageSpanPassword.id = 'errorMessageSpanPassword';
+    loginInputForm.appendChild(errorMessageSpanPassword);
+
+    let password = document.createElement('input');
+    password.id = 'passwordInputForm';
+    password.setAttribute('placeholder', 'Password...')
+    password.setAttribute('type', 'password', 'name', 'password');
+    loginInputForm.appendChild(password);
+    password.addEventListener('input', () =>{
+        const errMSG = document.getElementById('errorMessageSpanPassword');
+        const passwordInput = document.getElementById('passwordInputForm');
+        errMSG.innerText = '';
+        const passwordRegex = /\W/g;
+        console.log()
+        const containsRegex = passwordInput.value.match(passwordRegex);
+        if(!containsRegex) {
+            errMSG.innerText = 'Password needs contain character';
+            passwordInput.setAttribute('style', 'border: 2px solid red');
+        }
+        passwordInput.setAttribute('style', 'border: 2px solid grey');
+        if (passwordInput.value.length <=2 ){
+            errMSG.innerText = 'Password needs to be longar than two charachters';
+            passwordInput.setAttribute('style', 'border: 2px solid red');
+    }
+    });          
+    password.addEventListener('blur', () =>{
+        const errMSG = document.getElementById('errorMessageSpanPassword');
+        const passwordInput = document.getElementById('passwordInputForm');
+        errMSG.innerText = '';
+        const passwordRegex = /\W/g;
+        console.log()
+        const containsRegex = passwordInput.value.match(passwordRegex);
+        if(!containsRegex) {
+            errMSG.innerText = 'Password needs contain character';
+            passwordInput.setAttribute('style', 'border: 2px solid red');
+        }
+        passwordInput.setAttribute('style', 'border: 2px solid grey');
+        if (passwordInput.value.length <=2 ){
+            errMSG.innerText = 'Password needs to be longar than two charachters';
+            passwordInput.setAttribute('style', 'border: 2px solid red');
+        }
+    });   
+
+    let submitLoginFormBTN = document.createElement('button');
+    submitLoginFormBTN.id = 'submitLoginFormBTN';
+    submitLoginFormBTN.textContent = 'Login';
+    loginInputForm.appendChild(submitLoginFormBTN);
+
+    const errMSG = document.createElement('p');
+    errMSG.id ='invalidUser';
+    loginModalContent.appendChild(errMSG);
+
+
+    });
 
     //  Creates the list with navigation.     -----------------------------------------Optimize below with for loop. TO DO
     this.navList = document.createElement('ul');
@@ -52,16 +200,165 @@ class Main {
     this.listItemThree = document.createElement('li');
     this.listItemThree.textContent = 'Notebooks';
     this.navList.appendChild(this.listItemThree);
-
-    //  Creates the main.                   ---------------------------------------------Add below to main-class. TO DO
-    // this.mainNotes = document.createElement('main');
-    // this.mainNotes.id = 'mainNotes';
-    // this.mainWrapper.appendChild(this.mainNotes);
-    // this.notesHeader = document.createElement('h2');
-    // this.notesHeader.textContent = 'Notes';
-    // this.mainNotes.appendChild(this.notesHeader);
    
+
+    
 }
+
+// login(){
+//      //  Creates the loginbutton.
+//      this.loginBTN = document.createElement('button');
+//      this.loginBTN.id = 'loginBTN';
+//      this.loginBTN.textContent = 'Login';
+//      this.nav.appendChild(this.loginBTN);
+//      loginBTN.addEventListener('click', () =>{
+     
+//          //  creates the modals.
+//      let loginModal = document.createElement('div');
+//      loginModal.setAttribute('class', 'modal');
+//      document.body.appendChild(loginModal);
+//      loginModal.style.display = 'block';                     // Behöver vi denna?(emma?)
+ 
+//      let loginModalContent = document.createElement('div');
+//      loginModalContent.setAttribute('class', 'modalContent');
+//      loginModalContent.setAttribute('style', 'min-height: 300px');
+//      loginModal.appendChild(loginModalContent);
+     
+//      // creates the contents for the login modal.
+//      let loginInputForm = document.createElement('form');
+//      loginInputForm.id = 'usernameInputForm';
+//      loginModalContent.appendChild(loginInputForm);
+//      loginInputForm.addEventListener('submit', (e) =>{
+//          e.preventDefault();                                         //  Stops the form from submiting(reloding page).
+//          const xhr = new XMLHttpRequest();
+//          xhr.open('get','https://jsonplaceholder.typicode.com/users', true);
+//          xhr.addEventListener("load", () => {
+//              const emailInput = document.getElementById('emailInputField').value; 
+//              const passwordInput = document.getElementById('passwordInputForm').value;
+//              const users = JSON.parse(xhr.response);                    //  HITTAR DEN SVARET BARA FÖR ATT DEN KALLADES PÅ I LOAD FUNKTIONEN? DEN ÄR JU INTE MEDSKICKAD SOM ARGUMENT?
+//              console.log(users);
+//              const validUser = users.find(function (user){               // Checks if the user exists and has a password to match. If so, returns that user.
+//                  return user.email === emailInput && passwordInput === user.address.suite; 
+//              });
+         
+//              if(validUser){                                              //  If the the login was successful then validUser now contins the "validuserobject". 
+//                  sessionStorage.setItem('logedInUser', JSON.stringify(validUser));
+//                  const modal = document.getElementsByClassName('modal')[0];
+//                  modal.parentElement.removeChild(modal);
+//                  this.showLoggedInUser();
+ 
+         
+//              }
+//          });          //  Listens for the response to load, then calls handleUsersResponse function.
+//          xhr.send();  
+//      });
+ 
+//      const errorMessageSpanUsername = document.createElement('span');
+//      errorMessageSpanUsername.setAttribute('class', 'errorMSGAboveInput')
+//      errorMessageSpanUsername.id = 'errorMessageSpanUsername';
+//      loginInputForm.appendChild(errorMessageSpanUsername);
+ 
+//      let emailInputField = document.createElement('input');
+//      emailInputField.id = 'emailInputField';
+//      emailInputField.setAttribute('placeholder', 'Email...')
+//      emailInputField.setAttribute('type', 'text', 'name', 'email');
+//      loginInputForm.appendChild(emailInputField);
+//      emailInputField.addEventListener('blur', () =>{
+//          const errMSG = document.getElementById('errorMessageSpanUsername');
+//          const emailInput = document.getElementById('emailInputField');
+//          errMSG.innerText = '';
+//          emailInput.setAttribute('style', 'border: 2px solid grey');
+//          if (!emailInput.value){
+//              errMSG.innerText = 'Username required';
+//              emailInput.setAttribute('style', 'border: 2px solid red')
+//          }
+//          if (emailInput.value.length >= 40){
+//              errMSG.innerText = 'Email must be less than 40 characters';
+//              emailInput.setAttribute('style', 'border: 2px solid red');
+//          }
+//          if (!emailInput.value.includes('@')){
+//              errMSG.innerText = 'Email must have a: @';
+//              emailInput.setAttribute('style', 'border: 2px solid red');
+//          }
+//      });      
+//      emailInputField.addEventListener('keyup', () =>{
+//          const errMSG = document.getElementById('errorMessageSpanUsername');
+//          const emailInput = document.getElementById('emailInputField');
+//          errMSG.innerText = '';
+//          emailInput.setAttribute('style', 'border: 2px solid grey');
+//          if (!emailInput.value){
+//              errMSG.innerText = 'Username required';
+//              emailInput.setAttribute('style', 'border: 2px solid red')
+//          }
+//          if (emailInput.value.length >= 40){
+//              errMSG.innerText = 'Email must be less than 40 characters';
+//              emailInput.setAttribute('style', 'border: 2px solid red');
+//          }
+//          if (!emailInput.value.includes('@')){
+//              errMSG.innerText = 'Email must have a: @';
+//              emailInput.setAttribute('style', 'border: 2px solid red');
+//          }
+//      });      
+     
+ 
+//      const errorMessageSpanPassword = document.createElement('span');
+//      errorMessageSpanPassword.setAttribute('class', 'errorMSGAboveInput')
+//      errorMessageSpanPassword.id = 'errorMessageSpanPassword';
+//      loginInputForm.appendChild(errorMessageSpanPassword);
+ 
+//      let password = document.createElement('input');
+//      password.id = 'passwordInputForm';
+//      password.setAttribute('placeholder', 'Password...')
+//      password.setAttribute('type', 'password', 'name', 'password');
+//      loginInputForm.appendChild(password);
+//      password.addEventListener('input', () =>{
+//          const errMSG = document.getElementById('errorMessageSpanPassword');
+//          const passwordInput = document.getElementById('passwordInputForm');
+//          errMSG.innerText = '';
+//          const passwordRegex = /\W/g;
+//          console.log()
+//          const containsRegex = passwordInput.value.match(passwordRegex);
+//          if(!containsRegex) {
+//              errMSG.innerText = 'Password needs contain character';
+//              passwordInput.setAttribute('style', 'border: 2px solid red');
+//          }
+//          passwordInput.setAttribute('style', 'border: 2px solid grey');
+//          if (passwordInput.value.length <=2 ){
+//              errMSG.innerText = 'Password needs to be longar than two charachters';
+//              passwordInput.setAttribute('style', 'border: 2px solid red');
+//      }
+//      });          
+//      password.addEventListener('blur', () =>{
+//          const errMSG = document.getElementById('errorMessageSpanPassword');
+//          const passwordInput = document.getElementById('passwordInputForm');
+//          errMSG.innerText = '';
+//          const passwordRegex = /\W/g;
+//          console.log()
+//          const containsRegex = passwordInput.value.match(passwordRegex);
+//          if(!containsRegex) {
+//              errMSG.innerText = 'Password needs contain character';
+//              passwordInput.setAttribute('style', 'border: 2px solid red');
+//          }
+//          passwordInput.setAttribute('style', 'border: 2px solid grey');
+//          if (passwordInput.value.length <=2 ){
+//              errMSG.innerText = 'Password needs to be longar than two charachters';
+//              passwordInput.setAttribute('style', 'border: 2px solid red');
+//          }
+//      });   
+ 
+//      let submitLoginFormBTN = document.createElement('button');
+//      submitLoginFormBTN.id = 'submitLoginFormBTN';
+//      submitLoginFormBTN.textContent = 'Login';
+//      loginInputForm.appendChild(submitLoginFormBTN);
+ 
+//      const errMSG = document.createElement('p');
+//      errMSG.id ='invalidUser';
+//      loginModalContent.appendChild(errMSG);
+ 
+ 
+//      });
+// }
+
 addNavEventListeners () {
 
     //GÖR LOOP
@@ -106,20 +403,19 @@ activeListItem (e) {
     e.target.setAttribute('class', 'active'); 
 }
 
-
-
-// createMainContent (){
-//     // removes the previous main
-//     this.main = document.getElementById('mainNotes');
-//     this.main.parentElement.removeChild(this.main);
-    
-//     // adds a new main and h2
-//     this.mainTwo = document.createElement('main');
-//     this.mainTwo.id = 'mainNotes';
-//     this.mainWrapper.appendChild(mainTwo);
-//     this.notesHeader = document.createElement('h2');
-//     this.mainTwo.appendChild(this.notesHeader);
-// }
+showLoggedInUser (){           //  OBS DENNNA MÅSTE KALLAS PÅ TIDIGT(TYP I INIT DÅ DOMEN LADDATS!)
+    const logedInUserObject = JSON.parse(sessionStorage.getItem("logedInUser"));
+   
+    if (logedInUserObject !== null) {
+        console.log(logedInUserObject);
+        const header = document.getElementById('header');
+        console.log(header);
+        const emailSpan = document.createElement('h1');
+        emailSpan.setAttribute('style', 'float: left; padding: 12px; font-size: 1.2em');
+        emailSpan.textContent = logedInUserObject.email;
+        header.prepend(emailSpan);
+    }
+}
 
 
 changeScreen(screenType){

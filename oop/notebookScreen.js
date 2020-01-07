@@ -78,7 +78,7 @@ class NotebookScreen extends Screen {
     
         localNotebook.forEach(function(book){
             let notebook = document.createElement('button');
-            notebook.setAttribute('class', 'notebookElement');
+            notebook.setAttribute('id', 'notebookElement');
             notebook.textContent = book.notebookName;
             section1.appendChild(notebook);
         })
