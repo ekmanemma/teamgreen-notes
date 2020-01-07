@@ -3,8 +3,6 @@ class NoteScreen extends Screen {
     constructor(){
         super();
         this.displayNote();
-        // super(allNoteObjects, allNotebooks);
-        // this.deleteNote();
     }
 
     displayNote(){

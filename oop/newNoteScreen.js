@@ -48,18 +48,4 @@ class NewNoteScreen extends Screen {
         });                      
      
     }
-
-    //LÄGG DENNA FUNCTION I MAIN?
-    // saveFormToObject(){
-    //     // Creates object that saves value from the input.
-    //     this.newNoteObject = {
-    //     'noteHeader': noteHeader.value,
-    //     'noteContent': noteContent.value,
-    //     'toDaysDate': new Date()
-    //     }
-    
-    //     // this.allNoteObjects.push(this.newNoteObject);                                   // Pushes the object to the array
-    //     localStorage.setItem('allNoteObjects', JSON.stringify(this.allNoteObjects)); // Stores array with all objects in local storage
-    //     console.log(this.allNoteObjects); //TESTING
-    // }
 }
