@@ -11,11 +11,9 @@ class NoteScreen extends Screen {
         this.notesHeader = document.querySelector('main h2');
         this.notesHeader.textContent = 'Notes';
 
-        
         let localObject = JSON.parse(localStorage.getItem('allNoteObjects'));
+        console.log(localObject);
 
-
-        
         // Applies to each object in the array.
          localObject.forEach(function(notePad) {
             let mainNotesWrapper = document.getElementById('mainNotes');

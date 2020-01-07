@@ -38,8 +38,6 @@ class NotebookScreen extends Screen {
         buttonCreateNotebook.textContent = 'Create Notebook';
         buttonCreateNotebook.id = 'buttonCreateNotebook';
         section2.appendChild(buttonCreateNotebook);
-
-    
     
         buttonCreateNotebook.addEventListener('click', (e) => {
             let notebookModal = document.createElement('div');
@@ -70,19 +68,20 @@ class NotebookScreen extends Screen {
                 e.preventDefault();
                 this.saveNotebook(e);
                 this.notebookModal = document.getElementsByClassName('modal')[0];
-                document.body.removeChild(this.notebookModal);
+                document.body.removeChild(this.notebookModal);    
                 
             });
-            localNotebook.forEach(function(book){
-                let notebook = document.createElement('button');
-                notebook.setAttribute('class', 'notebookElement');
-                notebook.textContent = book.notebookName;
-                section1.appendChild(notebook);
-            })
+            //VET EJ VAR LIGGA
+           
            
         });
     
-
+        localNotebook.forEach(function(book){
+            let notebook = document.createElement('button');
+            notebook.setAttribute('class', 'notebookElement');
+            notebook.textContent = book.notebookName;
+            section1.appendChild(notebook);
+        })
         
     }
 
