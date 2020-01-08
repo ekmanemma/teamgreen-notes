@@ -29,6 +29,8 @@ class Screen {
 
         allNoteObjects.push(newNoteObject);                                   // Pushes the object to the array
         localStorage.setItem('allNoteObjects', JSON.stringify(allNoteObjects)); // Stores array with all objects in local storage
+    
+
     }
 
     saveNotebook(){

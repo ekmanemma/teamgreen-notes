@@ -3,6 +3,7 @@ class NoteScreen extends Screen {
     constructor(){
         super();
         this.displayNote();
+
     }
 
     displayNote(){

@@ -10,6 +10,7 @@ class NotebookScreen extends Screen {
         let notesHeader = document.querySelector('main h2');
         notesHeader.textContent = 'Notebooks'; 
         let localNotebook = JSON.parse(localStorage.getItem('allNotebooks'));
+        console.log(localNotebook);
 
         let mainNotes = document.getElementById('mainNotes');
     
