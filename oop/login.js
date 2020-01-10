@@ -1,6 +1,5 @@
-class Login extends Screen{
+class Login {
     constructor(){
-        super();
         this.initLogin();
     }
     initLogin(){
@@ -125,7 +124,6 @@ class Login extends Screen{
         const passwordInput = document.getElementById('passwordInputForm');
         errMSG.innerText = '';
         const passwordRegex = /\W/g;
-        console.log()
         const containsRegex = passwordInput.value.match(passwordRegex);
         if(!containsRegex) {
             errMSG.innerText = 'Password needs contain character';
@@ -162,4 +160,6 @@ class Login extends Screen{
         const errInvalidUser = document.getElementById('invalidUser');
         errInvalidUser.textContent = 'Invalid User, you do not exist :,(';
     }
+
+   
 }

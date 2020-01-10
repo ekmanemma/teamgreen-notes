@@ -10,10 +10,10 @@ class NoteScreen extends Screen {
         this.notesHeader = document.querySelector('main h2');
         this.notesHeader.textContent = 'Notes';
 
-        let localObject = JSON.parse(localStorage.getItem('allNoteObjects'));
+        // let localObject = JSON.parse(localStorage.getItem('allNoteObjects'));
 
         // Applies to each object in the array.
-         localObject.forEach(function(notePad) {
+         NotesHandler.allNoteObjects.forEach(function(notePad) {
             let mainNotesWrapper = document.getElementById('mainNotes');
             mainNotesWrapper.setAttribute('style', 'display: flex; flex-direction: row; flex-wrap: wrap');  //  inline styling is used to not colide with other mains.
     

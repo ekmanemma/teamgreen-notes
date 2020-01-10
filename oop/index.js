@@ -1,12 +1,32 @@
+//CHANGES
+var NotesHandler = {
+    allNoteObjects: [],
+    allNotebooks: [],
+    
+    }
+                 
+
+
 class Main {
     constructor(){
         this.init();
         this.addNavEventListeners();
         this.showLoggedInUser();
+
+        //CHANGES
+        this.localNotes = JSON.parse(localStorage.getItem('allNoteObjects'));
+        NotesHandler.allNoteObjects.push(this.localNotes);                                   // Pushes the object to the array
+
+        this.localNotebooks = JSON.parse(localStorage.getItem('allNotebooks'));
+        NotesHandler.allNotebooks.push(this.localNotebooks);                                   // Pushes the object to the array
+
+        console.log(NotesHandler);
+        
     }    
 
 // // Initializes the UI.
     init() {
+
         let bodyRef = document.body;
 
         //  Creates header.
@@ -22,6 +42,7 @@ class Main {
         this.mainWrapper = document.createElement('div');
         this.mainWrapper.id = 'mainWrapper';
         bodyRef.appendChild(this.mainWrapper);
+        
 
         //  Creates the nav.
         this.nav = document.createElement('nav');
@@ -51,7 +72,6 @@ class Main {
         this.listItemThree = document.createElement('li');
         this.listItemThree.textContent = 'Notebooks';
         this.navList.appendChild(this.listItemThree);
-
     }
 
     addNavEventListeners () {
@@ -71,7 +91,7 @@ class Main {
         //     })
         // })
             
-        this.allListItems = document.querySelectorAll('li');
+        this.allListItems = document.querySelectorAll('li'); 
     
         this.allListItems[0].addEventListener('click', (e) =>{
             this.activeListItem(e);

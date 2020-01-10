@@ -1,6 +1,4 @@
-let allNoteObjects = [];
-let allNotebooks = [];
-
+//REMOVED ARRAYS
 class Screen {
 
     constructor(){
@@ -27,9 +25,8 @@ class Screen {
         'toDaysDate': new Date()
         }
 
-        allNoteObjects.push(newNoteObject);                                   // Pushes the object to the array
-        localStorage.setItem('allNoteObjects', JSON.stringify(allNoteObjects)); // Stores array with all objects in local storage
-    
+        NotesHandler.allNoteObjects.push(newNoteObject);                                   // Pushes the object to the array
+        localStorage.setItem('allNoteObjects', JSON.stringify(newNoteObject)); // Stores array with all objects in local storage
 
     }
 
@@ -40,8 +37,15 @@ class Screen {
         }
         
         // Pushes the object to the allNotebooksarray.
-        allNotebooks.push(notebookObject);
-        localStorage.setItem('allNotebooks', JSON.stringify(allNotebooks)); 
+        NotesHandler.allNotebooks.push(notebookObject);
+        localStorage.setItem('allNotebooks', JSON.stringify(notebookObject)); 
+        
+        //MOVED THIS HERE FROM NOTEBOOKSCREEN
+            let notebook = document.createElement('button');
+            notebook.setAttribute('id', 'notebookElement');
+            notebook.textContent = notebookObject.notebookName;
+            section1.appendChild(notebook);
+        
     }
     
     removeMe(){
