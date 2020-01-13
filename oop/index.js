@@ -66,8 +66,8 @@ class Main {
         // this.localNotes = JSON.parse(localStorage.getItem('allNoteObjects'));
         // NotesHandler.allNoteObjects.push(this.localNotes);                                   // Pushes the object to the array
 
-        this.localNotebooks = JSON.parse(localStorage.getItem('allNotebooks'));
-        NotesHandler.allNotebooks.push(this.localNotebooks);                                   // Pushes the object to the array
+        // this.localNotebooks = JSON.parse(localStorage.getItem('allNotebooks'));
+        // NotesHandler.allNotebooks.push(this.localNotebooks);                                   // Pushes the object to the array
 
         console.log(NotesHandler);
 

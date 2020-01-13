@@ -34,13 +34,13 @@ class NotebookScreen extends Screen {
         section2.appendChild(buttonCreateNotebook);
 
         //VAR SKA DENNA LIGGA?!?!??!
-        // NotesHandler.allNotebooks.forEach(function(book){
-        //     console.log(book);
-        //     let notebook = document.createElement('button');
-        //     notebook.setAttribute('id', 'notebookElement');
-        //     notebook.textContent = book.notebookName;
-        //     section1.appendChild(notebook);
-        // });
+        NotesHandler.allNotebooks.forEach(function(book){
+            console.log(book);
+            let notebook = document.createElement('button');
+            notebook.setAttribute('id', 'notebookElement');
+            notebook.textContent = book.notebookName;
+            section1.appendChild(notebook);
+        });
 
     
         buttonCreateNotebook.addEventListener('click', (e) => {
