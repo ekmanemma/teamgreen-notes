@@ -32,12 +32,9 @@ class Screen {
     saveNotebook(){
         let notebookObject = {
             'notebookName': notebookName.value,
-            'notebookDate': new Date()       // TA BORT                               //  If, in the future, would like to add date to notebooks.
         }
         
-        // Pushes the object to the allNotebooksarray.
-        NotesHandler.allNotebooks.push(notebookObject);
-        localStorage.setItem('allNotebooks', JSON.stringify(notebookObject)); 
+        NotesHandler.addNotebook(notebookObject);                             // Pushes the object to the array
         
         //MOVED THIS HERE FROM NOTEBOOKSCREEN
             let notebook = document.createElement('button');

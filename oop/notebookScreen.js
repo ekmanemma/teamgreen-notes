@@ -33,12 +33,15 @@ class NotebookScreen extends Screen {
         buttonCreateNotebook.id = 'buttonCreateNotebook';
         section2.appendChild(buttonCreateNotebook);
 
-        NotesHandler.allNotebooks.forEach(function(book){
-            let notebook = document.createElement('button');
-            notebook.setAttribute('id', 'notebookElement');
-            notebook.textContent = book.notebookName;
-            section1.appendChild(notebook);
-        });
+        //VAR SKA DENNA LIGGA?!?!??!
+        // NotesHandler.allNotebooks.forEach(function(book){
+        //     console.log(book);
+        //     let notebook = document.createElement('button');
+        //     notebook.setAttribute('id', 'notebookElement');
+        //     notebook.textContent = book.notebookName;
+        //     section1.appendChild(notebook);
+        // });
+
     
         buttonCreateNotebook.addEventListener('click', (e) => {
             let notebookModal = document.createElement('div');
@@ -70,7 +73,16 @@ class NotebookScreen extends Screen {
                 this.saveNotebook(e);
                 this.notebookModal = document.getElementsByClassName('modal')[0];
                 document.body.removeChild(this.notebookModal);   
+
+                    // let notebook = document.createElement('button');
+                    // notebook.setAttribute('id', 'notebookElement');
+                    // notebook.textContent = notebookObject.notebookName;
+                    // section1.appendChild(notebook);
+            
             });    
+
+
+            
                   
         });
     

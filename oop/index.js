@@ -13,10 +13,13 @@ var NotesHandler = {
 
     },
     removeNote: function(e){
+        console.log(this.allNoteObjects);
+        console.log(e.target)
         this.allNoteObjects.splice(e.target.parentElement, 1);        // Takes away the object from the array.
         localStorage.setItem('allNoteObjects', JSON.stringify(this.allNoteObjects)); // Stores array with all objects in local storage
         let currentIndexLS = JSON.parse(localStorage.getItem("currentIndex"));
         // localStorage.removeItem()
+        
         console.log(this.allNoteObjects)
         console.log(this.currentIndex)
 
@@ -24,7 +27,27 @@ var NotesHandler = {
     loadNotesFromLS: function(){
         let objectsInLocalStorage = JSON.parse(localStorage.getItem("allNoteObjects"));
         this.allNoteObjects = objectsInLocalStorage || [];
-
+        console.log(this.allNoteObjects);
+    },
+    addNotebook: function(notebookObject){
+        this.allNotebooks.push(notebookObject);  
+        localStorage.setItem('allNotebooks', JSON.stringify(this.allNotebooks)); // Stores array with all objects in local storage
+        // this.currentIndex++;
+        // localStorage.setItem('currentIndex', this.currentIndex); // Stores array with all objects in local storage
+        // console.log(this.currentIndex);
+    },
+    loadNotebooksFromLS: function(){
+        let notebooksInLocalStorage = JSON.parse(localStorage.getItem("allNotebooks"));
+        console.log('before', this.allNotebooks);
+        console.log('b', notebooksInLocalStorage);
+        if(notebooksInLocalStorage){
+            console.log('in if');
+            this.allNotebooks = notebooksInLocalStorage;
+        } else {
+            console.log('else');
+            this.allNotebooks = [];
+        }
+        console.log('hello',this.allNotebooks);
     },
 }
 
@@ -37,6 +60,7 @@ class Main {
         this.addNavEventListeners();
         this.showLoggedInUser();
         NotesHandler.loadNotesFromLS();
+        NotesHandler.loadNotebooksFromLS();
 
         //CHANGES
         // this.localNotes = JSON.parse(localStorage.getItem('allNoteObjects'));
