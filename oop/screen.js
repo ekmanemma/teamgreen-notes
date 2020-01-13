@@ -22,18 +22,17 @@ class Screen {
         let newNoteObject = {
         'noteHeader': noteHeader.value,
         'noteContent': noteContent.value,
-        'toDaysDate': new Date()
+        'toDaysDate': new Date(),
+        'noteIndex': NotesHandler.currentIndex
         }
 
-        NotesHandler.allNoteObjects.push(newNoteObject);                                   // Pushes the object to the array
-        localStorage.setItem('allNoteObjects', JSON.stringify(newNoteObject)); // Stores array with all objects in local storage
-
+        NotesHandler.addNote(newNoteObject);                                   // Pushes the object to the array
     }
 
     saveNotebook(){
         let notebookObject = {
             'notebookName': notebookName.value,
-            'notebookDate': new Date()                                      //  If, in the future, would like to add date to notebooks.
+            'notebookDate': new Date()       // TA BORT                               //  If, in the future, would like to add date to notebooks.
         }
         
         // Pushes the object to the allNotebooksarray.

@@ -1,10 +1,34 @@
 //CHANGES
 var NotesHandler = {
+    currentIndex: -1,
     allNoteObjects: [],
     allNotebooks: [],
-    
-    }
-                 
+
+    addNote: function(newNoteObject){
+        this.allNoteObjects.push(newNoteObject);  
+        localStorage.setItem('allNoteObjects', JSON.stringify(this.allNoteObjects)); // Stores array with all objects in local storage
+        this.currentIndex++;
+        localStorage.setItem('currentIndex', this.currentIndex); // Stores array with all objects in local storage
+        console.log(this.currentIndex);
+
+    },
+    removeNote: function(e){
+        this.allNoteObjects.splice(e.target.parentElement, 1);        // Takes away the object from the array.
+        localStorage.setItem('allNoteObjects', JSON.stringify(this.allNoteObjects)); // Stores array with all objects in local storage
+        let currentIndexLS = JSON.parse(localStorage.getItem("currentIndex"));
+        // localStorage.removeItem()
+        console.log(this.allNoteObjects)
+        console.log(this.currentIndex)
+
+    },
+    loadNotesFromLS: function(){
+        let objectsInLocalStorage = JSON.parse(localStorage.getItem("allNoteObjects"));
+        this.allNoteObjects = objectsInLocalStorage || [];
+
+    },
+}
+
+
 
 
 class Main {
@@ -12,21 +36,23 @@ class Main {
         this.init();
         this.addNavEventListeners();
         this.showLoggedInUser();
+        NotesHandler.loadNotesFromLS();
 
         //CHANGES
-        this.localNotes = JSON.parse(localStorage.getItem('allNoteObjects'));
-        NotesHandler.allNoteObjects.push(this.localNotes);                                   // Pushes the object to the array
+        // this.localNotes = JSON.parse(localStorage.getItem('allNoteObjects'));
+        // NotesHandler.allNoteObjects.push(this.localNotes);                                   // Pushes the object to the array
 
         this.localNotebooks = JSON.parse(localStorage.getItem('allNotebooks'));
         NotesHandler.allNotebooks.push(this.localNotebooks);                                   // Pushes the object to the array
 
         console.log(NotesHandler);
-        
+
     }    
 
 // // Initializes the UI.
     init() {
 
+        
         let bodyRef = document.body;
 
         //  Creates header.
