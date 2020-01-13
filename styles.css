@@ -302,6 +302,66 @@ button:hover {
     text-decoration: underline;
 }
 
+/* styling notes */
+#stylingNotes{
+    margin-bottom: 20px;
+    background-color: rgb(56, 68, 78) ;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    width: 50%;
+    height: 100%;
+    margin: auto;
+}
+
+#stylingNotes> .stylingButton {
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-family: sans-serif;
+    padding: 10px;
+    margin: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.stylingButton:hover {
+    background-color: rgb(26, 174, 159);
+}
+
+.stylingButton:focus {
+    background-color: rgb(26, 174, 159);
+}
+
+#stylingNotes>#btnForBig{
+    width: 50px;
+}
+
+#stylingNotes>#btnForSmall{
+    width: 50px;
+}
+
+#stylingNotes>#btnForUnderline{
+    text-decoration: underline;
+}
+    
+.notePaper span #bold{
+    font-weight: bold;
+}
+
+#stylingNotes>p {
+    display: inline;
+    padding: 20px;
+}
+
+.stylingNotes> #boldFont{
+    width: 50%;
+}
+
 
 
 
