@@ -23,6 +23,19 @@ var NotesHandler = {
         console.log(this.allNoteObjects)
         console.log(this.currentIndex)
 
+
+        let removePaper = e.target.parentElement;
+        removePaper.parentElement.removeChild(removePaper); 
+
+    },
+    editNote: function(e){
+        const previousHeaderContent = e.target.parentElement.firstChild.children[1].textContent;
+        const previousTextContent = e.target.parentElement.firstChild.children[2].textContent;
+        const main = document.getElementById('mainNotes');
+        main.firstChild.textContent = 'Edit note';
+        main.lastChild.lastChild.firstChild.textContent = 'Save';
+        document.getElementById('noteHeader').value = previousHeaderContent;
+        document.getElementById('noteContent').value = previousTextContent;
     },
     loadNotesFromLS: function(){
         let objectsInLocalStorage = JSON.parse(localStorage.getItem("allNoteObjects"));
@@ -49,6 +62,64 @@ var NotesHandler = {
         }
         console.log('hello',this.allNotebooks);
     },
+    addNavEventListeners: function () {
+
+        //GÖR LOOP
+
+        // for(let i = 0; i < allListItems.length; i++){
+        //     listItem.addEventListener('click', (e) =>{
+        //         this.activeListItem(e);
+        //          this.changeScreen('notes' + [i])
+        //     })}
+
+        // this.allListItems.forEach(function (listitem){
+        //     listItem.addEventListener('click', (e) => {
+        //         this.activeListItem(e);
+        //         this.changeScreen('notes' +[i]);
+        //     })
+        // })
+            
+        this.allListItems = document.querySelectorAll('li'); 
+    
+        this.allListItems[0].addEventListener('click', (e) =>{
+            this.activeListItem(e);
+            this.changeScreen('newNoteScreen');
+        });
+        this.allListItems[1].addEventListener('click', (e) => {
+            this.activeListItem(e);  
+            this.changeScreen('noteScreen');
+        });
+        this.allListItems[2].addEventListener('click', (e) => {
+            this.activeListItem(e);
+            this.changeScreen('notebookScreen');
+        });
+    },
+
+    activeListItem: function(e) {
+        this.allListItems = document.querySelectorAll('li');
+        this.allListItems.forEach(function(listItem){
+            listItem.removeAttribute('class');
+        });
+        e.target.setAttribute('class', 'active'); 
+    },
+
+    changeScreen: function (screenType){
+        if(this.activeScreen) this.activeScreen.removeMe();
+
+        switch(screenType) {
+            case 'newNoteScreen':
+                this.activeScreen = new NewNoteScreen();
+            break;
+            case 'noteScreen':
+                this.activeScreen = new NoteScreen();
+            break;
+            case 'notebookScreen':
+                this.activeScreen = new NotebookScreen();
+            break;
+            default:
+                this.activeScreen = new Main();
+        }
+    }
 }
 
 
@@ -57,7 +128,7 @@ var NotesHandler = {
 class Main {
     constructor(){
         this.init();
-        this.addNavEventListeners();
+        NotesHandler.addNavEventListeners();
         this.showLoggedInUser();
         NotesHandler.loadNotesFromLS();
         NotesHandler.loadNotebooksFromLS();
@@ -124,46 +195,6 @@ class Main {
         this.navList.appendChild(this.listItemThree);
     }
 
-    addNavEventListeners () {
-
-        //GÖR LOOP
-
-        // for(let i = 0; i < allListItems.length; i++){
-        //     listItem.addEventListener('click', (e) =>{
-        //         this.activeListItem(e);
-        //          this.changeScreen('notes' + [i])
-        //     })}
-
-        // this.allListItems.forEach(function (listitem){
-        //     listItem.addEventListener('click', (e) => {
-        //         this.activeListItem(e);
-        //         this.changeScreen('notes' +[i]);
-        //     })
-        // })
-            
-        this.allListItems = document.querySelectorAll('li'); 
-    
-        this.allListItems[0].addEventListener('click', (e) =>{
-            this.activeListItem(e);
-            this.changeScreen('newNoteScreen');
-        });
-        this.allListItems[1].addEventListener('click', (e) => {
-            this.activeListItem(e);  
-            this.changeScreen('noteScreen');
-        });
-        this.allListItems[2].addEventListener('click', (e) => {
-            this.activeListItem(e);
-            this.changeScreen('notebookScreen');
-        });
-    }
-
-    activeListItem (e) {
-        this.allListItems = document.querySelectorAll('li');
-        this.allListItems.forEach(function(listItem){
-            listItem.removeAttribute('class');
-        });
-        e.target.setAttribute('class', 'active'); 
-    }
 
     showLoggedInUser (){     
         const logedInUserObject = JSON.parse(sessionStorage.getItem("logedInUser"));
@@ -178,23 +209,7 @@ class Main {
         }
     }
 
-    changeScreen(screenType){
-        if(this.activeScreen) this.activeScreen.removeMe();
 
-        switch(screenType) {
-            case 'newNoteScreen':
-                this.activeScreen = new NewNoteScreen();
-            break;
-            case 'noteScreen':
-                this.activeScreen = new NoteScreen();
-            break;
-            case 'notebookScreen':
-                this.activeScreen = new NotebookScreen();
-            break;
-            default:
-                this.activeScreen = new Main();
-        }
-    }
 }
 
 document.addEventListener('DOMContentLoaded', function(){

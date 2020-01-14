@@ -2,7 +2,8 @@ class NewNoteScreen extends Screen {
     
     constructor(){
         super();
-        this.createNoteForm();
+        this.createNoteForm();   
+     
     }
 
     createNoteForm() {
@@ -45,7 +46,8 @@ class NewNoteScreen extends Screen {
             e.preventDefault();
             this.saveFormToObject();
             this.form.reset();
-        });                      
-     
+        });         
     }
-}
+    
+
+ }

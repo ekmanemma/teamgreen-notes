@@ -24,13 +24,13 @@ class NoteScreen extends Screen {
             divForWrapperAndButton.appendChild(notePaper);
     
             let noteHeader = document.createElement('h4');
-            noteHeader.textContent = notePad.noteHeader; 
+            let headerContent = noteHeader.textContent = notePad.noteHeader; 
     
             let toDaysDate = document.createElement('h6');
             toDaysDate.textContent = notePad.toDaysDate;
         
             let noteContent = document.createElement('span');
-            noteContent.textContent = notePad.noteContent;
+            const noteText = noteContent.textContent = notePad.noteContent;
     
             notePaper.appendChild(noteHeader);
             notePaper.appendChild(noteContent);
@@ -58,18 +58,27 @@ class NoteScreen extends Screen {
             circleDivContainerOne.appendChild(circleDivTwo);
             notePaper.appendChild(circleDivContainerTwo);
             circleDivContainerTwo.appendChild(circleDivThree);
-            circleDivContainerTwo.appendChild(circleDivFour);  
+            circleDivContainerTwo.appendChild(circleDivFour); 
+            
+            let editButton = document.createElement('button');
+            editButton.id = 'editButton';
+            editButton.textContent = 'Edit';
+            divForWrapperAndButton.appendChild(editButton);
+            editButton.addEventListener('click', (e) => {
+                NotesHandler.activeListItem(e);
+                NotesHandler.changeScreen('newNoteScreen');
+                NotesHandler.editNote(e);
+                NotesHandler.removeNote(e);
+           
+            
+            }); 
             
             let deleteButton = document.createElement('button');
             deleteButton.id = 'deleteButton';
             deleteButton.textContent = 'Delete note';
-    
             divForWrapperAndButton.appendChild(deleteButton);
             deleteButton.addEventListener('click', (e) => {
                 NotesHandler.removeNote(e);
-                let removePaper = e.target.parentElement;
-                removePaper.parentElement.removeChild(removePaper); 
-                console.log(NotesHandler.allNoteObjects);
             }); 
         });
     }
