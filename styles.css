@@ -161,13 +161,12 @@ button:hover {
     text-align: center;
   }
 
-.notePaper span {
+span {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
     font-size: 1.2em;
     overflow-wrap: break-word;
     margin: 0 10% 5% 0;
-
 }
 
 .circleDivContainer {
@@ -341,7 +340,7 @@ button:hover {
     width: 50px;
 }
 
-#stylingNotes>#btnForSmall{
+#stylingNotes>#btnForSmall {
     width: 50px;
 }
 
@@ -349,16 +348,27 @@ button:hover {
     text-decoration: underline;
 }
     
-.notePaper span #bold{
-    font-weight: bold;
+.underline {
+    text-decoration: underline;
 }
 
-#stylingNotes>p {
+.bold {
+    font-weight: bold;
+}
+.twenty4px {
+    font-size: 24px;
+}
+
+.tenpx {
+    font-size: 10px;
+}
+
+#stylingNotes > p {
     display: inline;
     padding: 20px;
 }
 
-.stylingNotes> #boldFont{
+.stylingNotes > #boldFont {
     width: 50%;
 }
 

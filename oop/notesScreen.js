@@ -3,7 +3,6 @@ class NoteScreen extends Screen {
     constructor(){
         super();
         this.displayNote();
-
     }
 
     displayNote(){
@@ -31,6 +30,10 @@ class NoteScreen extends Screen {
         
             let noteContent = document.createElement('span');
             noteContent.textContent = notePad.noteContent;
+
+            notePad.styles.forEach(function(style){
+                noteContent.className = style;
+            })
     
             notePaper.appendChild(noteHeader);
             notePaper.appendChild(noteContent);
@@ -59,19 +62,25 @@ class NoteScreen extends Screen {
             notePaper.appendChild(circleDivContainerTwo);
             circleDivContainerTwo.appendChild(circleDivThree);
             circleDivContainerTwo.appendChild(circleDivFour);  
+
+            const editButton = document.createElement('button');
+            editButton.id = 'editButton';
+            editButton.textContent = 'Edit';
+            divForWrapperAndButton.appendChild(editButton);
+            editButton.addEventListener('click', (e) => {
+                NotesHandler.activeListItem(e);
+                NotesHandler.changeScreen('newNoteScreen');
+                NotesHandler.editNote(e);
+                NotesHandler.removeNote(e);
+            }); 
             
-            let deleteButton = document.createElement('button');
+            const deleteButton = document.createElement('button');
             deleteButton.id = 'deleteButton';
             deleteButton.textContent = 'Delete note';
-    
             divForWrapperAndButton.appendChild(deleteButton);
             deleteButton.addEventListener('click', (e) => {
                 NotesHandler.removeNote(e);
-                let removePaper = e.target.parentElement;
-                removePaper.parentElement.removeChild(removePaper); 
-                console.log(NotesHandler.allNoteObjects);
             }); 
         });
-    }
-    
+    }  
 }

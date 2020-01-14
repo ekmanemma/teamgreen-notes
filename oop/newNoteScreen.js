@@ -1,5 +1,6 @@
 class NewNoteScreen extends Screen {
-    
+    styles = [];
+
     constructor(){
         super();
         this.createNoteForm();
@@ -34,26 +35,18 @@ class NewNoteScreen extends Screen {
         this.stylingNotes.appendChild(this.btnForUnderline);
 
         this.btnForSmall = document.createElement('button');
-        this.btnForSmall.textContent = '14px';
+        this.btnForSmall.textContent = '10px';
         this.btnForSmall.setAttribute('class', 'stylingButton');
         this.btnForSmall.setAttribute('id', 'btnForSmall');
         this.btnForSmall.setAttribute('type', 'button');
         this.stylingNotes.appendChild(this.btnForSmall);
 
         this.btnForBig = document.createElement('button');
-        this.btnForBig.textContent = '22px';
+        this.btnForBig.textContent = '24px';
         this.btnForBig.setAttribute('class', 'stylingButton');
         this.btnForBig.setAttribute('id', 'btnForBig');
         this.btnForBig.setAttribute('type', 'button');
         this.stylingNotes.appendChild(this.btnForBig);
-
-        
-
-        // this.btnForBold.addEventListener('click', (e) =>{
-        //     this.contentSpan = document.getElementsByTagName('span');
-        //     this.contentSpan.style = 'color: green';
-        // })
-
     
         this.labelInputHeader = document.createElement('label');
         this.labelInputHeader.textContent = 'Header';
@@ -76,7 +69,58 @@ class NewNoteScreen extends Screen {
         this.toDay = document.createElement('Date');
         this.toDay.id = 'toDaysDate';
         this.toDay.setAttribute('type', 'text', 'name', 'toDaysDate');
-        this.form.prepend(this.toDay);                                                // Preoritizes this element before other when placing.
+        this.form.prepend(this.toDay);     
+        
+        //adding event on styling buttons, changes styling
+        this.btnForBold.addEventListener('click', () =>{
+            this.contentText = document.getElementById('noteContent');
+            this.contentText.style = 'font-weight: bold';
+            this.styles.push('bold');
+            
+            // this.selection = window.getSelection(this.contentText).toString();
+            // // Selection.toString(selection);
+            // console.log(this.selection);
+
+            // obtain the object reference for the <textarea>
+            // let formContent = document.getElementById("noteContent");
+            // obtain the index of the first selected character
+            // let start = formContent.selectionStart;
+            // obtain the index of the last selected character
+            // let end = formContent.selectionEnd;
+            // obtain the selected text
+            // let selection = formContent.value.substring(start, end);
+        
+            // let spanElement = document.createElement('b');
+            // spanElement.textContent = selection;
+            // formContent.appendChild(spanElement);
+
+            // spanElement.style = 'font-weight: bold';
+            
+            // selection.setAttribute('class', 'bold');
+
+            // do something with the selected content
+            // console.log(selection);
+
+            // this.styles.push(selection.formContent, 'bold');
+        });
+
+        this.btnForUnderline.addEventListener('click', () =>{
+            this.contentText = document.getElementById('noteContent');
+            this.contentText.style = 'text-decoration: underline';
+            this.styles.push('underline');
+        });
+
+        this.btnForSmall.addEventListener('click', () =>{
+            this.contentText = document.getElementById('noteContent');
+            this.contentText.style = 'font-size: 10px';
+            this.styles.push('tenpx');
+        });
+
+        this.btnForBig.addEventListener('click', () =>{
+            this.contentText = document.getElementById('noteContent');
+            this.contentText.style = 'font-size: 24px';
+            this.styles.push('twenty4px');
+        });
     
         this.submitButton = document.createElement('button');
         this.submitButton.setAttribute('type','submit');
@@ -84,42 +128,8 @@ class NewNoteScreen extends Screen {
         this.form.appendChild(this.submitButton);
         this.form.addEventListener('submit',(e) => {
             e.preventDefault();
-            this.saveFormToObject();
+            NotesHandler.saveFormToObject(noteHeader.value, noteContent.value, this.styles);
             this.form.reset();
         });              
-
-        this.btnForBold.addEventListener('click', (e) =>{
-            // this.contentSpan = document.getElementsByTagName('span');
-            // this.contentSpan.style = 'color: green';
-            this.contentText = document.getElementById('noteContent');
-            this.contentText.style = 'font-weight: bold';
-        });
-
-        this.btnForUnderline.addEventListener('click', (e) =>{
-            // this.contentSpan = document.getElementsByTagName('span');
-            // this.contentSpan.style = 'color: green';
-            this.contentText = document.getElementById('noteContent');
-            this.contentText.style = 'text-decoration: underline';
-        });
-
-        this.btnForSmall.addEventListener('click', (e) =>{
-            // this.contentSpan = document.getElementsByTagName('span');
-            // this.contentSpan.style = 'color: green';
-            this.contentText = document.getElementById('noteContent');
-            this.contentText.style = 'font-size: 14px';
-        });
-
-        this.btnForBig.addEventListener('click', (e) =>{
-            // this.contentSpan = document.getElementsByTagName('span');
-            // this.contentSpan.style = 'color: green';
-            this.contentText = document.getElementById('noteContent');
-            this.contentText.style = 'font-size: 22px';
-        });
-
-        
-
-            
-        
-     
     }
 }

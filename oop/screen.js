@@ -1,9 +1,7 @@
-//REMOVED ARRAYS
 class Screen {
 
     constructor(){
         this.createMainContent();
-        
     }
 
     createMainContent (){
@@ -16,32 +14,17 @@ class Screen {
         this.mainTwo.appendChild(this.notesHeader);
     }
 
-    saveFormToObject(){
-
-        // Creates object that saves value from the input.
-        let newNoteObject = {
-        'noteHeader': noteHeader.value,
-        'noteContent': noteContent.value,
-        'toDaysDate': new Date(),
-        'noteIndex': NotesHandler.currentIndex
-        }
-
-        NotesHandler.addNote(newNoteObject);                                   // Pushes the object to the array
-    }
-
     saveNotebook(){
         let notebookObject = {
             'notebookName': notebookName.value,
         }
         
-        NotesHandler.addNotebook(notebookObject);                             // Pushes the object to the array
+        NotesHandler.addNotebook(notebookObject);                  
         
-        //MOVED THIS HERE FROM NOTEBOOKSCREEN
-            let notebook = document.createElement('button');
-            notebook.setAttribute('id', 'notebookElement');
-            notebook.textContent = notebookObject.notebookName;
-            section1.appendChild(notebook);
-        
+        let notebook = document.createElement('button');
+        notebook.setAttribute('id', 'notebookElement');
+        notebook.textContent = notebookObject.notebookName;
+        section1.appendChild(notebook);
     }
     
     removeMe(){
