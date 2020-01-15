@@ -29,7 +29,7 @@ var NotesHandler = {
         main.firstChild.textContent = 'Edit note';
         main.lastChild.lastChild.firstChild.textContent = 'Save';
         document.getElementById('noteHeader').value = previousHeaderContent;
-        document.getElementById('noteContent').value = previousTextContent;
+        document.getElementById('noteContent').innerHTML = previousTextContent;
     },
     loadNotesFromLS: function(){
         let objectsInLocalStorage = JSON.parse(localStorage.getItem("allNoteObjects"));
@@ -60,6 +60,7 @@ var NotesHandler = {
             toDaysDate: new Date(),
             noteIndex: this.currentIndex,
             styles: styles
+
         }
         this.addNote(newNoteObject);                                   // Pushes the object to the array
     },
@@ -101,18 +102,6 @@ var NotesHandler = {
             listItem.removeAttribute('class');
         });
         e.target.setAttribute('class', 'active'); 
-    },
-    saveFormToObject: function(header, content, styles){
-
-        // Creates object that saves value from the input.
-        let newNoteObject = {
-            noteHeader: header,
-            noteContent: content,
-            toDaysDate: new Date(),
-            noteIndex: this.currentIndex,
-            styles: styles
-        }
-        this.addNote(newNoteObject);                                   // Pushes the object to the array
     },
     changeScreen(screenType){
         if(this.activeScreen) this.activeScreen.removeMe();

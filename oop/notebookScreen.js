@@ -42,7 +42,6 @@ class NotebookScreen extends Screen {
             section1.appendChild(notebook);
         });
 
-    
         buttonCreateNotebook.addEventListener('click', (e) => {
             let notebookModal = document.createElement('div');
             notebookModal.setAttribute('class', 'modal');
@@ -73,20 +72,7 @@ class NotebookScreen extends Screen {
                 this.saveNotebook(e);
                 this.notebookModal = document.getElementsByClassName('modal')[0];
                 document.body.removeChild(this.notebookModal);   
-
-                    // let notebook = document.createElement('button');
-                    // notebook.setAttribute('id', 'notebookElement');
-                    // notebook.textContent = notebookObject.notebookName;
-                    // section1.appendChild(notebook);
-            
-            });    
-
-
-            
-                  
-        });
-    
-        
-        
+            });                   
+        });      
     }    
 }

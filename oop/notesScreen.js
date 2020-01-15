@@ -29,7 +29,7 @@ class NoteScreen extends Screen {
             toDaysDate.textContent = notePad.toDaysDate;
         
             let noteContent = document.createElement('span');
-            noteContent.textContent = notePad.noteContent;
+            noteContent.innerHTML = notePad.noteContent;
 
             notePad.styles.forEach(function(style){
                 noteContent.className = style;

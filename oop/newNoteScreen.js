@@ -61,9 +61,15 @@ class NewNoteScreen extends Screen {
         this.labelTextarea.textContent = 'Content';
         this.form.appendChild(this.labelTextarea);
     
-        this.inputText = document.createElement('textarea');
-        this.inputText.id = 'noteContent'; 
-        this.inputText.setAttribute('type', 'text', 'name', 'noteContent');
+        // this.inputText = document.createElement('textarea');
+        // this.inputText.id = 'noteContent'; 
+        // this.inputText.setAttribute('type', 'text', 'name', 'noteContent');
+        // this.form.appendChild(this.inputText);
+
+        this.inputText = document.createElement('div');
+        this.inputText.id = 'noteContent';
+        this.inputText.setAttribute('contenteditable', 'true');
+        this.inputText.setAttribute('type', 'text', 'name, noteContent');
         this.form.appendChild(this.inputText);
     
         this.toDay = document.createElement('Date');
@@ -73,47 +79,19 @@ class NewNoteScreen extends Screen {
         
         //adding event on styling buttons, changes styling
         this.btnForBold.addEventListener('click', () =>{
-            this.contentText = document.getElementById('noteContent');
-            this.contentText.style = 'font-weight: bold';
-            this.styles.push('bold');
-            
-            // this.selection = window.getSelection(this.contentText).toString();
-            // // Selection.toString(selection);
-            // console.log(this.selection);
-
-            // obtain the object reference for the <textarea>
-            // let formContent = document.getElementById("noteContent");
-            // obtain the index of the first selected character
-            // let start = formContent.selectionStart;
-            // obtain the index of the last selected character
-            // let end = formContent.selectionEnd;
-            // obtain the selected text
-            // let selection = formContent.value.substring(start, end);
-        
-            // let spanElement = document.createElement('b');
-            // spanElement.textContent = selection;
-            // formContent.appendChild(spanElement);
-
-            // spanElement.style = 'font-weight: bold';
-            
-            // selection.setAttribute('class', 'bold');
-
-            // do something with the selected content
-            // console.log(selection);
-
-            // this.styles.push(selection.formContent, 'bold');
+            document.execCommand('bold');
         });
 
         this.btnForUnderline.addEventListener('click', () =>{
-            this.contentText = document.getElementById('noteContent');
-            this.contentText.style = 'text-decoration: underline';
-            this.styles.push('underline');
+            document.execCommand('underline');
+
         });
 
         this.btnForSmall.addEventListener('click', () =>{
             this.contentText = document.getElementById('noteContent');
             this.contentText.style = 'font-size: 10px';
             this.styles.push('tenpx');
+            
         });
 
         this.btnForBig.addEventListener('click', () =>{
@@ -126,10 +104,13 @@ class NewNoteScreen extends Screen {
         this.submitButton.setAttribute('type','submit');
         this.submitButton.textContent = 'Create New Note';
         this.form.appendChild(this.submitButton);
-        this.form.addEventListener('submit',(e) => {
+        this.submitButton.addEventListener('click',(e) => {
             e.preventDefault();
-            NotesHandler.saveFormToObject(noteHeader.value, noteContent.value, this.styles);
+            let inputTextInDiv = document.getElementById('noteContent');
+
+            NotesHandler.saveFormToObject(noteHeader.value, inputTextInDiv.innerHTML, this.styles);
             this.form.reset();
+            inputTextInDiv.innerHTML = '';
         });              
     }
 }
