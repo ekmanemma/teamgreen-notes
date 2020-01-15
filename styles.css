@@ -316,7 +316,7 @@ span {
 }
 
 #stylingNotes> .stylingButton {
-    width: 35px;
+    width: auto;
     height: 35px;
     border-radius: 5px;
     font-size: 15px;
@@ -335,14 +335,6 @@ span {
 
 .stylingButton:focus {
     background-color: rgb(26, 174, 159);
-}
-
-#stylingNotes>#btnForBig{
-    width: 50px;
-}
-
-#stylingNotes>#btnForSmall {
-    width: 50px;
 }
 
 #stylingNotes>#btnForUnderline{

@@ -37,14 +37,12 @@ class NewNoteScreen extends Screen {
         this.btnForSmall = document.createElement('button');
         this.btnForSmall.textContent = '10px';
         this.btnForSmall.setAttribute('class', 'stylingButton');
-        this.btnForSmall.setAttribute('id', 'btnForSmall');
         this.btnForSmall.setAttribute('type', 'button');
         this.stylingNotes.appendChild(this.btnForSmall);
 
         this.btnForBig = document.createElement('button');
         this.btnForBig.textContent = '24px';
         this.btnForBig.setAttribute('class', 'stylingButton');
-        this.btnForBig.setAttribute('id', 'btnForBig');
         this.btnForBig.setAttribute('type', 'button');
         this.stylingNotes.appendChild(this.btnForBig);
     
