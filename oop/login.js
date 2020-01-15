@@ -139,15 +139,21 @@ class Login {
         }
     }
 
-    showLoggedInUser (){          
+    showLoggedInUser (){    
         const logedInUserObject = JSON.parse(sessionStorage.getItem("logedInUser"));
         if (logedInUserObject !== null) {
-            console.log(logedInUserObject);
-            const header = document.getElementById('header');
-            const emailSpan = document.createElement('h1');
-            emailSpan.setAttribute('style', 'float: left; padding: 12px; font-size: 1.2em');
-            emailSpan.textContent = logedInUserObject.email;
-            header.prepend(emailSpan);
+            const previousLoggedInUser = document.getElementById('loggedInUser')
+            if (previousLoggedInUser) {
+                const emailSpan = document.getElementById('loggedInUser');
+                emailSpan.textContent = logedInUserObject.email;
+            } else {
+                const header = document.getElementById('header');
+                const emailSpan = document.createElement('h1');
+                emailSpan.setAttribute('style', 'float: left; padding: 12px; font-size: 1.2em');
+                emailSpan.setAttribute('id', 'loggedInUser');
+                emailSpan.textContent = logedInUserObject.email;
+                header.prepend(emailSpan);
+            }
         }
     }
 
