@@ -365,6 +365,30 @@ span {
     width: 50%;
 }
 
+#checkbox {
+    margin: auto;
+    margin-left: 25%;
+    margin-top: 4%;
+    width: auto;
+}
+
+#textForCheckbox {
+    margin: auto;
+    margin-left: 5%;
+    display: inline;
+}
+
+.divForWrapperAndButton > #done {
+    background-color: lightseagreen;
+}
+
+#checked {
+    background-color: lightgreen;
+}
+#unchecked {
+    background-color: beige;
+}
+
 
 
 
