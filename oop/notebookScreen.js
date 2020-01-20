@@ -29,7 +29,7 @@ var NotebooksHandler = {
 		}
 	},
 	displayNotebooks: function(){
-
+		console.log(this.allNotebooks);
 		NotebooksHandler.allNotebooks.forEach(function(book){
 			let notebook = document.createElement('button');
 			notebook.setAttribute('id', 'notebookElement');
@@ -103,7 +103,6 @@ class NotebookScreen extends Screen {
 			notebookForm.addEventListener('submit', (e) =>{
 				e.preventDefault();
 				NotebooksHandler.createNotebookObject(e);
-				NotebooksHandler.addNotebook();
 				this.notebookModal = document.getElementsByClassName('modal')[0];
 				document.body.removeChild(this.notebookModal);
 			});                   

@@ -33,16 +33,16 @@ var NotesHandler = {
     let objectsInLocalStorage = JSON.parse(localStorage.getItem("allNoteObjects"));
     this.allNoteObjects = objectsInLocalStorage || [];
 	},
-	saveFormToObject: function(header, content, styles){
+	saveFormToObject: function(header, content, styles, image){
 
-			// Creates object that saves value from the input.
     let newNoteObject = {
       noteHeader: header,
       noteContent: content,
       toDaysDate: new Date(),
       noteIndex: this.currentIndex,
-      styles: styles
+      styles: styles,
+      image: image
     }
-    this.addNote(newNoteObject);           // Pushes the object to the array
+    this.addNote(newNoteObject);
   },
 }

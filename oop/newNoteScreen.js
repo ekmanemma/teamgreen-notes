@@ -45,6 +45,38 @@ class NewNoteScreen extends Screen {
 		this.btnForBig.setAttribute('type', 'button');
 		this.stylingNotes.appendChild(this.btnForBig);
 
+		this.btnForUploadImage = document.createElement('input');
+		this.btnForUploadImage.setAttribute('type', 'file');
+		this.btnForUploadImage.setAttribute('class', 'stylingButton');
+		this.btnForUploadImage.textContent = 'upload image';
+		this.btnForUploadImage.id = 'imageUpload';
+		this.stylingNotes.appendChild(this.btnForUploadImage);
+
+		this.btnForUploadImage.addEventListener('change', (e) =>{
+			let fileInput = document.getElementById('imageUpload')
+			this.element = document.createElement('img');
+			this.element.id = 'imgtag';
+			this.stylingNotes.appendChild(this.element);
+
+
+			let file = fileInput.files[0];  
+			let imgType = /image.*/;
+
+			if (file.type.match(imgType)) {
+				let reader = new FileReader();
+
+				reader.onload = function() {
+					let imgtag = document.getElementById('imgtag')
+					console.log(reader.result);
+					imgtag.src = reader.result;
+				} 
+				reader.readAsDataURL(file);  
+
+				} else {
+					imgTag.src = null;
+				}
+		})
+
 		this.labelInputHeader = document.createElement('label');
 		this.labelInputHeader.textContent = 'Header';
 		this.form.appendChild(this.labelInputHeader);
@@ -96,7 +128,14 @@ class NewNoteScreen extends Screen {
 		this.submitButton.addEventListener('click',(e) => {
 			e.preventDefault();
 			let inputTextInDiv = document.getElementById('noteContent');
-			NotesHandler.saveFormToObject(noteHeader.value, inputTextInDiv.innerHTML, this.styles);
+			let imagetag = document.getElementById('imgtag');
+			console.log(imagetag);
+
+			if(imagetag !== null){
+				NotesHandler.saveFormToObject(noteHeader.value, inputTextInDiv.innerHTML, this.styles, imgtag.src);
+			} if(imagetag == null) {
+				NotesHandler.saveFormToObject(noteHeader.value, inputTextInDiv.innerHTML, this.styles);
+			}
 			this.form.reset();
 			inputTextInDiv.innerHTML = '';
 		});              

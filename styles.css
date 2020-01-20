@@ -3,6 +3,7 @@ body {
     background-color: lightgrey;
 }
 
+/*styling init*/
 #mainWrapper {
     display: flex;
     background-color: rgb(75, 92, 107);
@@ -33,28 +34,27 @@ h2 {
     font-family: sans-serif;
     font-weight: lighter;
     margin: 30px 100% 0 30px;
-    
 }
+
 h6 {
     color: black;
     font-family: sans-serif;
     font-weight: lighter;
     margin: 30px 100% 0 30px;
-  }
+}
 
 #nav {
     background-color: rgb(26, 174, 159);
     padding: 40px;
     display: flex;  
     flex-direction: column;
-    /* justify-content: center; */
 }
 
-#loginBTN{                          
+#loginBTN {                          
     position: relative;
     top: -30px;
 }
- 
+
 ul {
     margin-top: 10em;
     text-align: center;
@@ -74,7 +74,6 @@ li {
 #mainNotes {
     width: 100%;
 }
-
 
 #formNewNote {
     padding: 80px;
@@ -103,7 +102,7 @@ input {
     box-sizing: border-box;
     padding: 12px;
     font-size: 18px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 label {
@@ -130,8 +129,6 @@ button:hover {
    background-color: rgb(22, 92, 79)
 }
 
-
-
 .notePaper {
     display: grid;
     grid-template-columns: 10% 90%;
@@ -143,7 +140,7 @@ button:hover {
     overflow: auto;
 }
 
-.divForWrapperAndButton{
+.divForWrapperAndButton {
     width: 35%;
     margin: 4%;
 }
@@ -156,11 +153,12 @@ button:hover {
     text-decoration: underline;
     text-align: center;
 }
+
 .notePaper h6 {
     grid-column:3 / 2;
     grid-row: auto;
     text-align: center;
-  }
+}
 
 span {
     grid-column: 2 / 3;
@@ -184,6 +182,7 @@ span {
     margin: 20px 0 0 0;
 }
 
+/*styling for notebook*/
 #buttonCreateNotebook {
     width: 100%;
     border-radius: 5px;
@@ -192,7 +191,6 @@ span {
     background-color: rgb(26, 174, 159);
     margin: auto;
 }
-
 
 #divNotebook {
     display: grid;
@@ -220,8 +218,7 @@ span {
     justify-self: center;
 }
 
-/*styling for notebook elements that are created*/
-#notebookElement{
+#notebookElement {
     width: 60%;
     border-radius: 5px;
     padding: 30px;
@@ -231,6 +228,7 @@ span {
     color: rgb(65, 63, 63);
 }
 
+/*styling for modal popup*/
 .modalContent {
     background-color: rgb(194, 226, 224);
     margin: auto;
@@ -238,7 +236,6 @@ span {
     width: 30%;
     border: 3px solid rgb(26, 174, 159);
     border-radius: 5px;
-
 }
 
 .modal {
@@ -256,6 +253,7 @@ span {
     display: none;
 
 }
+
 #notebookForm {
     padding: 50px;
     text-align: center;
@@ -279,19 +277,17 @@ span {
     width: 50%;
 }
 
-::placeholder{
+::placeholder {
     color: rgb(0, 0, 0);
     font-size: 1.5rem;
 } 
 
-
-
-#invalidUser{
+/*styling for login*/
+#invalidUser {
     color: red;
     font-size: 2em;
     font-weight: bold;
     text-align: center;
-    
 }
 
 .errorMSGAboveInput {
@@ -303,7 +299,7 @@ span {
 }
 
 /* styling notes */
-#stylingNotes{
+#stylingNotes {
     margin-bottom: 20px;
     background-color: rgb(56, 68, 78) ;
     border-radius: 10px;
@@ -315,7 +311,7 @@ span {
     margin: auto;
 }
 
-#stylingNotes> .stylingButton {
+#stylingNotes > .stylingButton {
     width: auto;
     height: 35px;
     border-radius: 5px;
@@ -337,7 +333,7 @@ span {
     background-color: rgb(26, 174, 159);
 }
 
-#stylingNotes>#btnForUnderline{
+#stylingNotes>#btnForUnderline {
     text-decoration: underline;
 }
     
@@ -365,6 +361,7 @@ span {
     width: 50%;
 }
 
+/*styling checkbox done */
 #checkbox {
     margin: auto;
     margin-left: 25%;
@@ -387,6 +384,13 @@ span {
 }
 #unchecked {
     background-color: beige;
+}
+
+img {
+    width: 100px;
+    display: block;
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
 }
 
 

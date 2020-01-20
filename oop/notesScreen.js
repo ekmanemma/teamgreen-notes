@@ -35,6 +35,13 @@ class NoteScreen extends Screen {
 				noteContent.className = style;
 			})
 
+			// SISTA FIX
+				let imageTag = document.createElement('img');
+				imageTag.setAttribute('src', notePad.image);
+				imageTag.setAttribute('alt', 'myImage');
+				noteContent.prepend(imageTag);
+			
+
 			notePaper.appendChild(noteHeader);
 			notePaper.appendChild(noteContent);
 			notePaper.prepend(toDaysDate);
