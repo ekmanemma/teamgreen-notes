@@ -280,7 +280,7 @@ span {
 ::placeholder {
     color: rgb(0, 0, 0);
     font-size: 1.5rem;
-} 
+}
 
 /*styling for login*/
 #invalidUser {
@@ -337,13 +337,6 @@ span {
     text-decoration: underline;
 }
     
-.underline {
-    text-decoration: underline;
-}
-
-.bold {
-    font-weight: bold;
-}
 .twenty4px {
     font-size: 24px;
 }
@@ -386,7 +379,11 @@ span {
     background-color: beige;
 }
 
-img {
+::before {
+    display: none;
+}
+
+img ::after {
     width: 100px;
     display: block;
     grid-column: 2 / 3;

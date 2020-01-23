@@ -7,56 +7,56 @@ class NewNoteScreen extends Screen {
 	}
 
 	createNoteForm() {
-		this.notesHeader = document.querySelector('main h2');
-		this.notesHeader.textContent = 'New note';
-		this.mainNotes = document.getElementById('mainNotes');
+		const notesHeader = document.querySelector('main h2');
+		notesHeader.textContent = 'New note';
+		const mainNotes = document.getElementById('mainNotes');
 
-		this.form = document.createElement('form');
-		this.form.id = 'formNewNote';
-		this.mainNotes.appendChild(this.form);
+		const form = document.createElement('form');
+		form.id = 'formNewNote';
+		mainNotes.appendChild(form);
 
-		//adding elements for styling
-		this.stylingNotes = document.createElement('div');
-		this.stylingNotes.id = 'stylingNotes';
-		this.form.appendChild(this.stylingNotes);
+		//adding photos for styling
+		const stylingNotes = document.createElement('div');
+		stylingNotes.id = 'stylingNotes';
+		form.appendChild(stylingNotes);
 
-		this.btnForBold = document.createElement('button');
-		this.btnForBold.textContent = 'B';
-		this.btnForBold.setAttribute('class', 'stylingButton');
-		this.btnForBold.setAttribute('type', 'button');
-		this.stylingNotes.appendChild(this.btnForBold);
+		const btnForBold = document.createElement('button');
+		btnForBold.textContent = 'B';
+		btnForBold.setAttribute('class', 'stylingButton');
+		btnForBold.setAttribute('type', 'button');
+		stylingNotes.appendChild(btnForBold);
 
-		this.btnForUnderline = document.createElement('button');
-		this.btnForUnderline.textContent = 'U';
-		this.btnForUnderline.setAttribute('class', 'stylingButton');
-		this.btnForUnderline.setAttribute('id', 'btnForUnderline');
-		this.btnForUnderline.setAttribute('type', 'button');
-		this.stylingNotes.appendChild(this.btnForUnderline);
+		const btnForUnderline = document.createElement('button');
+		btnForUnderline.textContent = 'U';
+		btnForUnderline.setAttribute('class', 'stylingButton');
+		btnForUnderline.setAttribute('id', 'btnForUnderline');
+		btnForUnderline.setAttribute('type', 'button');
+		stylingNotes.appendChild(btnForUnderline);
 
-		this.btnForSmall = document.createElement('button');
-		this.btnForSmall.textContent = '10px';
-		this.btnForSmall.setAttribute('class', 'stylingButton');
-		this.btnForSmall.setAttribute('type', 'button');
-		this.stylingNotes.appendChild(this.btnForSmall);
+		const btnForSmall = document.createElement('button');
+		btnForSmall.textContent = '10px';
+		btnForSmall.setAttribute('class', 'stylingButton');
+		btnForSmall.setAttribute('type', 'button');
+		stylingNotes.appendChild(btnForSmall);
 
-		this.btnForBig = document.createElement('button');
-		this.btnForBig.textContent = '24px';
-		this.btnForBig.setAttribute('class', 'stylingButton');
-		this.btnForBig.setAttribute('type', 'button');
-		this.stylingNotes.appendChild(this.btnForBig);
+		const btnForBig = document.createElement('button');
+		btnForBig.textContent = '24px';
+		btnForBig.setAttribute('class', 'stylingButton');
+		btnForBig.setAttribute('type', 'button');
+		stylingNotes.appendChild(btnForBig);
 
-		this.btnForUploadImage = document.createElement('input');
-		this.btnForUploadImage.setAttribute('type', 'file');
-		this.btnForUploadImage.setAttribute('class', 'stylingButton');
-		this.btnForUploadImage.textContent = 'upload image';
-		this.btnForUploadImage.id = 'imageUpload';
-		this.stylingNotes.appendChild(this.btnForUploadImage);
+		const btnForUploadImage = document.createElement('input');
+		btnForUploadImage.setAttribute('type', 'file');
+		btnForUploadImage.setAttribute('class', 'stylingButton');
+		btnForUploadImage.textContent = 'upload image';
+		btnForUploadImage.id = 'imageUpload';
+		stylingNotes.appendChild(btnForUploadImage);
 
-		this.btnForUploadImage.addEventListener('change', (e) =>{
-			let fileInput = document.getElementById('imageUpload')
-			this.element = document.createElement('img');
-			this.element.id = 'imgtag';
-			this.stylingNotes.appendChild(this.element);
+		btnForUploadImage.addEventListener('change', (e) =>{
+			const fileInput = document.getElementById('imageUpload')
+			const photo = document.createElement('img');
+			photo.id = 'imgtag';
+			stylingNotes.appendChild(photo);
 
 
 			let file = fileInput.files[0];  
@@ -67,7 +67,6 @@ class NewNoteScreen extends Screen {
 
 				reader.onload = function() {
 					let imgtag = document.getElementById('imgtag')
-					console.log(reader.result);
 					imgtag.src = reader.result;
 				} 
 				reader.readAsDataURL(file);  
@@ -77,66 +76,65 @@ class NewNoteScreen extends Screen {
 				}
 		})
 
-		this.labelInputHeader = document.createElement('label');
-		this.labelInputHeader.textContent = 'Header';
-		this.form.appendChild(this.labelInputHeader);
+		const labelInputHeader = document.createElement('label');
+		labelInputHeader.textContent = 'Header';
+		form.appendChild(labelInputHeader);
 
-		this.inputHeader = document.createElement('input');
-		this.inputHeader.setAttribute('type', 'text', 'name', 'noteHeader');
-		this.inputHeader.id = 'noteHeader';
-		this.form.appendChild(this.inputHeader);
+		const inputHeader = document.createElement('input');
+		inputHeader.setAttribute('type', 'text', 'name', 'noteHeader');
+		inputHeader.id = 'noteHeader';
+		form.appendChild(inputHeader);
 
-		this.labelTextarea = document.createElement('label');
-		this.labelTextarea.textContent = 'Content';
-		this.form.appendChild(this.labelTextarea);
+		const labelTextarea = document.createElement('label');
+		labelTextarea.textContent = 'Content';
+		form.appendChild(labelTextarea);
 
-		this.inputText = document.createElement('div');
-		this.inputText.id = 'noteContent';
-		this.inputText.setAttribute('contenteditable', 'true');
-		this.inputText.setAttribute('type', 'text', 'name, noteContent');
-		this.form.appendChild(this.inputText);
+		const inputText = document.createElement('div');
+		inputText.id = 'noteContent';
+		inputText.setAttribute('contenteditable', 'true');
+		inputText.setAttribute('type', 'text', 'name, noteContent');
+		form.appendChild(inputText);
 
-		this.toDay = document.createElement('Date');
-		this.toDay.id = 'toDaysDate';
-		this.toDay.setAttribute('type', 'text', 'name', 'toDaysDate');
-		this.form.prepend(this.toDay);     
+		const toDay = document.createElement('Date');
+		toDay.id = 'toDaysDate';
+		toDay.setAttribute('type', 'text', 'name', 'toDaysDate');
+		form.prepend(toDay);     
 		
-		this.btnForBold.addEventListener('click', () =>{
+		btnForBold.addEventListener('click', () =>{
 			document.execCommand('bold');
 		});
 
-		this.btnForUnderline.addEventListener('click', () =>{
+		btnForUnderline.addEventListener('click', () =>{
 			document.execCommand('underline');
 		});
 
-		this.btnForSmall.addEventListener('click', () =>{
-			this.divForContent = document.getElementById('noteContent');
-			this.divForContent.style = 'font-size: 10px';
+		btnForSmall.addEventListener('click', () =>{
+			const divForContent = document.getElementById('noteContent');
+			divForContent.style = 'font-size: 10px';
 			this.styles.push('tenpx');
 		});
 
-		this.btnForBig.addEventListener('click', () =>{
-			this.divForContent = document.getElementById('noteContent');
-			this.divForContent.style = 'font-size: 24px';
+		btnForBig.addEventListener('click', () =>{
+			const divForContent = document.getElementById('noteContent');
+			divForContent.style = 'font-size: 24px';
 			this.styles.push('twenty4px');
 		});
 
-		this.submitButton = document.createElement('button');
-		this.submitButton.setAttribute('type','submit');
-		this.submitButton.textContent = 'Create New Note';
-		this.form.appendChild(this.submitButton);
-		this.submitButton.addEventListener('click',(e) => {
+		const submitButton = document.createElement('button');
+		submitButton.setAttribute('type','submit');
+		submitButton.textContent = 'Create New Note';
+		form.appendChild(submitButton);
+		submitButton.addEventListener('click',(e) => {
 			e.preventDefault();
 			let inputTextInDiv = document.getElementById('noteContent');
 			let imagetag = document.getElementById('imgtag');
-			console.log(imagetag);
 
 			if(imagetag !== null){
 				NotesHandler.saveFormToObject(noteHeader.value, inputTextInDiv.innerHTML, this.styles, imgtag.src);
-			} if(imagetag == null) {
+			} else if(imagetag == null) {
 				NotesHandler.saveFormToObject(noteHeader.value, inputTextInDiv.innerHTML, this.styles);
 			}
-			this.form.reset();
+			form.reset();
 			inputTextInDiv.innerHTML = '';
 		});              
 	}

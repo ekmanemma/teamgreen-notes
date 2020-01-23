@@ -6,29 +6,29 @@ class NoteScreen extends Screen {
 	}
 
 	displayNote(){
-		this.notesHeader = document.querySelector('main h2');
-		this.notesHeader.textContent = 'Notes';
+		const notesHeader = document.querySelector('main h2');
+		notesHeader.textContent = 'Notes';
 
 		// Applies to each object in the array.
 		NotesHandler.allNoteObjects.forEach(function(notePad) {
-			let mainNotesWrapper = document.getElementById('mainNotes');
+			const mainNotesWrapper = document.getElementById('mainNotes');
 			mainNotesWrapper.setAttribute('style', 'display: flex; flex-direction: row; flex-wrap: wrap');  //  inline styling is used to not colide with other mains.
 
-			let divForWrapperAndButton = document.createElement('div');
+			const divForWrapperAndButton = document.createElement('div');
 			divForWrapperAndButton.setAttribute('class', 'divForWrapperAndButton');
 			mainNotesWrapper.appendChild(divForWrapperAndButton);
 
-			let notePaper = document.createElement('div');
+			const notePaper = document.createElement('div');
 			notePaper.setAttribute('class', 'notePaper');
 			divForWrapperAndButton.appendChild(notePaper);
 
-			let noteHeader = document.createElement('h4');
+			const noteHeader = document.createElement('h4');
 			noteHeader.textContent = notePad.noteHeader; 
 
-			let toDaysDate = document.createElement('h6');
+			const toDaysDate = document.createElement('h6');
 			toDaysDate.textContent = notePad.toDaysDate;
 	
-			let noteContent = document.createElement('span');
+			const noteContent = document.createElement('span');
 			noteContent.innerHTML = notePad.noteContent;
 
 			notePad.styles.forEach(function(style){
@@ -36,30 +36,30 @@ class NoteScreen extends Screen {
 			})
 
 			// SISTA FIX
-				let imageTag = document.createElement('img');
-				imageTag.setAttribute('src', notePad.image);
-				imageTag.setAttribute('alt', 'myImage');
-				noteContent.prepend(imageTag);
-			
+			const imageTag = document.createElement('img');
+			imageTag.setAttribute('src', notePad.image);
+			imageTag.setAttribute('alt', 'myImage');
+			noteContent.prepend(imageTag);
+		
 
 			notePaper.appendChild(noteHeader);
 			notePaper.appendChild(noteContent);
 			notePaper.prepend(toDaysDate);
 
 			//  Creates the circles for the paper.
-			let circleDivContainerOne = document.createElement('div')
+			const circleDivContainerOne = document.createElement('div')
 			circleDivContainerOne.setAttribute('class', 'circleDivContainer');
-			let circleDivOne = document.createElement('div')
+			const circleDivOne = document.createElement('div')
 			circleDivOne.setAttribute('class', 'circleDiv');
-			let circleDivTwo = document.createElement('div')
+			const circleDivTwo = document.createElement('div')
 			circleDivTwo.setAttribute('class', 'circleDiv');
 
-			let circleDivContainerTwo = document.createElement('div')
+			const circleDivContainerTwo = document.createElement('div')
 			circleDivContainerTwo.setAttribute('class', 'circleDivContainer');
 			circleDivContainerTwo.setAttribute('style', 'margin-top: 300px');           // Pushes the containers apart.
-			let circleDivThree = document.createElement('div')
+			const circleDivThree = document.createElement('div')
 			circleDivThree.setAttribute('class', 'circleDiv');
-			let circleDivFour = document.createElement('div')
+			const circleDivFour = document.createElement('div')
 			circleDivFour.setAttribute('class', 'circleDiv');
 
 			//  Appends the circles to the paper.
@@ -89,13 +89,13 @@ class NoteScreen extends Screen {
 				NotesHandler.removeNote(e);
 			}); 
 
-			let checkboxForDone = document.createElement('input');
+			const checkboxForDone = document.createElement('input');
 			checkboxForDone.id = 'checkbox';
 			checkboxForDone.setAttribute('type', 'checkbox');
 			checkboxForDone.textContent = 'This note is DONE';
 			divForWrapperAndButton.appendChild(checkboxForDone);
 
-			let textForCheckbox = document.createElement('label');
+			const textForCheckbox = document.createElement('label');
 			textForCheckbox.id = 'textForCheckbox';
 			textForCheckbox.setAttribute('for', 'checkbox');
 			textForCheckbox.textContent = 'This note is DONE';

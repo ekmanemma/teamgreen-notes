@@ -16,17 +16,24 @@ var Navigation = {
 			//     })
 			// })
 					
-			this.allListItems = document.querySelectorAll('li'); 
+			const allListItems = document.querySelectorAll('li'); 
+
+			// allListItems.forEach(function(listItem){
+			// 	listItem.addEventListener('click', (e) =>{
+			// 		this.activeListItem(e);
+			// 		this.changeScreen('notes', [i]);
+			// 	})
+			// })
 	
-			this.allListItems[0].addEventListener('click', (e) =>{
+			allListItems[0].addEventListener('click', (e) =>{
 					this.activeListItem(e);
 					this.changeScreen('newNoteScreen');
 			});
-			this.allListItems[1].addEventListener('click', (e) => {
+			allListItems[1].addEventListener('click', (e) => {
 					this.activeListItem(e);  
 					this.changeScreen('noteScreen');
 			});
-			this.allListItems[2].addEventListener('click', (e) => {
+			allListItems[2].addEventListener('click', (e) => {
 					this.activeListItem(e);
 					this.changeScreen('notebookScreen');
 			});
@@ -69,50 +76,50 @@ class Main {
 	// Initializes the UI.
 	init() {
 
-		let bodyRef = document.body;
+		const bodyRef = document.body;
 
 		//  Creates header.
-		this.header = document.createElement('header');
-		this.header.id = 'header';
-		bodyRef.appendChild(this.header);
+		const header = document.createElement('header');
+		header.id = 'header';
+		bodyRef.appendChild(header);
 
-		this.mainApplicationHeader = document.createElement('h1');
-		this.mainApplicationHeader.textContent = 'Note Application 2000';
-		this.header.appendChild(this.mainApplicationHeader);
+		const mainApplicationHeader = document.createElement('h1');
+		mainApplicationHeader.textContent = 'Note Application 2000';
+		header.appendChild(mainApplicationHeader);
 
 		//  Creates the main section.
-		this.mainWrapper = document.createElement('div');
-		this.mainWrapper.id = 'mainWrapper';
-		bodyRef.appendChild(this.mainWrapper);
+		const mainWrapper = document.createElement('div');
+		mainWrapper.id = 'mainWrapper';
+		bodyRef.appendChild(mainWrapper);
 		
 		//  Creates the nav.
-		this.nav = document.createElement('nav');
-		this.nav.id = 'nav';
-		this.mainWrapper.appendChild(this.nav);
+		const nav = document.createElement('nav');
+		nav.id = 'nav';
+		mainWrapper.appendChild(nav);
 
 		//  Creates the loginbutton.
-		this.loginBTN = document.createElement('button');
-		this.loginBTN.id = 'loginBTN';
-		this.loginBTN.textContent = 'Login';
-		this.nav.appendChild(this.loginBTN);
+		const loginBTN = document.createElement('button');
+		loginBTN.id = 'loginBTN';
+		loginBTN.textContent = 'Login';
+		nav.appendChild(loginBTN);
 		loginBTN.addEventListener('click', () =>{
 			new Login();
 		});
 
 		//  Creates the list with navigation. 
-		this.navList = document.createElement('ul');
-		this.nav.appendChild(this.navList);
-		this.listItemOne = document.createElement('li');
-		this.listItemOne.textContent = 'New note';
-		this.navList.appendChild(this.listItemOne);
+		const navList = document.createElement('ul');
+		nav.appendChild(navList);
+		const listItemOne = document.createElement('li');
+		listItemOne.textContent = 'New note';
+		navList.appendChild(listItemOne);
 
-		this.listItemTwo = document.createElement('li');
-		this.listItemTwo.textContent = 'Notes';
-		this.listItemTwo.setAttribute('class', 'active');
-		this.navList.appendChild(this.listItemTwo);
-		this.listItemThree = document.createElement('li');
-		this.listItemThree.textContent = 'Notebooks';
-		this.navList.appendChild(this.listItemThree);
+		const listItemTwo = document.createElement('li');
+		listItemTwo.textContent = 'Notes';
+		listItemTwo.setAttribute('class', 'active');
+		navList.appendChild(listItemTwo);
+		const listItemThree = document.createElement('li');
+		listItemThree.textContent = 'Notebooks';
+		navList.appendChild(listItemThree);
 	}
 }
 

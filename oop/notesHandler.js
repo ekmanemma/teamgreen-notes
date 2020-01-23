@@ -30,7 +30,7 @@ var NotesHandler = {
 	},
 	loadNotesFromLS: function(){
 
-    let objectsInLocalStorage = JSON.parse(localStorage.getItem("allNoteObjects"));
+    const objectsInLocalStorage = JSON.parse(localStorage.getItem("allNoteObjects"));
     this.allNoteObjects = objectsInLocalStorage || [];
 	},
 	saveFormToObject: function(header, content, styles, image){
@@ -39,7 +39,6 @@ var NotesHandler = {
       noteHeader: header,
       noteContent: content,
       toDaysDate: new Date(),
-      noteIndex: this.currentIndex,
       styles: styles,
       image: image
     }
