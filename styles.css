@@ -390,6 +390,11 @@ img ::after {
 	grid-row: 2 / 3;
 }
 
+img {
+	width: 50%;
+
+}
+
 
 
 
