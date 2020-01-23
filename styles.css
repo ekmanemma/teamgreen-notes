@@ -1,395 +1,401 @@
 body {
-    margin: 0;
-    background-color: lightgrey;
+	margin: 0;
+	background-color: lightgrey;
 }
 
 /*styling init*/
 #mainWrapper {
-    display: flex;
-    background-color: rgb(75, 92, 107);
-    min-height: 100vh;
+	display: flex;
+	background-color: rgb(75, 92, 107);
+	min-height: 100vh;
 }
 
 #header {
-    background-color: rgb(32, 120, 104);
-    color: white;
-    text-align: center;
-    border-radius: 0 0 5px 5px;
-    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.37);
-    z-index: 10;
-    position: relative;
+	background-color: rgb(32, 120, 104);
+	color: white;
+	text-align: center;
+	border-radius: 0 0 5px 5px;
+	box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.37);
+	z-index: 10;
+	position: relative;
 }
 
 h1 {
-    font-size: 1.5rem;
-    padding: 10px;
-    font-family: sans-serif;
-    font-weight: lighter;
-    margin: 0;
+	font-size: 1.5rem;
+	padding: 10px;
+	font-family: sans-serif;
+	font-weight: lighter;
+	margin: 0;
 }
 
 h2 {
-    font-size: 2rem;
-    color: white;
-    font-family: sans-serif;
-    font-weight: lighter;
-    margin: 30px 100% 0 30px;
-    display: inline;
+	font-size: 2rem;
+	color: white;
+	font-family: sans-serif;
+	font-weight: lighter;
+	margin: 30px 100% 0 30px;
+	display: inline;
 }
 
 h6 {
-    color: black;
-    font-family: sans-serif;
-    font-weight: lighter;
-    margin: 30px 100% 0 30px;
+	color: black;
+	font-family: sans-serif;
+	font-weight: lighter;
+	margin: 30px 100% 0 30px;
 }
 
 #nav {
-    background-color: rgb(26, 174, 159);
-    padding: 40px;
-    display: flex;  
-    flex-direction: column;
+	background-color: rgb(26, 174, 159);
+	padding: 40px;
+	display: flex;  
+	flex-direction: column;
 }
 
 #loginBTN {                          
-    position: relative;
-    top: -30px;
+	position: relative;
+	top: -30px;
 }
 
 ul {
-    margin-top: 10em;
-    text-align: center;
-    padding: 0;
+	margin-top: 10em;
+	text-align: center;
+	padding: 0;
 }
 
 li {
-    list-style-type: none;
-    font-family: sans-serif;
-    color: white;
-    font-size: 25px;
-    font-weight: bold;
-    padding: 20px;
-    cursor: pointer;
+	list-style-type: none;
+	font-family: sans-serif;
+	color: white;
+	font-size: 25px;
+	font-weight: bold;
+	padding: 20px;
+	cursor: pointer;
 }
 
 #mainNotes {
-    width: 100%;
+	width: 100%;
 }
 
 #formNewNote {
-    padding: 30px;
-    margin: 40px;
+	padding: 30px;
+	margin: 40px;
 }
 
 input {
-    border: 2px solid grey;
-    border-radius: 8px;
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    font-size: 18px;
-    font-family: sans-serif;
-    font-weight: bold;
+	border: 2px solid grey;
+	border-radius: 8px;
+	width: 100%;
+	padding: 12px;
+	margin: 8px 0;
+	box-sizing: border-box;
+	font-size: 18px;
+	font-family: sans-serif;
+	font-weight: bold;
 }
 
 #noteContent {
-    resize: none;
-    border: 2px solid grey;
-    background-color: white;
-    border-radius: 8px;
-    width: 100%;
-    height: 20rem;
-    box-sizing: border-box;
-    padding: 12px;
-    font-size: 18px;
-    font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
+	resize: none;
+	border: 2px solid grey;
+	background-color: white;
+	border-radius: 8px;
+	width: 100%;
+	height: 20rem;
+	box-sizing: border-box;
+	padding: 12px;
+	font-size: 18px;
+	font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 label {
-    color: white;
-    font-family: sans-serif;
-    font-size: 20px;
-    margin-top: 20px;
+	color: white;
+	font-family: sans-serif;
+	font-size: 20px;
+	margin-top: 20px;
 }
 
 button {
-    background-color: rgb(32, 120, 104);
-    padding: 10px;
-    border: none;
-    border-radius: 10px;
-    width: 100%;
-    float: none;
-    color: white;
-    margin-top: 10px;
-    font-size: 20px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.301);
+	background-color: rgb(32, 120, 104);
+	padding: 10px;
+	border: none;
+	border-radius: 10px;
+	width: 100%;
+	float: none;
+	color: white;
+	margin-top: 10px;
+	font-size: 20px;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.301);
 }
 
 button:hover {
-   background-color: rgb(22, 92, 79)
+	background-color: rgb(22, 92, 79)
 }
 
 .notePaper {
-    display: grid;
-    grid-template-columns: 10% 90%;
-    grid-template-rows: 50px 450px;
-    width: 100%;
-    height: 500px;
-    background-color:beige;
-    box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.301);
-    overflow: auto;
+	display: grid;
+	grid-template-columns: 10% 90%;
+	grid-template-rows: 50px 450px;
+	width: 100%;
+	height: 500px;
+	background-color:beige;
+	box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.301);
+	overflow: auto;
 }
 
 .divForWrapperAndButton {
-    width: 35%;
-    margin: 4%;
+	width: 35%;
+	margin: 4%;
 }
 
 .notePaper h4 {
-    grid-column: 1 / 3;
-    grid-row: 1 / 2;
-    font-size: 1.8em;
-    margin: 4% 0 0 0;
-    text-decoration: underline;
-    text-align: center;
+	grid-column: 1 / 3;
+	grid-row: 1 / 2;
+	font-size: 1.8em;
+	margin: 4% 0 0 0;
+	text-decoration: underline;
+	text-align: center;
 }
 
 .notePaper h6 {
-    grid-column:3 / 2;
-    grid-row: auto;
-    text-align: center;
+	grid-column:3 / 2;
+	grid-row: auto;
+	text-align: center;
 }
 
 span {
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
-    font-size: 1.2em;
-    overflow-wrap: break-word;
-    margin: 0 10% 5% 0;
+	grid-column: 2 / 3;
+	grid-row: 2 / 3;
+	font-size: 1.2em;
+	overflow-wrap: break-word;
+	margin: 0 10% 5% 0;
 }
 
 .circleDivContainer {
-    grid-column: 1 / 2;
-    grid-row: 2 / 3;
-    margin: 50px 0 0 10px;
+	grid-column: 1 / 2;
+	grid-row: 2 / 3;
+	margin: 50px 0 0 10px;
 }
 
 .circleDiv {
-    background-color: rgb(75, 92, 107);
-    border-radius: 5px;
-    height: 10px;
-    width: 10px;
-    margin: 20px 0 0 0;
+	background-color: rgb(75, 92, 107);
+	border-radius: 5px;
+	height: 10px;
+	width: 10px;
+	margin: 20px 0 0 0;
 }
 
 /*styling for notebook*/
 #buttonCreateNotebook {
-    width: 100%;
-    border-radius: 5px;
-    padding: 30px;
-    font-size: 2rem;
-    background-color: rgb(26, 174, 159);
-    margin: auto;
+	width: 100%;
+	border-radius: 5px;
+	padding: 30px;
+	font-size: 2rem;
+	background-color: rgb(26, 174, 159);
+	margin: auto;
 }
 
 #divNotebook {
-    display: grid;
-    grid-template-columns: 49% 0.5% 49%;
-    grid-template-rows: repeat(4, 25%);
-    grid-gap: 5px;
+	display: grid;
+	grid-template-columns: 49% 0.5% 49%;
+	grid-template-rows: repeat(4, 25%);
+	grid-gap: 5px;
 }
 
 #section1 {
-    grid-column: 1 / 2;
-    grid-row: 1 / 5;
+	grid-column: 1 / 2;
+	grid-row: 1 / 5;
 }
 
 #separator {
-    grid-column: 2;
-    grid-row: 1 / 5;
-    background-color: rgba(187, 187, 187, 0.445);
-    border-radius: 5px;
-    height: 600px;
+	grid-column: 2;
+	grid-row: 1 / 5;
+	background-color: rgba(187, 187, 187, 0.445);
+	border-radius: 5px;
+	height: 600px;
 }
 
 #section2 {
-    grid-column: 3 / 4;
-    grid-row: 1 / 5;
-    justify-self: center;
+	grid-column: 3 / 4;
+	grid-row: 1 / 5;
+	justify-self: center;
 }
 
 #notebookElement {
-    width: 60%;
-    border-radius: 5px;
-    padding: 30px;
-    margin: 20px;
-    font-size: 1.5rem;
-    background-color: white;
-    color: rgb(65, 63, 63);
+	width: 60%;
+	border-radius: 5px;
+	padding: 30px;
+	margin: 20px;
+	font-size: 1.5rem;
+	background-color: white;
+	color: rgb(65, 63, 63);
 }
 
 /*styling for modal popup*/
 .modalContent {
-    background-color: rgb(194, 226, 224);
-    margin: auto;
-    padding: 10px;
-    width: 30%;
-    border: 3px solid rgb(26, 174, 159);
-    border-radius: 5px;
+	background-color: rgb(194, 226, 224);
+	margin: auto;
+	padding: 10px;
+	width: 30%;
+	border: 3px solid rgb(26, 174, 159);
+	border-radius: 5px;
 }
 
 .modal {
-    display: block; 
-    position: fixed; 
-    padding-top: 100px; 
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.267);
+	display: block; 
+	position: fixed; 
+	padding-top: 100px; 
+	left: 0;
+	top: 0;
+	width: 100%; 
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.267);
 }
 
 .modalClose {
-    display: none;
+	display: none;
 
 }
 
 #notebookForm {
-    padding: 50px;
-    text-align: center;
+	padding: 50px;
+	text-align: center;
 }
 
 #notebookName {
-    border: none;
-    padding: 20px;
-    text-align: center;
+	border: none;
+	padding: 20px;
+	text-align: center;
 }
 
 #submitBtnNotebook {
-    border: none;
-    padding: 30px;
-    margin: auto;
-    margin-top: 30px;
-    font-size: 1.5rem;
-    background-color:  rgb(26, 174, 159);
-    border-radius: 5px;
-    justify-self: center;
-    width: 50%;
+	border: none;
+	padding: 30px;
+	margin: auto;
+	margin-top: 30px;
+	font-size: 1.5rem;
+	background-color:  rgb(26, 174, 159);
+	border-radius: 5px;
+	justify-self: center;
+	width: 50%;
 }
 
 ::placeholder {
-    color: rgb(0, 0, 0);
-    font-size: 1.5rem;
+	color: rgb(0, 0, 0);
+	font-size: 1.5rem;
 }
 
 /*styling for login*/
 #invalidUser {
-    color: red;
-    font-size: 2em;
-    font-weight: bold;
-    text-align: center;
+	color: red;
+	font-size: 2em;
+	font-weight: bold;
+	text-align: center;
 }
 
 .errorMSGAboveInput {
-    color: red;
+	color: red;
 }
 
 .active {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 /* styling notes */
 #stylingNotes {
-    margin-bottom: 20px;
-    background-color: rgb(56, 68, 78) ;
-    border-radius: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    text-align: center;
-    width: 50%;
-    height: 100%;
-    margin: auto;
+	margin-bottom: 20px;
+	background-color: rgb(56, 68, 78) ;
+	border-radius: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+	width: 50%;
+	height: 100%;
+	margin: auto;
 }
 
 #stylingNotes > .stylingButton {
-    width: auto;
-    height: 35px;
-    border-radius: 5px;
-    font-size: 15px;
-    text-align: center;
-    font-weight: bold;
-    font-family: sans-serif;
-    padding: 10px;
-    margin: 5px;
-    color: white;
-    cursor: pointer;
+	width: auto;
+	height: 35px;
+	border-radius: 5px;
+	font-size: 15px;
+	text-align: center;
+	font-weight: bold;
+	font-family: sans-serif;
+	padding: 10px;
+	margin: 5px;
+	color: white;
+	cursor: pointer;
 }
 
 .stylingButton:hover {
-    background-color: rgb(26, 174, 159);
+	background-color: rgb(26, 174, 159);
 }
 
 .stylingButton:focus {
-    background-color: rgb(26, 174, 159);
+	background-color: rgb(26, 174, 159);
 }
 
 #stylingNotes>#btnForUnderline {
-    text-decoration: underline;
+	text-decoration: underline;
 }
-    
+	
 .twenty4px {
-    font-size: 24px;
+	font-size: 24px;
 }
 
 .tenpx {
-    font-size: 10px;
+	font-size: 10px;
 }
 
 #stylingNotes > p {
-    display: inline;
-    padding: 20px;
+	display: inline;
+	padding: 20px;
 }
 
 .stylingNotes > #boldFont {
-    width: 50%;
+	width: 50%;
 }
 
 /*styling checkbox done */
 #checkbox {
-    margin: auto;
-    margin-left: 25%;
-    margin-top: 4%;
-    width: auto;
+	margin: auto;
+	margin-left: 25%;
+	margin-top: 4%;
+	width: auto;
 }
 
 #textForCheckbox {
-    margin: auto;
-    margin-left: 5%;
-    display: inline;
+	margin: auto;
+	margin-left: 5%;
+	display: inline;
 }
 
 .divForWrapperAndButton > #done {
-    background-color: lightseagreen;
+	background-color: lightseagreen;
 }
 
 #checked {
-    background-color: lightgreen;
+	background-color: lightgreen;
 }
 #unchecked {
-    background-color: beige;
+	background-color: beige;
 }
 
 ::before {
-    display: none;
+	display: none;
 }
 
 img ::after {
-    width: 100px;
-    display: block;
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
+	display: block;
+	grid-column: 2 / 3;
+	grid-row: 2 / 3;
 }
+
+img {
+	width: 50%;
+	position: 
+
+}
+
 
 
 

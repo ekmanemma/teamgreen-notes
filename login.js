@@ -60,10 +60,6 @@ var DisplayLogin = {
 			errMSG.innerText = 'Username required';
 			emailInput.setAttribute('style', 'border: 2px solid red')
 		}
-		if (emailInput.value.length >= 40){
-			errMSG.innerText = 'Email must be less than 40 characters';
-			emailInput.setAttribute('style', 'border: 2px solid red');
-		}
 		if (!emailInput.value.includes('@')){
 			errMSG.innerText = 'Email must have a: @';
 			emailInput.setAttribute('style', 'border: 2px solid red');
