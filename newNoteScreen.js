@@ -1,5 +1,6 @@
+// Class for new notes with one method that creates the form and sends the input value to the object for notes
 class NewNoteScreen extends Screen {
-	styles = [];
+	styles = [];		//creates an array for styling attributes from form
 
 	constructor(){
 			super();
@@ -15,7 +16,6 @@ class NewNoteScreen extends Screen {
 		form.id = 'formNewNote';
 		mainNotes.appendChild(form);
 
-		//adding photos for styling
 		const stylingNotes = document.createElement('div');
 		stylingNotes.id = 'stylingNotes';
 		form.appendChild(stylingNotes);
@@ -47,18 +47,18 @@ class NewNoteScreen extends Screen {
 
 		const btnForUploadImage = document.createElement('input');
 		btnForUploadImage.setAttribute('type', 'file');
-		btnForUploadImage.setAttribute('class', 'stylingButton');
+		// btnForUploadImage.setAttribute('class', 'stylingButton');
 		btnForUploadImage.textContent = 'upload image';
 		btnForUploadImage.id = 'imageUpload';
 		stylingNotes.appendChild(btnForUploadImage);
 
-		btnForUploadImage.addEventListener('change', (e) =>{
+		btnForUploadImage.addEventListener('change', () =>{
 			const fileInput = document.getElementById('imageUpload')
 			const photo = document.createElement('img');
 			photo.id = 'imgtag';
 			stylingNotes.appendChild(photo);
 
-
+			// If chosen file matches imgType new fileReader, creates and imgtag to display and sets img.src
 			let file = fileInput.files[0];  
 			let imgType = /image.*/;
 
@@ -99,7 +99,13 @@ class NewNoteScreen extends Screen {
 		toDay.id = 'toDaysDate';
 		toDay.setAttribute('type', 'text', 'name', 'toDaysDate');
 		form.prepend(toDay);     
+
+		const submitButton = document.createElement('button');
+		submitButton.setAttribute('type','submit');
+		submitButton.textContent = 'Create New Note';
+		form.appendChild(submitButton);
 		
+		// Using execCommand to add <b> and <u> to the selected text to in the form 
 		btnForBold.addEventListener('click', () =>{
 			document.execCommand('bold');
 		});
@@ -108,6 +114,7 @@ class NewNoteScreen extends Screen {
 			document.execCommand('underline');
 		});
 
+		//pushes the chosen styling to the styles-array and send it to the object when submit
 		btnForSmall.addEventListener('click', () =>{
 			const divForContent = document.getElementById('noteContent');
 			divForContent.style = 'font-size: 10px';
@@ -120,22 +127,20 @@ class NewNoteScreen extends Screen {
 			this.styles.push('twenty4px');
 		});
 
-		const submitButton = document.createElement('button');
-		submitButton.setAttribute('type','submit');
-		submitButton.textContent = 'Create New Note';
-		form.appendChild(submitButton);
+		//When submit form, all input values as sent to the object
 		submitButton.addEventListener('click',(e) => {
 			e.preventDefault();
 			let inputTextInDiv = document.getElementById('noteContent');
-			let imagetag = document.getElementById('imgtag');
+			let imgTag = document.getElementById('imgtag');
 
-			if(imagetag !== null){
-				NotesHandler.saveFormToObject(noteHeader.value, inputTextInDiv.innerHTML, this.styles, imgtag.src);
-			} else if(imagetag == null) {
+			if(imgTag !== null){
+				NotesHandler.saveFormToObject(noteHeader.value, inputTextInDiv.innerHTML, this.styles, imgTag.src);
+			} else if(imgTag == null) {
 				NotesHandler.saveFormToObject(noteHeader.value, inputTextInDiv.innerHTML, this.styles);
 			}
 			form.reset();
 			inputTextInDiv.innerHTML = '';
+			imgTag.src = '';
 		});              
 	}
 }

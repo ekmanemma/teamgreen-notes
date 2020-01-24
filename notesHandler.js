@@ -1,25 +1,26 @@
-var NotesHandler = {
+const NotesHandler = {
 	allNoteObjects: [],
 
-	addNote: function(newNoteObject){
-
+  /**
+   * @desc: Pushes object to array and updates localstorage.
+   * @param newNoteObject from saveFormToObject.
+   */
+	addNote(newNoteObject){
     this.allNoteObjects.push(newNoteObject);  
-    localStorage.setItem('allNoteObjects', JSON.stringify(this.allNoteObjects)); // Stores array with all objects in local storage
-	},
-	removeNote: function(e){
-
-		const paperDate = e.target.parentElement.firstElementChild.firstChild.textContent;         // Gets the clicked papers date  
-		const indexInArrayToRemove = this.allNoteObjects.findIndex(function(eachObjectinArray){    // Returns the arrayindex of the object with a matching date.
+    localStorage.setItem('allNoteObjects', JSON.stringify(this.allNoteObjects));
+  },
+	removeNote(e){
+		const paperDate = e.target.parentElement.firstElementChild.firstChild.textContent;        
+		const indexInArrayToRemove = this.allNoteObjects.findIndex(function(eachObjectinArray){    
       return paperDate == eachObjectinArray.toDaysDate;
 		})
-		this.allNoteObjects.splice(indexInArrayToRemove, 1);                                       // Takes away the object from the array.
-		localStorage.setItem('allNoteObjects', JSON.stringify(this.allNoteObjects));               // Updates array in local storage.
+		this.allNoteObjects.splice(indexInArrayToRemove, 1);                                       
+		localStorage.setItem('allNoteObjects', JSON.stringify(this.allNoteObjects));             
 	
 		const removePaper = e.target.parentElement;
 		removePaper.parentElement.removeChild(removePaper);
 	},
-	editNote: function(e){
-
+	editNote(e){
     const previousHeaderContent = e.target.parentElement.firstChild.children[1].textContent;
     const previousTextContent = e.target.parentElement.firstChild.children[2].textContent;
     const main = document.getElementById('mainNotes');
@@ -28,14 +29,18 @@ var NotesHandler = {
     document.getElementById('noteHeader').value = previousHeaderContent;
     document.getElementById('noteContent').innerHTML = previousTextContent;
 	},
-	loadNotesFromLS: function(){
-
+	loadNotesFromLS(){
     const objectsInLocalStorage = JSON.parse(localStorage.getItem("allNoteObjects"));
     this.allNoteObjects = objectsInLocalStorage || [];
-	},
-	saveFormToObject: function(header, content, styles, image){
+  },
+  
+  /**
+   * @desk: saves the form imput to a new object.
+   * @parameters from newNote input.
+   */
+	saveFormToObject(header, content, styles, image){
 
-    let newNoteObject = {
+    const newNoteObject = {
       noteHeader: header,
       noteContent: content,
       toDaysDate: new Date(),

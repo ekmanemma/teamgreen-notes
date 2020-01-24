@@ -1,50 +1,33 @@
-var Navigation = {
-	addNavEventListeners: function () {
+const Navigation = {
 
-			//GÖR LOOP
+	addNavEventListeners() {
 
-			// for(let i = 0; i < allListItems.length; i++){
-			//     listItem.addEventListener('click', (e) =>{
-			//         this.activeListItem(e);
-			//          this.changeScreen('notes' + [i])
-			//     })}
+		const allListItems = document.querySelectorAll('li');
 
-			// this.allListItems.forEach(function (listitem){
-			//     listItem.addEventListener('click', (e) => {
-			//         this.activeListItem(e);
-			//         this.changeScreen('notes' +[i]);
-			//     })
-			// })
-					
-			const allListItems = document.querySelectorAll('li'); 
-
-			// allListItems.forEach(function(listItem){
-			// 	listItem.addEventListener('click', (e) =>{
-			// 		this.activeListItem(e);
-			// 		this.changeScreen('notes', [i]);
-			// 	})
-			// })
-	
-			allListItems[0].addEventListener('click', (e) =>{
-					this.activeListItem(e);
-					this.changeScreen('newNoteScreen');
-			});
-			allListItems[1].addEventListener('click', (e) => {
-					this.activeListItem(e);  
-					this.changeScreen('noteScreen');
-			});
-			allListItems[2].addEventListener('click', (e) => {
-					this.activeListItem(e);
-					this.changeScreen('notebookScreen');
-			});
+		allListItems[0].addEventListener('click', (e) =>{
+				this.activeListItem(e);
+				this.changeScreen('newNoteScreen');
+		});
+		allListItems[1].addEventListener('click', (e) => {
+				this.activeListItem(e);  
+				this.changeScreen('noteScreen');
+		});
+		allListItems[2].addEventListener('click', (e) => {
+				this.activeListItem(e);
+				this.changeScreen('notebookScreen');
+		});
 	},
-	activeListItem: function (e) {
-			this.allListItems = document.querySelectorAll('li');
-			this.allListItems.forEach(function(listItem){
-					listItem.removeAttribute('class');
-			});
-			e.target.setAttribute('class', 'active'); 
+
+	//	When an "li" is clicked, it becomes "active".
+	activeListItem(e) {
+		this.allListItems = document.querySelectorAll('li');
+		this.allListItems.forEach(function(listItem){
+				listItem.removeAttribute('class');
+		});
+		e.target.setAttribute('class', 'active'); 
 	},
+
+	//	The switchcase changes the screen and removes the previous one. 
 	changeScreen(screenType){
 		if(this.activeScreen) this.activeScreen.removeMe();
 

@@ -1,12 +1,12 @@
+//Class for notebook screen with one motehod that initiates the notebook content, and sends the information to the object for notebookshandler.
 class NotebookScreen extends Screen {
 	
 	constructor(){
 		super();
 		this.initNotebook();
-		NotebooksHandler.loadNotebooksFromLS();
-		NotebooksHandler.displayNotebooks();
-  }
-
+		NotebooksHandler.loadNotebooksFromLS(); 	
+		NotebooksHandler.displayNotebooks();				
+	}
 	initNotebook(){
 		let notesHeader = document.querySelector('main h2');
 		notesHeader.textContent = 'Notebooks'; 
@@ -34,7 +34,7 @@ class NotebookScreen extends Screen {
 		buttonCreateNotebook.id = 'buttonCreateNotebook';
 		section2.appendChild(buttonCreateNotebook);
 
-		buttonCreateNotebook.addEventListener('click', (e) => {
+		buttonCreateNotebook.addEventListener('click', () => {
 			let notebookModal = document.createElement('div');
 			notebookModal.setAttribute('class', 'modal');
 			document.body.appendChild(notebookModal);

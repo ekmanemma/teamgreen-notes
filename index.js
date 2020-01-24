@@ -1,13 +1,14 @@
+// Main class with metod for initializing the UI and calls functions for navigation, notes and active screen. Eventlistener for DOMContentLoaded.
 class Main {
 	constructor(){
 		this.init();
 		DisplayLogin.showLoggedInUser();
 		Navigation.addNavEventListeners();
 		NotesHandler.loadNotesFromLS();
-		Navigation.changeScreen('noteScreen');
+		Navigation.changeScreen('noteScreen'); 
 	}    
 
-	// Initializes the UI.
+	// Initializes the UI
 	init() {
 
 		const bodyRef = document.body;
@@ -37,7 +38,7 @@ class Main {
 		loginBTN.textContent = 'Login';
 		nav.appendChild(loginBTN);
 		loginBTN.addEventListener('click', () =>{
-			new Login();
+			new Login();						//creates a new Login
 		});
 
 		//  Creates the list with navigation. 

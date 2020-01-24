@@ -1,3 +1,4 @@
+//Class for notes that contains one method for displaying the created notes(from LS) and adds eventlisteners for its buttons.
 class NoteScreen extends Screen {
 
 	constructor(){
@@ -35,12 +36,10 @@ class NoteScreen extends Screen {
 				noteContent.className = style;
 			})
 
-			// SISTA FIX
 			const imageTag = document.createElement('img');
 			imageTag.setAttribute('src', notePad.image);
 			imageTag.setAttribute('alt', 'myImage');
 			noteContent.prepend(imageTag);
-		
 
 			notePaper.appendChild(noteHeader);
 			notePaper.appendChild(noteContent);
@@ -56,7 +55,7 @@ class NoteScreen extends Screen {
 
 			const circleDivContainerTwo = document.createElement('div')
 			circleDivContainerTwo.setAttribute('class', 'circleDivContainer');
-			circleDivContainerTwo.setAttribute('style', 'margin-top: 300px');           // Pushes the containers apart.
+			circleDivContainerTwo.setAttribute('style', 'margin-top: 300px');
 			const circleDivThree = document.createElement('div')
 			circleDivThree.setAttribute('class', 'circleDiv');
 			const circleDivFour = document.createElement('div')
@@ -70,6 +69,7 @@ class NoteScreen extends Screen {
 			circleDivContainerTwo.appendChild(circleDivThree);
 			circleDivContainerTwo.appendChild(circleDivFour);  
 
+			// edit a note 
 			const editButton = document.createElement('button');
 			editButton.id = 'editButton';
 			editButton.textContent = 'Edit';
@@ -80,7 +80,8 @@ class NoteScreen extends Screen {
 				NotesHandler.editNote(e);
 				NotesHandler.removeNote(e);
 			}); 
-				
+			
+			//delete a note
 			const deleteButton = document.createElement('button');
 			deleteButton.id = 'deleteButton';
 			deleteButton.textContent = 'Delete note';
@@ -89,6 +90,7 @@ class NoteScreen extends Screen {
 				NotesHandler.removeNote(e);
 			}); 
 
+			//checkbox for diplaying a note as done
 			const checkboxForDone = document.createElement('input');
 			checkboxForDone.id = 'checkbox';
 			checkboxForDone.setAttribute('type', 'checkbox');
@@ -102,7 +104,6 @@ class NoteScreen extends Screen {
 			divForWrapperAndButton.appendChild(textForCheckbox);
 
 			checkboxForDone.addEventListener('change', (e) =>{
-		
 				if(e.target.checked){
 					e.target.parentElement.firstChild.style = 'background-color: mediumaquamarine';
 				} else {

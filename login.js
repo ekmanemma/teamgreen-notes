@@ -1,12 +1,19 @@
-var DisplayLogin = {
+const DisplayLogin = {
 
-	showLoggedInUser: function (){    
+	showLoggedInUser(){    
+
 		const logedInUserObject = JSON.parse(sessionStorage.getItem("logedInUser"));
+
 		if (logedInUserObject !== null) {
+
 			const previousLoggedInUser = document.getElementById('loggedInUser')
+
+			//Checks if the id:loggedInUser exist, if so, only the text is replaced to display correct user.
 			if (previousLoggedInUser) {
 				const emailSpan = document.getElementById('loggedInUser');
 				emailSpan.textContent = logedInUserObject.email;
+
+			// Else creates the elements and appends them with the now logged in user.
 			} else {
 				const header = document.getElementById('header');
 				const emailSpan = document.createElement('h1');
@@ -17,58 +24,83 @@ var DisplayLogin = {
 			}
 		}
 	},
+
+	//	Handles the loginform, once submitted.
 	handleLogin(e){     
-		e.preventDefault();                                         //  Stops the form from submiting(reloding page).
+
+		//  Stops the form from submiting(reloding page).
+		e.preventDefault();         
+		
+		//  Gets the users from Jsonplaceholder.
 		const xhr = new XMLHttpRequest();
 		xhr.open('get','https://jsonplaceholder.typicode.com/users', true);
+
+		//	When the response is loaded it is parsed and validated.
 		xhr.addEventListener("load", () => {
 			const emailInput = document.getElementById('emailInputField').value; 
 			const passwordInput = document.getElementById('passwordInputForm').value;
-			const users = JSON.parse(xhr.response);                    //  HITTAR DEN SVARET BARA FÖR ATT DEN KALLADES PÅ I LOAD FUNKTIONEN? DEN ÄR JU INTE MEDSKICKAD SOM ARGUMENT?
-			const validUser = users.find(function (user){               // Checks if the user exists and has a password to match. If so, returns that user.
+			const users = JSON.parse(xhr.response);                    
+
+			// If a matching user is found (from JP) that matches the values in the inputfields, that user is returned.
+			const validUser = users.find(function (user){               
 					return user.email === emailInput && passwordInput === user.address.suite; 
+			});
+
+			//  If the the login was successful then validUser now contins the "validuserobject" from JP and the user gets "logged in".
+			if(validUser){                                              
+				sessionStorage.setItem('logedInUser', JSON.stringify(validUser));
+				const modal = document.getElementsByClassName('modal')[0];
+				modal.parentElement.removeChild(modal);
+				this.showLoggedInUser();     
+			} 
+
+			// If the loggin was not sucessfull the email is tested.
+			if(!validUser){ 
+
+				// Checks if the user exists. If so "findIndex" returns something else than -1. 
+				const wrongPassword = users.findIndex(function(user){   
+					return user.email === emailInput;
+				});
+
+				//  Runs if the password was wrong(the user was found and "-1" was not returned).
+				if(wrongPassword !== -1 ){                              
+					const errMSG = document.getElementById('errorMessageSpanPassword');
+					const passwordInput = document.getElementById('passwordInputForm');
+					const errInvalidUser = document.getElementById('invalidUser');
+					errInvalidUser.textContent = '';
+					errMSG.innerText = 'Password is incorrect';
+					passwordInput.setAttribute('style', 'border: 2px solid red');
+				} 
+
+				//	Else runs if the user was not found.
+				else {                                               
+					this.notExistingUser();
+				}
+			}
 		});
 
-		if(validUser){                                              //  If the the login was successful then validUser now contins the "validuserobject". 
-			sessionStorage.setItem('logedInUser', JSON.stringify(validUser));
-			const modal = document.getElementsByClassName('modal')[0];
-			modal.parentElement.removeChild(modal);
-			this.showLoggedInUser();     
-		} 
-		if(!validUser){                                             //  If the the login was not successfull. 
-			const wrongPassword = users.findIndex(function(user){   // Checks if the user exists. If so "findIndex" returns something else than -1. 
-				return user.email === emailInput;
-			});
-			if(wrongPassword !== -1 ){                              //  If the user was found (not-1).
-				const errMSG = document.getElementById('errorMessageSpanPassword');
-				const passwordInput = document.getElementById('passwordInputForm');
-				errMSG.innerText = 'Password is incorrect';
-				passwordInput.setAttribute('style', 'border: 2px solid red');
-			} else {                                               
-				this.inValidLoginCredentials();
-			}
-			}
-		});          //  Listens for the response to load, then calls handleUsersResponse function.
 		xhr.send();  
 	},
+
+	//	Validates every email "input".
 	liveEmailCheck(){
 		const errMSG = document.getElementById('errorMessageSpanUsername');
 		const emailInput = document.getElementById('emailInputField');
 		errMSG.innerText = '';
 		emailInput.setAttribute('style', 'border: 2px solid grey');
-		if (!emailInput.value){
-			errMSG.innerText = 'Username required';
-			emailInput.setAttribute('style', 'border: 2px solid red')
-		}
 		if (!emailInput.value.includes('@')){
 			errMSG.innerText = 'Email must have a: @';
 			emailInput.setAttribute('style', 'border: 2px solid red');
 		}
 	},
+
+	//	Validates every password "input".
 	livePasswordCheck(){
 		const errMSG = document.getElementById('errorMessageSpanPassword');
 		const passwordInput = document.getElementById('passwordInputForm');
 		errMSG.innerText = '';
+
+		//	Checks the inputfield for a non letter/ non number charachter.
 		const passwordRegex = /\W/g;
 		const containsRegex = passwordInput.value.match(passwordRegex);
 		if(!containsRegex) {
@@ -83,7 +115,7 @@ var DisplayLogin = {
 			passwordInput.setAttribute('style', 'border: 2px solid red');
 		}
 	},
-	inValidLoginCredentials(){
+	notExistingUser(){
 			const errMSGOne = document.getElementById('errorMessageSpanUsername');
 			const emailInput = document.getElementById('emailInputField');
 			errMSGOne.innerText = '';
@@ -97,29 +129,33 @@ var DisplayLogin = {
 			const errInvalidUser = document.getElementById('invalidUser');
 			errInvalidUser.textContent = 'Invalid User, you do not exist :,(';
 	}   
+
 }
+
+//	Class for initializing the login elements and functionality.
 class Login {
 	constructor(){
 		this.initLogin();
 	}
 	initLogin(){
-		//  creates the modals.
-		let loginModal = document.createElement('div');
+		
+		//  Creates the modals.
+		const loginModal = document.createElement('div');
 		loginModal.setAttribute('class', 'modal');
 		document.body.appendChild(loginModal);
 
-		let loginModalContent = document.createElement('div');
+		const loginModalContent = document.createElement('div');
 		loginModalContent.setAttribute('class', 'modalContent');
 		loginModalContent.setAttribute('style', 'min-height: 300px');
 		loginModal.appendChild(loginModalContent);
 		
-		// creates the contents for the login modal.
+		// Creates the form for the login modal and adds listeners.
 		const loginInputForm = document.createElement('form');
 		loginInputForm.id = 'usernameInputForm';
-		loginModalContent.appendChild(loginInputForm);
 		loginInputForm.addEventListener('submit', (e) =>{
 			DisplayLogin.handleLogin(e);
 		});
+		loginModalContent.appendChild(loginInputForm);
 
 		const errorMessageSpanUsername = document.createElement('span');
 		errorMessageSpanUsername.setAttribute('class', 'errorMSGAboveInput')
@@ -130,12 +166,11 @@ class Login {
 		emailInputField.id = 'emailInputField';
 		emailInputField.setAttribute('placeholder', 'Email...')
 		emailInputField.setAttribute('type', 'text', 'name', 'email');
-		loginInputForm.appendChild(emailInputField);
-
-		emailInputField.addEventListener('keyup', () =>{
+		emailInputField.addEventListener('input', () =>{
 			DisplayLogin.liveEmailCheck();
 		});      
-		
+		loginInputForm.appendChild(emailInputField);
+	
 		const errorMessageSpanPassword = document.createElement('span');
 		errorMessageSpanPassword.setAttribute('class', 'errorMSGAboveInput')
 		errorMessageSpanPassword.id = 'errorMessageSpanPassword';
@@ -145,10 +180,10 @@ class Login {
 		password.id = 'passwordInputForm';
 		password.setAttribute('placeholder', 'Password...')
 		password.setAttribute('type', 'password', 'name', 'password');
-		loginInputForm.appendChild(password);
 		password.addEventListener('input', () =>{
 			DisplayLogin.livePasswordCheck();
 		});          
+		loginInputForm.appendChild(password);
 
 		const submitLoginFormBTN = document.createElement('button');
 		submitLoginFormBTN.id = 'submitLoginFormBTN';
@@ -159,5 +194,4 @@ class Login {
 		errMSG.id ='invalidUser';
 		loginModalContent.appendChild(errMSG);
 	}
-
 }
